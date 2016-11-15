@@ -21,8 +21,6 @@
 		842473111DD03102007B4D44 /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8424730F1DD03102007B4D44 /* RecordController.xib */; };
 		8424731E1DD04D83007B4D44 /* MediaPlayerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8424731B1DD04D83007B4D44 /* MediaPlayerFramework.framework */; };
 		8424731F1DD04D83007B4D44 /* MediaPlayerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8424731B1DD04D83007B4D44 /* MediaPlayerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		842473201DD04D83007B4D44 /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8424731C1DD04D83007B4D44 /* MediaStreamerFramework.framework */; };
-		842473211DD04D83007B4D44 /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8424731C1DD04D83007B4D44 /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		842473221DD04D83007B4D44 /* PPYLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8424731D1DD04D83007B4D44 /* PPYLiveKit.framework */; };
 		842473231DD04D83007B4D44 /* PPYLiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8424731D1DD04D83007B4D44 /* PPYLiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		842473271DD04FDB007B4D44 /* CaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 842473261DD04FDB007B4D44 /* CaptureView.m */; };
@@ -48,10 +46,10 @@
 		8424738B1DD094BE007B4D44 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8424737E1DD094BE007B4D44 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		8424738C1DD094BE007B4D44 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 842473801DD094BE007B4D44 /* View+MASAdditions.m */; };
 		8424738D1DD094BE007B4D44 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 842473831DD094BE007B4D44 /* ViewController+MASAdditions.m */; };
-		842473971DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473931DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png */; };
-		842473981DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473941DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png */; };
-		842473991DD183A2007B4D44 /* 按住拍摄_禁用@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473951DD183A2007B4D44 /* 按住拍摄_禁用@2x.png */; };
-		8424739A1DD183A2007B4D44 /* 按住拍摄_禁用@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473961DD183A2007B4D44 /* 按住拍摄_禁用@3x.png */; };
+		842473971DD183A2007B4D44 /* 按住拍摄_按下hover1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473931DD183A2007B4D44 /* 按住拍摄_按下hover1@2x.png */; };
+		842473981DD183A2007B4D44 /* 按住拍摄_按下hover1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473941DD183A2007B4D44 /* 按住拍摄_按下hover1@3x.png */; };
+		842473991DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473951DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png */; };
+		8424739A1DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842473961DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png */; };
 		842473A71DD1A181007B4D44 /* PlayListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842473A51DD1A181007B4D44 /* PlayListController.m */; };
 		842473A81DD1A181007B4D44 /* PlayListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842473A61DD1A181007B4D44 /* PlayListController.xib */; };
 		842473AC1DD1A27F007B4D44 /* FlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842473AA1DD1A27F007B4D44 /* FlowCell.m */; };
@@ -88,6 +86,12 @@
 		842474061DD448C5007B4D44 /* 上传@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 842474041DD448C5007B4D44 /* 上传@3x.png */; };
 		842474091DD49907007B4D44 /* JGCycleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 842474081DD49907007B4D44 /* JGCycleProgressView.m */; };
 		842474121DD5C678007B4D44 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 842474111DD5C677007B4D44 /* MBProgressHUD.m */; };
+		845D636E1DDABB5300E9CA07 /* 美颜开@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845D636A1DDABB5300E9CA07 /* 美颜开@2x.png */; };
+		845D636F1DDABB5300E9CA07 /* 美颜开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845D636B1DDABB5300E9CA07 /* 美颜开@3x.png */; };
+		845D63701DDABB5300E9CA07 /* 闪光灯开@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */; };
+		845D63711DDABB5300E9CA07 /* 闪光灯开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */; };
+		84FEF3651DDAE112008D4EDD /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */; };
+		84FEF3661DDAE112008D4EDD /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -97,9 +101,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				842473211DD04D83007B4D44 /* MediaStreamerFramework.framework in Embed Frameworks */,
 				8424731F1DD04D83007B4D44 /* MediaPlayerFramework.framework in Embed Frameworks */,
 				842473231DD04D83007B4D44 /* PPYLiveKit.framework in Embed Frameworks */,
+				84FEF3661DDAE112008D4EDD /* MediaStreamerFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,7 +129,6 @@
 		8424730E1DD03102007B4D44 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecordController.m; path = Controller/RecordController.m; sourceTree = "<group>"; };
 		8424730F1DD03102007B4D44 /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordController.xib; path = Controller/RecordController.xib; sourceTree = "<group>"; };
 		8424731B1DD04D83007B4D44 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayerFramework.framework; path = CoreLib/MediaPlayerFramework.framework; sourceTree = "<group>"; };
-		8424731C1DD04D83007B4D44 /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaStreamerFramework.framework; path = CoreLib/MediaStreamerFramework.framework; sourceTree = "<group>"; };
 		8424731D1DD04D83007B4D44 /* PPYLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PPYLiveKit.framework; path = CoreLib/PPYLiveKit.framework; sourceTree = "<group>"; };
 		842473251DD04FDB007B4D44 /* CaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaptureView.h; path = CustomView/CaptureView.h; sourceTree = "<group>"; };
 		842473261DD04FDB007B4D44 /* CaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaptureView.m; path = CustomView/CaptureView.m; sourceTree = "<group>"; };
@@ -166,10 +169,10 @@
 		842473811DD094BE007B4D44 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "OpenSource/Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		842473821DD094BE007B4D44 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "OpenSource/Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		842473831DD094BE007B4D44 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "OpenSource/Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		842473931DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_按下hover@2x.png"; path = "Controller/icons/按住拍摄_按下hover@2x.png"; sourceTree = "<group>"; };
-		842473941DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_按下hover@3x.png"; path = "Controller/icons/按住拍摄_按下hover@3x.png"; sourceTree = "<group>"; };
-		842473951DD183A2007B4D44 /* 按住拍摄_禁用@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_禁用@2x.png"; path = "Controller/icons/按住拍摄_禁用@2x.png"; sourceTree = "<group>"; };
-		842473961DD183A2007B4D44 /* 按住拍摄_禁用@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_禁用@3x.png"; path = "Controller/icons/按住拍摄_禁用@3x.png"; sourceTree = "<group>"; };
+		842473931DD183A2007B4D44 /* 按住拍摄_按下hover1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_按下hover1@2x.png"; path = "Controller/icons/按住拍摄_按下hover1@2x.png"; sourceTree = "<group>"; };
+		842473941DD183A2007B4D44 /* 按住拍摄_按下hover1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_按下hover1@3x.png"; path = "Controller/icons/按住拍摄_按下hover1@3x.png"; sourceTree = "<group>"; };
+		842473951DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_按下hover@2x.png"; path = "Controller/icons/按住拍摄_按下hover@2x.png"; sourceTree = "<group>"; };
+		842473961DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_按下hover@3x.png"; path = "Controller/icons/按住拍摄_按下hover@3x.png"; sourceTree = "<group>"; };
 		842473A41DD1A181007B4D44 /* PlayListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayListController.h; path = Player/PlayListController.h; sourceTree = "<group>"; };
 		842473A51DD1A181007B4D44 /* PlayListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayListController.m; path = Player/PlayListController.m; sourceTree = "<group>"; };
 		842473A61DD1A181007B4D44 /* PlayListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayListController.xib; path = Player/PlayListController.xib; sourceTree = "<group>"; };
@@ -229,6 +232,11 @@
 		842474081DD49907007B4D44 /* JGCycleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGCycleProgressView.m; path = CustomView/JGCycleProgressView.m; sourceTree = "<group>"; };
 		842474101DD5C677007B4D44 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = OpenSource/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		842474111DD5C677007B4D44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = OpenSource/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
+		845D636A1DDABB5300E9CA07 /* 美颜开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "美颜开@2x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/美颜开@2x.png"; sourceTree = "<group>"; };
+		845D636B1DDABB5300E9CA07 /* 美颜开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "美颜开@3x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/美颜开@3x.png"; sourceTree = "<group>"; };
+		845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@2x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@2x.png"; sourceTree = "<group>"; };
+		845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@3x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@3x.png"; sourceTree = "<group>"; };
+		84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaStreamerFramework.framework; path = CoreLib/MediaStreamerFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,9 +244,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				842473201DD04D83007B4D44 /* MediaStreamerFramework.framework in Frameworks */,
 				8424731E1DD04D83007B4D44 /* MediaPlayerFramework.framework in Frameworks */,
 				842473221DD04D83007B4D44 /* PPYLiveKit.framework in Frameworks */,
+				84FEF3651DDAE112008D4EDD /* MediaStreamerFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,8 +256,8 @@
 		842472D91DCC7FA0007B4D44 = {
 			isa = PBXGroup;
 			children = (
+				84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */,
 				8424731B1DD04D83007B4D44 /* MediaPlayerFramework.framework */,
-				8424731C1DD04D83007B4D44 /* MediaStreamerFramework.framework */,
 				8424731D1DD04D83007B4D44 /* PPYLiveKit.framework */,
 				842472E41DCC7FA0007B4D44 /* PPYShortVideo */,
 				842472E31DCC7FA0007B4D44 /* Products */,
@@ -347,16 +355,20 @@
 				8424732A1DD06625007B4D44 /* 录制时间前面的小红点@3x.png */,
 				8424732D1DD0665F007B4D44 /* 按住拍摄_未按@2x.png */,
 				8424732E1DD0665F007B4D44 /* 按住拍摄_未按@3x.png */,
-				842473931DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png */,
-				842473941DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png */,
-				842473951DD183A2007B4D44 /* 按住拍摄_禁用@2x.png */,
-				842473961DD183A2007B4D44 /* 按住拍摄_禁用@3x.png */,
+				842473931DD183A2007B4D44 /* 按住拍摄_按下hover1@2x.png */,
+				842473941DD183A2007B4D44 /* 按住拍摄_按下hover1@3x.png */,
+				842473951DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png */,
+				842473961DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png */,
 				842473311DD06717007B4D44 /* 列表页_上传成功_关闭@2x.png */,
 				842473321DD06717007B4D44 /* 列表页_上传成功_关闭@3x.png */,
 				842473391DD08EA6007B4D44 /* 摄像头转换@2x.png */,
 				8424733A1DD08EA6007B4D44 /* 摄像头转换@3x.png */,
 				842473411DD08F0A007B4D44 /* 美颜@2x.png */,
 				842473421DD08F0A007B4D44 /* 美颜@3x.png */,
+				845D636A1DDABB5300E9CA07 /* 美颜开@2x.png */,
+				845D636B1DDABB5300E9CA07 /* 美颜开@3x.png */,
+				845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */,
+				845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */,
 			);
 			name = icons;
 			sourceTree = "<group>";
@@ -638,7 +650,7 @@
 				8424730C1DD01C6C007B4D44 /* 标题栏logo@3x.png in Resources */,
 				842473A81DD1A181007B4D44 /* PlayListController.xib in Resources */,
 				8424733F1DD08ECE007B4D44 /* 闪光灯@2x.png in Resources */,
-				842473991DD183A2007B4D44 /* 按住拍摄_禁用@2x.png in Resources */,
+				842473991DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png in Resources */,
 				842473E21DD1B262007B4D44 /* 空列表图@3x.png in Resources */,
 				8424732F1DD0665F007B4D44 /* 按住拍摄_未按@2x.png in Resources */,
 				842473DE1DD1B0CD007B4D44 /* 图层-0@3x.png in Resources */,
@@ -648,15 +660,17 @@
 				842473441DD08F0A007B4D44 /* 美颜@3x.png in Resources */,
 				8424732C1DD06625007B4D44 /* 录制时间前面的小红点@3x.png in Resources */,
 				842474001DD444D0007B4D44 /* UploadController.xib in Resources */,
+				845D636E1DDABB5300E9CA07 /* 美颜开@2x.png in Resources */,
 				842473AD1DD1A27F007B4D44 /* FlowCell.xib in Resources */,
-				842473971DD183A2007B4D44 /* 按住拍摄_按下hover@2x.png in Resources */,
+				842473971DD183A2007B4D44 /* 按住拍摄_按下hover1@2x.png in Resources */,
 				8424733B1DD08EA6007B4D44 /* 摄像头转换@2x.png in Resources */,
+				845D636F1DDABB5300E9CA07 /* 美颜开@3x.png in Resources */,
 				8424730B1DD01C6C007B4D44 /* 标题栏logo@2x.png in Resources */,
 				842474051DD448C5007B4D44 /* 上传@2x.png in Resources */,
 				842473EB1DD1DD70007B4D44 /* bofang-@3x.png in Resources */,
 				842473331DD06717007B4D44 /* 列表页_上传成功_关闭@2x.png in Resources */,
 				842473071DD01C50007B4D44 /* 首页背景@2x.png in Resources */,
-				8424739A1DD183A2007B4D44 /* 按住拍摄_禁用@3x.png in Resources */,
+				8424739A1DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png in Resources */,
 				842473081DD01C50007B4D44 /* 首页背景@3x.png in Resources */,
 				842473F01DD1E58C007B4D44 /* PlayerController.xib in Resources */,
 				842473EA1DD1DD70007B4D44 /* bofang-@2x.png in Resources */,
@@ -665,13 +679,15 @@
 				842473001DCC80FA007B4D44 /* mainViewController.xib in Resources */,
 				842473341DD06717007B4D44 /* 列表页_上传成功_关闭@3x.png in Resources */,
 				842473D51DD1ADD2007B4D44 /* 左上角返回@2x.png in Resources */,
-				842473981DD183A2007B4D44 /* 按住拍摄_按下hover@3x.png in Resources */,
+				842473981DD183A2007B4D44 /* 按住拍摄_按下hover1@3x.png in Resources */,
 				8424732B1DD06625007B4D44 /* 录制时间前面的小红点@2x.png in Resources */,
 				842473DA1DD1AE10007B4D44 /* 左上角的关闭@3x.png in Resources */,
 				842473301DD0665F007B4D44 /* 按住拍摄_未按@3x.png in Resources */,
 				842473431DD08F0A007B4D44 /* 美颜@2x.png in Resources */,
 				842473D61DD1ADD2007B4D44 /* 左上角返回@3x.png in Resources */,
 				8424733C1DD08EA6007B4D44 /* 摄像头转换@3x.png in Resources */,
+				845D63701DDABB5300E9CA07 /* 闪光灯开@2x.png in Resources */,
+				845D63711DDABB5300E9CA07 /* 闪光灯开@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,7 +843,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PPLive Corporation";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PPLive Corporation";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -839,7 +855,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pplive.uploadDemo.PPYShortVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c73268ea-1c16-4eed-95b7-4f536ad82575";
-				PROVISIONING_PROFILE_SPECIFIER = "PPLive Enterprise Wildcard";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -848,7 +864,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PPLive Corporation";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PPLive Corporation";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -860,7 +876,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pplive.uploadDemo.PPYShortVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c73268ea-1c16-4eed-95b7-4f536ad82575";
-				PROVISIONING_PROFILE_SPECIFIER = "PPLive Enterprise Wildcard";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

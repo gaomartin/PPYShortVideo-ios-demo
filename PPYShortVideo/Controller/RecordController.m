@@ -51,6 +51,8 @@
 }
 
 -(void)initUI{
+    [self.btnBeatify setImage:[UIImage imageNamed:@"美颜开.png"] forState:UIControlStateNormal];
+    [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
     self.lblRecordTime.text =  [NSString stringWithFormat:@"0s"];
     self.progressTime.progress = 0;
     self.pushEngine.preview = self.captureView;
@@ -59,15 +61,31 @@
 
 - (IBAction)doBeauty:(id)sender {
     self.pushEngine.beautify = !self.pushEngine.isBeautify;
+    if(self.pushEngine.beautify){
+        [self.btnBeatify setImage:[UIImage imageNamed:@"美颜开.png"] forState:UIControlStateNormal];
+    }else{
+        [self.btnBeatify setImage:[UIImage imageNamed:@"美颜.png"] forState:UIControlStateNormal];
+    }
+    
 }
 - (IBAction)doTorch:(id)sender {
     if(self.pushEngine.hasTorch){
         self.pushEngine.torch = !self.pushEngine.isTorch;
+        if(self.pushEngine.isTorch){
+            [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯开.png"] forState:UIControlStateNormal];
+        }else{
+            [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
+        }
     }
 }
+
+-(void)controlTorch{
+    
+}
 - (IBAction)doSwitchCamera:(id)sender {
-    if(self.pushEngine.hasTorch){
+    if(self.pushEngine.hasTorch){  // 翻转摄像头之前关闭闪光灯
         self.pushEngine.torch = NO;
+        [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
     }
     if([AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo].count > 1){
         AVCaptureDevicePosition current = self.pushEngine.cameraPosition;
@@ -176,7 +194,7 @@
 -(void)prepareForRecord{
     //初始化推流引擎
     PPYAudioConfiguration *audioConfigurate = [PPYAudioConfiguration defalutAudioConfiguration];
-    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration defalutVideoConfiguration];
+    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640 andFPS:PPYCaptureFPSHigh andBirate:1.2*1020]; //1.2Mbps
     self.pushEngine = [[PPYPushEngine alloc]initWithAudioConfiguration:audioConfigurate andVideoConfiguration:videoConfigurate pushRTMPAddress:self.recordPath];
     self.pushEngine.delegate = self;
     self.pushEngine.running = YES;
