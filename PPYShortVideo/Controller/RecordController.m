@@ -51,6 +51,7 @@
 }
 
 -(void)initUI{
+    [self.btnRecord setImage:[UIImage imageNamed:@"按住拍摄_未按"] forState:UIControlStateNormal];
     [self.btnBeatify setImage:[UIImage imageNamed:@"美颜开.png"] forState:UIControlStateNormal];
     [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
     self.lblRecordTime.text =  [NSString stringWithFormat:@"0s"];
@@ -194,7 +195,7 @@
 -(void)prepareForRecord{
     //初始化推流引擎
     PPYAudioConfiguration *audioConfigurate = [PPYAudioConfiguration defalutAudioConfiguration];
-    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640 andFPS:PPYCaptureFPSHigh andBirate:1.2*1020]; //1.2Mbps
+    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640 andFPS:PPYCaptureFPSHigh andBirate:1.2*1024]; //1.2Mbps
     self.pushEngine = [[PPYPushEngine alloc]initWithAudioConfiguration:audioConfigurate andVideoConfiguration:videoConfigurate pushRTMPAddress:self.recordPath];
     self.pushEngine.delegate = self;
     self.pushEngine.running = YES;

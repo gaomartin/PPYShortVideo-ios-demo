@@ -92,6 +92,7 @@
 		845D63711DDABB5300E9CA07 /* 闪光灯开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */; };
 		84FEF3651DDAE112008D4EDD /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */; };
 		84FEF3661DDAE112008D4EDD /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84FEF3691DDB0371008D4EDD /* JGPlayerProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEF3681DDB0371008D4EDD /* JGPlayerProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -237,6 +238,8 @@
 		845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@2x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@2x.png"; sourceTree = "<group>"; };
 		845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@3x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@3x.png"; sourceTree = "<group>"; };
 		84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaStreamerFramework.framework; path = CoreLib/MediaStreamerFramework.framework; sourceTree = "<group>"; };
+		84FEF3671DDB0371008D4EDD /* JGPlayerProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGPlayerProgressView.h; path = CustomView/JGPlayerProgressView.h; sourceTree = "<group>"; };
+		84FEF3681DDB0371008D4EDD /* JGPlayerProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGPlayerProgressView.m; path = CustomView/JGPlayerProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +393,8 @@
 				842473261DD04FDB007B4D44 /* CaptureView.m */,
 				842474071DD49907007B4D44 /* JGCycleProgressView.h */,
 				842474081DD49907007B4D44 /* JGCycleProgressView.m */,
+				84FEF3671DDB0371008D4EDD /* JGPlayerProgressView.h */,
+				84FEF3681DDB0371008D4EDD /* JGPlayerProgressView.m */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -617,7 +622,8 @@
 				TargetAttributes = {
 					842472E11DCC7FA0007B4D44 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = 3BLAQEXJ3N;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -717,6 +723,7 @@
 				842473F81DD40CB0007B4D44 /* PlayListHelper.m in Sources */,
 				842473881DD094BE007B4D44 /* MASViewAttribute.m in Sources */,
 				842473F41DD2C360007B4D44 /* WebAPI.m in Sources */,
+				84FEF3691DDB0371008D4EDD /* JGPlayerProgressView.m in Sources */,
 				842473E61DD1D1B5007B4D44 /* PlayerView.m in Sources */,
 				842473861DD094BE007B4D44 /* MASConstraintMaker.m in Sources */,
 				842473B51DD1A2E6007B4D44 /* YYClassInfo.m in Sources */,
@@ -843,8 +850,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PPLive Corporation";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3BLAQEXJ3N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoreLib",
@@ -852,9 +859,9 @@
 				INFOPLIST_FILE = PPYShortVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pplive.uploadDemo.PPYShortVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.plive.uploadDemo.PPYShortVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c73268ea-1c16-4eed-95b7-4f536ad82575";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
@@ -864,8 +871,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PPLive Corporation";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3BLAQEXJ3N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoreLib",
@@ -873,9 +880,9 @@
 				INFOPLIST_FILE = PPYShortVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pplive.uploadDemo.PPYShortVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.plive.uploadDemo.PPYShortVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c73268ea-1c16-4eed-95b7-4f536ad82575";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
