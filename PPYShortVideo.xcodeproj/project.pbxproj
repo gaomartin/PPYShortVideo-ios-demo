@@ -88,9 +88,14 @@
 		845D63711DDABB5300E9CA07 /* 闪光灯开@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */; };
 		84FEF3651DDAE112008D4EDD /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */; };
 		84FEF3661DDAE112008D4EDD /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		84FEF3691DDB0371008D4EDD /* JGPlayerProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEF3681DDB0371008D4EDD /* JGPlayerProgressView.m */; };
 		84FEF3F01DDDCAC8008D4EDD /* 暂停@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF3EE1DDDCAC8008D4EDD /* 暂停@2x.png */; };
 		84FEF3F11DDDCAC8008D4EDD /* 暂停@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF3EF1DDDCAC8008D4EDD /* 暂停@3x.png */; };
+		84FEF3FE1DDEE47C008D4EDD /* JGPlayerControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FEF3FC1DDEE47C008D4EDD /* JGPlayerControlPanel.m */; };
+		84FEF3FF1DDEE47C008D4EDD /* JGPlayerControlPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF3FD1DDEE47C008D4EDD /* JGPlayerControlPanel.xib */; };
+		84FEF4021DDEEA2C008D4EDD /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF4001DDEEA2C008D4EDD /* pause@2x.png */; };
+		84FEF4031DDEEA2C008D4EDD /* pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF4011DDEEA2C008D4EDD /* pause@3x.png */; };
+		84FEF4061DDEEAED008D4EDD /* startplay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF4041DDEEAED008D4EDD /* startplay@2x.png */; };
+		84FEF4071DDEEAED008D4EDD /* startplay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FEF4051DDEEAED008D4EDD /* startplay@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -232,10 +237,15 @@
 		845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@2x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@2x.png"; sourceTree = "<group>"; };
 		845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@3x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@3x.png"; sourceTree = "<group>"; };
 		84FEF3641DDAE112008D4EDD /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaStreamerFramework.framework; path = CoreLib/MediaStreamerFramework.framework; sourceTree = "<group>"; };
-		84FEF3671DDB0371008D4EDD /* JGPlayerProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGPlayerProgressView.h; path = CustomView/JGPlayerProgressView.h; sourceTree = "<group>"; };
-		84FEF3681DDB0371008D4EDD /* JGPlayerProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGPlayerProgressView.m; path = CustomView/JGPlayerProgressView.m; sourceTree = "<group>"; };
 		84FEF3EE1DDDCAC8008D4EDD /* 暂停@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "暂停@2x.png"; path = "Controller/icons/暂停@2x.png"; sourceTree = "<group>"; };
 		84FEF3EF1DDDCAC8008D4EDD /* 暂停@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "暂停@3x.png"; path = "Controller/icons/暂停@3x.png"; sourceTree = "<group>"; };
+		84FEF3FB1DDEE47C008D4EDD /* JGPlayerControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGPlayerControlPanel.h; path = CustomView/JGPlayerControlPanel.h; sourceTree = "<group>"; };
+		84FEF3FC1DDEE47C008D4EDD /* JGPlayerControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGPlayerControlPanel.m; path = CustomView/JGPlayerControlPanel.m; sourceTree = "<group>"; };
+		84FEF3FD1DDEE47C008D4EDD /* JGPlayerControlPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JGPlayerControlPanel.xib; path = CustomView/JGPlayerControlPanel.xib; sourceTree = "<group>"; };
+		84FEF4001DDEEA2C008D4EDD /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause@2x.png"; path = "Controller/icons/pause@2x.png"; sourceTree = "<group>"; };
+		84FEF4011DDEEA2C008D4EDD /* pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause@3x.png"; path = "Controller/icons/pause@3x.png"; sourceTree = "<group>"; };
+		84FEF4041DDEEAED008D4EDD /* startplay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startplay@2x.png"; path = "Controller/icons/startplay@2x.png"; sourceTree = "<group>"; };
+		84FEF4051DDEEAED008D4EDD /* startplay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startplay@3x.png"; path = "Controller/icons/startplay@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,10 +395,11 @@
 				842473E51DD1D1B5007B4D44 /* PlayerView.m */,
 				842473251DD04FDB007B4D44 /* CaptureView.h */,
 				842473261DD04FDB007B4D44 /* CaptureView.m */,
+				84FEF3FB1DDEE47C008D4EDD /* JGPlayerControlPanel.h */,
+				84FEF3FC1DDEE47C008D4EDD /* JGPlayerControlPanel.m */,
+				84FEF3FD1DDEE47C008D4EDD /* JGPlayerControlPanel.xib */,
 				842474071DD49907007B4D44 /* JGCycleProgressView.h */,
 				842474081DD49907007B4D44 /* JGCycleProgressView.m */,
-				84FEF3671DDB0371008D4EDD /* JGPlayerProgressView.h */,
-				84FEF3681DDB0371008D4EDD /* JGPlayerProgressView.m */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -532,6 +543,10 @@
 			children = (
 				842473E81DD1DD70007B4D44 /* bofang-@2x.png */,
 				842473E91DD1DD70007B4D44 /* bofang-@3x.png */,
+				84FEF4041DDEEAED008D4EDD /* startplay@2x.png */,
+				84FEF4051DDEEAED008D4EDD /* startplay@3x.png */,
+				84FEF4001DDEEA2C008D4EDD /* pause@2x.png */,
+				84FEF4011DDEEA2C008D4EDD /* pause@3x.png */,
 			);
 			name = icons;
 			sourceTree = "<group>";
@@ -663,12 +678,16 @@
 				842473971DD183A2007B4D44 /* 按住拍摄_未按@2x.png in Resources */,
 				8424733B1DD08EA6007B4D44 /* 摄像头转换@2x.png in Resources */,
 				845D636F1DDABB5300E9CA07 /* 美颜开@3x.png in Resources */,
+				84FEF4071DDEEAED008D4EDD /* startplay@3x.png in Resources */,
 				8424730B1DD01C6C007B4D44 /* 标题栏logo@2x.png in Resources */,
 				842474051DD448C5007B4D44 /* 上传@2x.png in Resources */,
+				84FEF4061DDEEAED008D4EDD /* startplay@2x.png in Resources */,
 				842473EB1DD1DD70007B4D44 /* bofang-@3x.png in Resources */,
+				84FEF4031DDEEA2C008D4EDD /* pause@3x.png in Resources */,
 				842473331DD06717007B4D44 /* 列表页_上传成功_关闭@2x.png in Resources */,
 				842473071DD01C50007B4D44 /* 首页背景@2x.png in Resources */,
 				842473081DD01C50007B4D44 /* 首页背景@3x.png in Resources */,
+				84FEF3FF1DDEE47C008D4EDD /* JGPlayerControlPanel.xib in Resources */,
 				842473F01DD1E58C007B4D44 /* PlayerController.xib in Resources */,
 				842473EA1DD1DD70007B4D44 /* bofang-@2x.png in Resources */,
 				84FEF3F01DDDCAC8008D4EDD /* 暂停@2x.png in Resources */,
@@ -686,6 +705,7 @@
 				8424733C1DD08EA6007B4D44 /* 摄像头转换@3x.png in Resources */,
 				845D63701DDABB5300E9CA07 /* 闪光灯开@2x.png in Resources */,
 				845D63711DDABB5300E9CA07 /* 闪光灯开@3x.png in Resources */,
+				84FEF4021DDEEA2C008D4EDD /* pause@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +728,7 @@
 				842474091DD49907007B4D44 /* JGCycleProgressView.m in Sources */,
 				842473101DD03102007B4D44 /* RecordController.m in Sources */,
 				8424738C1DD094BE007B4D44 /* View+MASAdditions.m in Sources */,
+				84FEF3FE1DDEE47C008D4EDD /* JGPlayerControlPanel.m in Sources */,
 				842473AC1DD1A27F007B4D44 /* FlowCell.m in Sources */,
 				842473FF1DD444D0007B4D44 /* UploadController.m in Sources */,
 				842473B41DD1A2E6007B4D44 /* NSObject+YYModel.m in Sources */,
@@ -715,7 +736,6 @@
 				842473F81DD40CB0007B4D44 /* PlayListHelper.m in Sources */,
 				842473881DD094BE007B4D44 /* MASViewAttribute.m in Sources */,
 				842473F41DD2C360007B4D44 /* WebAPI.m in Sources */,
-				84FEF3691DDB0371008D4EDD /* JGPlayerProgressView.m in Sources */,
 				842473E61DD1D1B5007B4D44 /* PlayerView.m in Sources */,
 				842473861DD094BE007B4D44 /* MASConstraintMaker.m in Sources */,
 				842473B51DD1A2E6007B4D44 /* YYClassInfo.m in Sources */,

@@ -8,16 +8,21 @@
 
 #import "PlayerView.h"
 #import "Masonry.h"
+#import "JGPlayerControlPanel.h"
+#import "MBProgressHUD.h"
 
+#define kOffScreenNumber 1000
 
-@interface PlayerView ()<PPYPlayEngineDelegate>
+@interface PlayerView ()<PPYPlayEngineDelegate,JGPlayControlPanelDelegate>
 @property (strong, nonatomic) UIView *displayView;
-@property (strong, nonatomic) UIView *playControlView;
 @property (strong, nonatomic) UIButton *btnStartOrPause;
 @property (strong, nonatomic) UIImageView *previewImage;
 
 @property (nonatomic,assign) BOOL isPlaying;
 @property (nonatomic,copy)   NSString *cachImagePath;
+
+@property (nonatomic, strong) JGPlayerControlPanel *controlPanel;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 #define JPlayControllerLog(format, ...) NSLog((@"PlayerController_"format), ##__VA_ARGS__)
@@ -30,6 +35,7 @@
     __instance.sourceType = sourceType;
     return __instance;
 }
+
 -(void)initialize{
     _displayView = [UIView new];
     [self addSubview:_displayView];
@@ -41,6 +47,13 @@
     [_btnStartOrPause setImage:[UIImage imageNamed:@"bofang-.png"] forState:UIControlStateNormal];
     [_btnStartOrPause addTarget:self action:@selector(onPressBtnStartOrPause:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_btnStartOrPause];
+    
+    //控制界面
+    _controlPanel = [JGPlayerControlPanel playerControlPanel];
+    _controlPanel.delegate = self;
+    _controlPanel.state = JGPlayerControlState_Init;
+    [self addSubview:_controlPanel];
+    
     
     [_displayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
@@ -57,18 +70,19 @@
         make.size.equalTo(self);
     }];
     
+    [_controlPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self);
+        make.trailing.equalTo(self);
+        make.bottom.equalTo(self).offset(kOffScreenNumber);
+        make.height.mas_equalTo(40);
+    }];
+    
     [PPYPlayEngine shareInstance].delegate = self;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
-        
         [self initialize];
-        
-        //todo
-//        _playControlView = [UIView new];
-//        [self addSubview:_playControlView];
-        
     }
     return self;
 }
@@ -84,7 +98,7 @@
     [super layoutSubviews];
     CGRect rect = self.displayView.frame;
     [PPYPlayEngine shareInstance].previewRect = rect;
-     [super layoutSubviews];
+    [super layoutSubviews];
 }
 
 -(void)dealloc{
@@ -119,8 +133,14 @@
 -(void)startPlay{
     [[PPYPlayEngine shareInstance] startPlayFromURL:self.playerURL WithType:PPYSourceType_VOD];
     [self.btnStartOrPause mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(CGPointMake(-1000, -1000));
+        make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
     }];
+    
+    self.controlPanel.state = JGPlayerControlState_Start;
+    [self.controlPanel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(0);
+    }];
+
     [self layoutIfNeeded];
 }
 
@@ -141,6 +161,9 @@
         case PPYPlayEngineError_FatalError:
             break;
     }
+    NSString *errInfo = [NSString stringWithFormat:@"播放发生错误:%d",error];
+    [self notifyMessageOnUI:errInfo];
+    self.controlPanel.state = JGPlayerControlState_Init;
     JPlayControllerLog(@"error = %d",error);
 }
 
@@ -155,7 +178,10 @@
         case PPYPlayEngineInfo_BufferingUpdatePercent:
             break;
         case PPYPlayEngineInfo_Duration:
-           
+            self.controlPanel.duration = value;
+            break;
+        case PPYPlayEngineInfo_CurrentPlayBackTime:
+            self.controlPanel.progress = value;
             break;
     }
     JPlayControllerLog(@"type = %d,value = %d",type,value);
@@ -171,9 +197,10 @@
           
             break;
         case PPYPlayEngineStatus_FisrtKeyFrameComing:
+           
             [[PPYPlayEngine shareInstance] presentPreviewOnView:_displayView];
             [self.previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.center.mas_equalTo(CGPointMake(-1000, -1000));
+                make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
             }];
             [self layoutIfNeeded];
             self.isPlaying = YES;
@@ -184,6 +211,9 @@
         {
             [self.btnStartOrPause mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.center.equalTo(self);
+            }];
+            [self.controlPanel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self).offset(kOffScreenNumber);
             }];
             [self layoutIfNeeded];
             self.isPlaying = NO;
@@ -198,6 +228,28 @@
 -(void)didPPYPlayEngineVideoResolutionCaptured:(int)width VideoHeight:(int)height{
     JPlayControllerLog(@"width = %d,height = %d",width,height);
 }
+-(void)playControlPanelDidClickStartOrPauseButton:(JGPlayerControlPanel *)control{
+    switch (control.state) {
+        case JGPlayerControlState_Init:
+            [self startPlay];
+            break;
+        case JGPlayerControlState_Start:
+            [[PPYPlayEngine shareInstance] resume];
+            break;
+        case JGPlayerControlState_Pause:
+            [[PPYPlayEngine shareInstance] pause];
+            break;
+    }
+}
+-(void)playControlPanel:(JGPlayerControlPanel *)controlPanel didSliderValueChanged:(float)newValue{
+    [[PPYPlayEngine shareInstance] seekToPosition:newValue * [PPYPlayEngine shareInstance].duration];
+}
 
-
+-(void)notifyMessageOnUI:(NSString *)message{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = message;
+    hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+    [hud hideAnimated:YES afterDelay:3.f];
+}
 @end

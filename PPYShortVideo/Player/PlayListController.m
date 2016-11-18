@@ -89,55 +89,9 @@ static NSString * reuseIdentifier = @"flowcell";
     [weakSelf.flowView addPullToRefreshWithActionHandler:^{
         [weakSelf doPullRefresh];
     }];
-//    [weakSelf.flowView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf doInfiniteScrolling];
-//    }];
 }
 
-//#pragma mark ---PlayerListHelperDelegate---
-//-(void)didFetchVODListSuccess:(NSMutableArray *)array{
-//    if(self.pageNum == 1){    //下拉刷新只显示第一页内容
-//        self.VODList = array;
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.flowView.pullToRefreshView stopAnimating];
-//            [self.flowView.infiniteScrollingView stopAnimating];
-//        });
-//        
-//    }else if(self.pageNum > 1){   //上拉加载需要累加
-//        for(NSDictionary *model in array){
-//            [self.VODList addObject:model];
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.flowView.infiniteScrollingView stopAnimating];
-//        });
-//    }
-//    
-//    if(self.VODList.count == 0){
-//        self.imgBackground.hidden = NO;
-//        self.lblTip.hidden = NO;
-//        self.lblTip.text = @"当前无播放视频，去看看直播视频吧";
-//    }else{
-//        self.imgBackground.hidden = YES;
-//        self.lblTip.hidden = YES;
-//    }
-//    NSLog(@"current VOD list = %@",self.VODList);
-//    [self.flowView reloadData];
-//}
-//
-//-(void)didFetchVODListFailued:(PlayerListErrorType)type Code:(int)errorCode Info:(NSString *)errInfo{
-//    NSLog(@"%s,errorCode = %d,errorInfo = %@",__FUNCTION__,errorCode,errInfo);
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.flowView.infiniteScrollingView stopAnimating];
-//        if(self.VODList.count == 0){
-//            self.imgBackground.hidden = NO;
-//            self.lblTip.hidden = NO;
-//            self.lblTip.text = @"加载出错了...";
-//        }else{
-//            self.imgBackground.hidden = YES;
-//            self.lblTip.hidden = YES;
-//        }
-//    });
-//}
+
 #pragma mark --PlayerListHelperDelegate--
 -(void)didFetchVODListSuccessed:(NSArray *)list{
     if(list.count > 0){

@@ -27,6 +27,7 @@ typedef NS_ENUM (int,PPYPlayEngineInfoType)  {
     PPYPlayEngineInfo_RealFPS,
     PPYPlayEngineInfo_BufferingUpdatePercent, //VOD only
     PPYPlayEngineInfo_Duration,               //VOD only
+    PPYPlayEngineInfo_CurrentPlayBackTime,    //VOD only
 };
 
 typedef NS_ENUM(NSUInteger, PPYPlayEngineStatus){
