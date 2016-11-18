@@ -6,11 +6,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadController">
             <connections>
+                <outlet property="btnUpload" destination="IYi-rO-5Ux" id="AuH-Tm-1VT"/>
                 <outlet property="playerView" destination="SfE-P5-XMG" id="iCd-eS-SeM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,10 +23,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SfE-P5-XMG" customClass="PlayerView">
-                    <rect key="frame" x="0.0" y="109" width="375" height="400"/>
+                    <rect key="frame" x="0.0" y="101" width="375" height="375"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="400" id="pcL-Kf-KOk"/>
+                        <constraint firstAttribute="width" secondItem="SfE-P5-XMG" secondAttribute="height" multiplier="1:1" id="TED-dn-5AQ"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYi-rO-5Ux">
@@ -58,7 +60,7 @@
                 <constraint firstAttribute="trailing" secondItem="IYi-rO-5Ux" secondAttribute="trailing" constant="16" id="fcu-uH-N7I"/>
                 <constraint firstItem="IYi-rO-5Ux" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="lJu-kT-yuP"/>
                 <constraint firstItem="Ihj-Vm-S1d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="rAP-CZ-cgR"/>
-                <constraint firstItem="SfE-P5-XMG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-24.5" id="rGj-8G-kai"/>
+                <constraint firstItem="SfE-P5-XMG" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-45" id="rGj-8G-kai"/>
                 <constraint firstItem="Ihj-Vm-S1d" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="rib-yr-fcS"/>
             </constraints>
             <point key="canvasLocation" x="26.5" y="51.5"/>

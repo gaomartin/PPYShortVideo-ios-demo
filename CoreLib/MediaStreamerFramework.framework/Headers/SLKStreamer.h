@@ -50,7 +50,7 @@ enum slk_media_streamer_info_type {
 - (instancetype) initWithVideoSize:(CGSize)videoSize
                         FrameRate:(int)fps
                         Bitrate:(int)bps
-                        PublishUrl:(NSString*)rtmpUrl;
+                        PublishUrl:(NSString*)url;
 
 - (void)pushPixelBuffer:(CVPixelBufferRef)pixelBuffer
                         Rotation:(int)rotation;

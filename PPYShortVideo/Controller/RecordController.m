@@ -181,10 +181,10 @@
             
             break;
         case PPYPushEngineInfo_PublishTime:
-            self.lblRecordTime.text = [NSString stringWithFormat:@"%ds",value];
-            self.progressTime.progress = ((float)value)/300;
-            self.imgDot.hidden = value%2;
-            if(value >= 300){
+            self.lblRecordTime.text = [NSString stringWithFormat:@"%.1fs",(float)value/10];
+            self.progressTime.progress = ((float)value)/3000;
+            self.imgDot.hidden = value%5;
+            if(value >= 3000){   //步长100ms， 上限5分钟
                 [self stopRecord];
             }
             break;
@@ -195,7 +195,7 @@
 -(void)prepareForRecord{
     //初始化推流引擎
     PPYAudioConfiguration *audioConfigurate = [PPYAudioConfiguration defalutAudioConfiguration];
-    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640 andFPS:PPYCaptureFPSHigh andBirate:1.2*1024]; //1.2Mbps
+    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640 andFPS:PPYCaptureFPSMedium andBirate:1.2*1024]; //1.2Mbps
     self.pushEngine = [[PPYPushEngine alloc]initWithAudioConfiguration:audioConfigurate andVideoConfiguration:videoConfigurate pushRTMPAddress:self.recordPath];
     self.pushEngine.delegate = self;
     self.pushEngine.running = YES;
@@ -212,7 +212,7 @@
 }
 -(void)didRecordStarted{
     self.isRecording = YES;
-    [self.btnRecord setImage:[UIImage imageNamed:@"按住拍摄_按下hover.png"] forState:UIControlStateNormal];
+    [self.btnRecord setImage:[UIImage imageNamed:@"暂停.png"] forState:UIControlStateNormal];
     self.btnRecord.userInteractionEnabled = YES;
 }
 -(void)stopRecord{

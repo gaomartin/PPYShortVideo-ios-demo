@@ -15,6 +15,7 @@
 
 @interface UploadController ()
 @property (weak, nonatomic) IBOutlet PlayerView *playerView;
+@property (weak, nonatomic) IBOutlet UIButton *btnUpload;
 
 @property (copy, nonatomic) NSString *recordFilePath;
 @property (strong, nonatomic) JGCycleProgressView *progressView;
@@ -44,11 +45,14 @@
             [weakSelf presentProgressView];
             weakSelf.progressView.label.text = [NSString stringWithFormat:@"%d%%",(int)(progress.fractionCompleted * 100)];
             [weakSelf.progressView drawProgress:progress.fractionCompleted];
+            weakSelf.btnUpload.userInteractionEnabled = NO;
         });
     } Success:^{
+        weakSelf.btnUpload.userInteractionEnabled = YES;
         [weakSelf.navigationController dismissViewControllerAnimated:NO completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"kUploadSuccess" object:nil];
     } Failured:^(NetworkErrorType type, int errcode, NSString *msg) {
+        weakSelf.btnUpload.userInteractionEnabled = YES;
         [weakSelf processMessage:type code:errcode info:msg];
     }];
 }
@@ -79,7 +83,7 @@
 -(void)presentProgressView{
     [self.view addSubview:self.progressView];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
+        make.center.equalTo(self.playerView);
         make.size.mas_equalTo(CGSizeMake(100, 100));
     }];
 }

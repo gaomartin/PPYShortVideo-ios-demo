@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11542"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,10 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="62N-K4-cFP" customClass="PlayerView">
-                    <rect key="frame" x="0.0" y="109" width="375" height="400"/>
+                    <rect key="frame" x="0.0" y="101" width="375" height="375"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="400" id="DiA-6v-4BS"/>
+                        <constraint firstAttribute="width" secondItem="62N-K4-cFP" secondAttribute="height" multiplier="1:1" id="HiH-Vk-dYH"/>
                     </constraints>
                 </view>
             </subviews>
@@ -32,7 +33,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="62N-K4-cFP" secondAttribute="trailing" id="6A0-Gi-de4"/>
                 <constraint firstItem="62N-K4-cFP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cz2-vI-WLy"/>
-                <constraint firstItem="62N-K4-cFP" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-24.5" id="PJe-cp-rhm"/>
+                <constraint firstItem="62N-K4-cFP" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-45" id="PJe-cp-rhm"/>
                 <constraint firstItem="62N-K4-cFP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jJb-eY-GWL"/>
             </constraints>
             <point key="canvasLocation" x="25.5" y="51.5"/>
