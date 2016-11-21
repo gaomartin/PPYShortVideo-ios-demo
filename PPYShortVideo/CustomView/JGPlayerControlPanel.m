@@ -28,7 +28,9 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-
+    [self.sliderProgress setValue:0 animated:NO];
+    self.sliderProgress.continuous = NO;
+    self.lblTime.text = @"00:00/00:00";
 }
 
 
