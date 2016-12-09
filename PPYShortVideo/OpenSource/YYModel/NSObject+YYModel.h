@@ -13,58 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- Provide some data-model method:
- 
- * Convert json to any object, or convert any object to json.
- * Set object properties with a key-value dictionary (like KVC).
- * Implementations of `NSCoding`, `NSCopying`, `-hash` and `-isEqual:`.
- 
- See `YYModel` protocol for custom methods.
- 
- 
- Sample Code:
-    
-     ********************** json convertor *********************
-     @interface YYAuthor : NSObject
-     @property (nonatomic, strong) NSString *name;
-     @property (nonatomic, assign) NSDate *birthday;
-     @end
-     @implementation YYAuthor
-     @end
- 
-     @interface YYBook : NSObject
-     @property (nonatomic, copy) NSString *name;
-     @property (nonatomic, assign) NSUInteger pages;
-     @property (nonatomic, strong) YYAuthor *author;
-     @end
-     @implementation YYBook
-     @end
-    
-     int main() {
-         // create model from json
-         YYBook *book = [YYBook yy_modelWithJSON:@"{\"name\": \"Harry Potter\", \"pages\": 256, \"author\": {\"name\": \"J.K.Rowling\", \"birthday\": \"1965-07-31\" }}"];
- 
-         // convert model to json
-         NSString *json = [book yy_modelToJSONString];
-         // {"author":{"name":"J.K.Rowling","birthday":"1965-07-31T00:00:00+0000"},"name":"Harry Potter","pages":256}
-     }
- 
-     ********************** Coding/Copying/hash/equal *********************
-     @interface YYShadow :NSObject <NSCoding, NSCopying>
-     @property (nonatomic, copy) NSString *name;
-     @property (nonatomic, assign) CGSize size;
-     @end
- 
-     @implementation YYShadow
-     - (void)encodeWithCoder:(NSCoder *)aCoder { [self yy_modelEncodeWithCoder:aCoder]; }
-     - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self yy_modelInitWithCoder:aDecoder]; }
-     - (id)copyWithZone:(NSZone *)zone { return [self yy_modelCopy]; }
-     - (NSUInteger)hash { return [self yy_modelHash]; }
-     - (BOOL)isEqual:(id)object { return [self yy_modelIsEqual:object]; }
-     @end
- 
- */
+
 @interface NSObject (YYModel)
 
 /**
@@ -263,106 +212,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol YYModel <NSObject>
 @optional
 
-/**
- Custom property mapper.
- 
- @discussion If the key in JSON/Dictionary does not match to the model's property name,
- implements this method and returns the additional mapper.
- 
- Example:
-    
-    json: 
-        {
-            "n":"Harry Pottery",
-            "p": 256,
-            "ext" : {
-                "desc" : "A book written by J.K.Rowling."
-            },
-            "ID" : 100010
-        }
- 
-    model:
-        @interface YYBook : NSObject
-        @property NSString *name;
-        @property NSInteger page;
-        @property NSString *desc;
-        @property NSString *bookID;
-        @end
-        
-        @implementation YYBook
-        + (NSDictionary *)modelCustomPropertyMapper {
-            return @{@"name"  : @"n",
-                     @"page"  : @"p",
-                     @"desc"  : @"ext.desc",
-                     @"bookID": @[@"id", @"ID", @"book_id"]};
-        }
-        @end
- 
- @return A custom mapper for properties.
- */
+
 + (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper;
 
-/**
- The generic class mapper for container properties.
- 
- @discussion If the property is a container object, such as NSArray/NSSet/NSDictionary,
- implements this method and returns a property->class mapper, tells which kind of 
- object will be add to the array/set/dictionary.
- 
-  Example:
-        @class YYShadow, YYBorder, YYAttachment;
- 
-        @interface YYAttributes
-        @property NSString *name;
-        @property NSArray *shadows;
-        @property NSSet *borders;
-        @property NSDictionary *attachments;
-        @end
- 
-        @implementation YYAttributes
-        + (NSDictionary *)modelContainerPropertyGenericClass {
-            return @{@"shadows" : [YYShadow class],
-                     @"borders" : YYBorder.class,
-                     @"attachments" : @"YYAttachment" };
-        }
-        @end
- 
- @return A class mapper.
- */
+
 + (nullable NSDictionary<NSString *, id> *)modelContainerPropertyGenericClass;
 
-/**
- If you need to create instances of different classes during json->object transform,
- use the method to choose custom class based on dictionary data.
- 
- @discussion If the model implements this method, it will be called to determine resulting class
- during `+modelWithJSON:`, `+modelWithDictionary:`, conveting object of properties of parent objects 
- (both singular and containers via `+modelContainerPropertyGenericClass`).
- 
- Example:
-        @class YYCircle, YYRectangle, YYLine;
- 
-        @implementation YYShape
 
-        + (Class)modelCustomClassForDictionary:(NSDictionary*)dictionary {
-            if (dictionary[@"radius"] != nil) {
-                return [YYCircle class];
-            } else if (dictionary[@"width"] != nil) {
-                return [YYRectangle class];
-            } else if (dictionary[@"y2"] != nil) {
-                return [YYLine class];
-            } else {
-                return [self class];
-            }
-        }
-
-        @end
-
- @param dictionary The json/kv dictionary.
- 
- @return Class to create from this dictionary, `nil` to use current class.
-
- */
 + (nullable Class)modelCustomClassForDictionary:(NSDictionary *)dictionary;
 
 /**
