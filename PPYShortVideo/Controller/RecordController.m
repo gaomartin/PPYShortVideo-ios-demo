@@ -103,6 +103,7 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定要放弃当前录制视频？" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *OK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self stopRecord];
             [self dismissViewControllerAnimated:YES completion:nil];
         }];
 
@@ -195,8 +196,12 @@
 -(void)prepareForRecord{
     //初始化推流引擎
     PPYAudioConfiguration *audioConfigurate = [PPYAudioConfiguration defalutAudioConfiguration];
-    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640 andFPS:PPYCaptureFPSMedium andBirate:1.2*1024]; //1.2Mbps
-    self.pushEngine = [[PPYPushEngine alloc]initWithAudioConfiguration:audioConfigurate andVideoConfiguration:videoConfigurate pushRTMPAddress:self.recordPath];
+    PPYVideoConfiguration *videoConfigurate = [PPYVideoConfiguration videoConfigurationWithPreset:PPYCaptureSessionPreset360x640
+                                                                                           andFPS:PPYCaptureFPSMedium
+                                                                                        andBirate:1.2*1024]; //1.2Mbps
+    self.pushEngine = [[PPYPushEngine alloc] initWithAudioConfiguration:audioConfigurate
+                                                 andVideoConfiguration:videoConfigurate
+                                                       pushRTMPAddress:self.recordPath];
     self.pushEngine.delegate = self;
     self.pushEngine.running = YES;
     self.pushEngine.beautify = YES;

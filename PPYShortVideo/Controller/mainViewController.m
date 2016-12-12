@@ -36,7 +36,6 @@
     [self.btnCinema clipsToBounds];
 }
 
-
 - (IBAction)onPressedRecord:(id)sender {
     UINavigationController *nv = [[UINavigationController alloc]initWithRootViewController:[[RecordController alloc]init]];
     nv.navigationBarHidden = YES;
@@ -45,7 +44,6 @@
 
 - (IBAction)onPressedCinema:(id)sender {
     [self showPlayListUploadMessageNeeded:NO];
-    
 }
 
 -(void)showPlayListUploadMessageNeeded:(BOOL)needOrNo{
@@ -55,7 +53,7 @@
     UINavigationController *nv = [[UINavigationController alloc]initWithRootViewController: listVC];
     UINavigationBar *bar = [UINavigationBar appearance];
     bar.translucent = NO;
-    bar.barTintColor = [UIColor colorWithRed:26.0/255 green:24.0/255 blue:37.0/255 alpha:1];;
+    bar.barTintColor = [UIColor colorWithRed:26.0/255 green:24.0/255 blue:37.0/255 alpha:1];
     bar.tintColor = [UIColor whiteColor];
     [bar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:113.0/255 green:220.0/255 blue:249.0/255 alpha:1]}];
     

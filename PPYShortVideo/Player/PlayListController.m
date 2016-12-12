@@ -37,10 +37,11 @@ static NSString * reuseIdentifier = @"flowcell";
     self.helper = [[PlayListHelper alloc]init];
     self.helper.delegate = self;
     self.VODList = [[NSMutableArray alloc]init];
+    
+    [self.flowView triggerPullToRefresh];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self.flowView triggerPullToRefresh];
     if(self.needShowUploadSuccess){
         [self notifyMessageOnUI:@"上传成功！"];
         self.needShowUploadSuccess = NO;

@@ -93,25 +93,11 @@
 		842472FC1DCC80FA007B4D44 /* mainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mainViewController.h; path = Controller/mainViewController.h; sourceTree = "<group>"; };
 		842472FD1DCC80FA007B4D44 /* mainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = mainViewController.m; path = Controller/mainViewController.m; sourceTree = "<group>"; };
 		842472FE1DCC80FA007B4D44 /* mainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainViewController.xib; path = Controller/mainViewController.xib; sourceTree = "<group>"; };
-		842473051DD01C50007B4D44 /* 首页背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "首页背景@2x.png"; path = "Controller/icons/首页背景@2x.png"; sourceTree = "<group>"; };
-		842473061DD01C50007B4D44 /* 首页背景@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "首页背景@3x.png"; path = "Controller/icons/首页背景@3x.png"; sourceTree = "<group>"; };
-		842473091DD01C6C007B4D44 /* 标题栏logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "标题栏logo@2x.png"; path = "Controller/icons/标题栏logo@2x.png"; sourceTree = "<group>"; };
-		8424730A1DD01C6C007B4D44 /* 标题栏logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "标题栏logo@3x.png"; path = "Controller/icons/标题栏logo@3x.png"; sourceTree = "<group>"; };
 		8424730D1DD03102007B4D44 /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RecordController.h; path = Controller/RecordController.h; sourceTree = "<group>"; };
 		8424730E1DD03102007B4D44 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RecordController.m; path = Controller/RecordController.m; sourceTree = "<group>"; };
 		8424730F1DD03102007B4D44 /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordController.xib; path = Controller/RecordController.xib; sourceTree = "<group>"; };
 		842473251DD04FDB007B4D44 /* CaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CaptureView.h; path = CustomView/CaptureView.h; sourceTree = "<group>"; };
 		842473261DD04FDB007B4D44 /* CaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CaptureView.m; path = CustomView/CaptureView.m; sourceTree = "<group>"; };
-		842473291DD06625007B4D44 /* 录制时间前面的小红点@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "录制时间前面的小红点@2x.png"; path = "Controller/icons/录制时间前面的小红点@2x.png"; sourceTree = "<group>"; };
-		8424732A1DD06625007B4D44 /* 录制时间前面的小红点@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "录制时间前面的小红点@3x.png"; path = "Controller/icons/录制时间前面的小红点@3x.png"; sourceTree = "<group>"; };
-		842473311DD06717007B4D44 /* 列表页_上传成功_关闭@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "列表页_上传成功_关闭@2x.png"; path = "Controller/icons/列表页_上传成功_关闭@2x.png"; sourceTree = "<group>"; };
-		842473321DD06717007B4D44 /* 列表页_上传成功_关闭@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "列表页_上传成功_关闭@3x.png"; path = "Controller/icons/列表页_上传成功_关闭@3x.png"; sourceTree = "<group>"; };
-		842473391DD08EA6007B4D44 /* 摄像头转换@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "摄像头转换@2x.png"; path = "Controller/icons/摄像头转换@2x.png"; sourceTree = "<group>"; };
-		8424733A1DD08EA6007B4D44 /* 摄像头转换@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "摄像头转换@3x.png"; path = "Controller/icons/摄像头转换@3x.png"; sourceTree = "<group>"; };
-		8424733D1DD08ECE007B4D44 /* 闪光灯@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯@2x.png"; path = "Controller/icons/闪光灯@2x.png"; sourceTree = "<group>"; };
-		8424733E1DD08ECE007B4D44 /* 闪光灯@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯@3x.png"; path = "Controller/icons/闪光灯@3x.png"; sourceTree = "<group>"; };
-		842473411DD08F0A007B4D44 /* 美颜@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "美颜@2x.png"; path = "Controller/icons/美颜@2x.png"; sourceTree = "<group>"; };
-		842473421DD08F0A007B4D44 /* 美颜@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "美颜@3x.png"; path = "Controller/icons/美颜@3x.png"; sourceTree = "<group>"; };
 		8424736B1DD094BE007B4D44 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = OpenSource/Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
 		8424736C1DD094BE007B4D44 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = OpenSource/Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
 		8424736D1DD094BE007B4D44 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = OpenSource/Masonry/MASConstraint.h; sourceTree = "<group>"; };
@@ -137,8 +123,6 @@
 		842473811DD094BE007B4D44 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "OpenSource/Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		842473821DD094BE007B4D44 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "OpenSource/Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		842473831DD094BE007B4D44 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "OpenSource/Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		842473931DD183A2007B4D44 /* 按住拍摄_未按@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_未按@2x.png"; path = "Controller/icons/按住拍摄_未按@2x.png"; sourceTree = "<group>"; };
-		842473941DD183A2007B4D44 /* 按住拍摄_未按@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "按住拍摄_未按@3x.png"; path = "Controller/icons/按住拍摄_未按@3x.png"; sourceTree = "<group>"; };
 		842473A41DD1A181007B4D44 /* PlayListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayListController.h; path = Player/PlayListController.h; sourceTree = "<group>"; };
 		842473A51DD1A181007B4D44 /* PlayListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayListController.m; path = Player/PlayListController.m; sourceTree = "<group>"; };
 		842473A61DD1A181007B4D44 /* PlayListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayListController.xib; path = Player/PlayListController.xib; sourceTree = "<group>"; };
@@ -168,8 +152,6 @@
 		842473C91DD1A30C007B4D44 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = OpenSource/AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		842473CA1DD1A30C007B4D44 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = OpenSource/AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		842473CB1DD1A30C007B4D44 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = OpenSource/AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
-		842473D71DD1AE10007B4D44 /* 左上角的关闭@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "左上角的关闭@2x.png"; path = "Controller/icons/左上角的关闭@2x.png"; sourceTree = "<group>"; };
-		842473D81DD1AE10007B4D44 /* 左上角的关闭@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "左上角的关闭@3x.png"; path = "Controller/icons/左上角的关闭@3x.png"; sourceTree = "<group>"; };
 		842473E41DD1D1B5007B4D44 /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerView.h; path = CustomView/PlayerView.h; sourceTree = "<group>"; };
 		842473E51DD1D1B5007B4D44 /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerView.m; path = CustomView/PlayerView.m; sourceTree = "<group>"; };
 		842473EC1DD1E58C007B4D44 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerController.h; path = Player/PlayerController.h; sourceTree = "<group>"; };
@@ -184,18 +166,10 @@
 		842473FC1DD444D0007B4D44 /* UploadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadController.h; path = Controller/UploadController.h; sourceTree = "<group>"; };
 		842473FD1DD444D0007B4D44 /* UploadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadController.m; path = Controller/UploadController.m; sourceTree = "<group>"; };
 		842473FE1DD444D0007B4D44 /* UploadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UploadController.xib; path = Controller/UploadController.xib; sourceTree = "<group>"; };
-		842474031DD448C5007B4D44 /* 上传@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "上传@2x.png"; path = "Controller/icons/上传@2x.png"; sourceTree = "<group>"; };
-		842474041DD448C5007B4D44 /* 上传@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "上传@3x.png"; path = "Controller/icons/上传@3x.png"; sourceTree = "<group>"; };
 		842474071DD49907007B4D44 /* JGCycleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGCycleProgressView.h; path = CustomView/JGCycleProgressView.h; sourceTree = "<group>"; };
 		842474081DD49907007B4D44 /* JGCycleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGCycleProgressView.m; path = CustomView/JGCycleProgressView.m; sourceTree = "<group>"; };
 		842474101DD5C677007B4D44 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = OpenSource/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		842474111DD5C677007B4D44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = OpenSource/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		845D636A1DDABB5300E9CA07 /* 美颜开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "美颜开@2x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/美颜开@2x.png"; sourceTree = "<group>"; };
-		845D636B1DDABB5300E9CA07 /* 美颜开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "美颜开@3x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/美颜开@3x.png"; sourceTree = "<group>"; };
-		845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@2x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@2x.png"; sourceTree = "<group>"; };
-		845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "闪光灯开@3x.png"; path = "../../../Downloads/短拍UI效果图/1.0补充/归档/demo切图－美颜＋闪光灯补充/闪光灯开@3x.png"; sourceTree = "<group>"; };
-		84FEF3EE1DDDCAC8008D4EDD /* 暂停@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "暂停@2x.png"; path = "Controller/icons/暂停@2x.png"; sourceTree = "<group>"; };
-		84FEF3EF1DDDCAC8008D4EDD /* 暂停@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "暂停@3x.png"; path = "Controller/icons/暂停@3x.png"; sourceTree = "<group>"; };
 		84FEF3FB1DDEE47C008D4EDD /* JGPlayerControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGPlayerControlPanel.h; path = CustomView/JGPlayerControlPanel.h; sourceTree = "<group>"; };
 		84FEF3FC1DDEE47C008D4EDD /* JGPlayerControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGPlayerControlPanel.m; path = CustomView/JGPlayerControlPanel.m; sourceTree = "<group>"; };
 		84FEF3FD1DDEE47C008D4EDD /* JGPlayerControlPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JGPlayerControlPanel.xib; path = CustomView/JGPlayerControlPanel.xib; sourceTree = "<group>"; };
@@ -288,58 +262,18 @@
 				842472FC1DCC80FA007B4D44 /* mainViewController.h */,
 				842472FD1DCC80FA007B4D44 /* mainViewController.m */,
 				842472FE1DCC80FA007B4D44 /* mainViewController.xib */,
-				842473041DD01BA9007B4D44 /* icons */,
 			);
 			name = "首页";
-			sourceTree = "<group>";
-		};
-		842473041DD01BA9007B4D44 /* icons */ = {
-			isa = PBXGroup;
-			children = (
-				842473051DD01C50007B4D44 /* 首页背景@2x.png */,
-				842473061DD01C50007B4D44 /* 首页背景@3x.png */,
-				842473091DD01C6C007B4D44 /* 标题栏logo@2x.png */,
-				8424730A1DD01C6C007B4D44 /* 标题栏logo@3x.png */,
-			);
-			name = icons;
 			sourceTree = "<group>";
 		};
 		842473121DD0310D007B4D44 /* 录制 */ = {
 			isa = PBXGroup;
 			children = (
-				842473131DD0311F007B4D44 /* icons */,
 				8424730D1DD03102007B4D44 /* RecordController.h */,
 				8424730E1DD03102007B4D44 /* RecordController.m */,
 				8424730F1DD03102007B4D44 /* RecordController.xib */,
 			);
 			name = "录制";
-			sourceTree = "<group>";
-		};
-		842473131DD0311F007B4D44 /* icons */ = {
-			isa = PBXGroup;
-			children = (
-				84FEF3EE1DDDCAC8008D4EDD /* 暂停@2x.png */,
-				84FEF3EF1DDDCAC8008D4EDD /* 暂停@3x.png */,
-				842473D71DD1AE10007B4D44 /* 左上角的关闭@2x.png */,
-				842473D81DD1AE10007B4D44 /* 左上角的关闭@3x.png */,
-				8424733D1DD08ECE007B4D44 /* 闪光灯@2x.png */,
-				8424733E1DD08ECE007B4D44 /* 闪光灯@3x.png */,
-				842473291DD06625007B4D44 /* 录制时间前面的小红点@2x.png */,
-				8424732A1DD06625007B4D44 /* 录制时间前面的小红点@3x.png */,
-				842473931DD183A2007B4D44 /* 按住拍摄_未按@2x.png */,
-				842473941DD183A2007B4D44 /* 按住拍摄_未按@3x.png */,
-				842473311DD06717007B4D44 /* 列表页_上传成功_关闭@2x.png */,
-				842473321DD06717007B4D44 /* 列表页_上传成功_关闭@3x.png */,
-				842473391DD08EA6007B4D44 /* 摄像头转换@2x.png */,
-				8424733A1DD08EA6007B4D44 /* 摄像头转换@3x.png */,
-				842473411DD08F0A007B4D44 /* 美颜@2x.png */,
-				842473421DD08F0A007B4D44 /* 美颜@3x.png */,
-				845D636A1DDABB5300E9CA07 /* 美颜开@2x.png */,
-				845D636B1DDABB5300E9CA07 /* 美颜开@3x.png */,
-				845D636C1DDABB5300E9CA07 /* 闪光灯开@2x.png */,
-				845D636D1DDABB5300E9CA07 /* 闪光灯开@3x.png */,
-			);
-			name = icons;
 			sourceTree = "<group>";
 		};
 		842473281DD04FEC007B4D44 /* CustomView */ = {
@@ -493,21 +427,11 @@
 		842474011DD444D9007B4D44 /* 上传 */ = {
 			isa = PBXGroup;
 			children = (
-				842474021DD448B2007B4D44 /* icon */,
 				842473FC1DD444D0007B4D44 /* UploadController.h */,
 				842473FD1DD444D0007B4D44 /* UploadController.m */,
 				842473FE1DD444D0007B4D44 /* UploadController.xib */,
 			);
 			name = "上传";
-			sourceTree = "<group>";
-		};
-		842474021DD448B2007B4D44 /* icon */ = {
-			isa = PBXGroup;
-			children = (
-				842474031DD448C5007B4D44 /* 上传@2x.png */,
-				842474041DD448C5007B4D44 /* 上传@3x.png */,
-			);
-			name = icon;
 			sourceTree = "<group>";
 		};
 		8424740F1DD5C660007B4D44 /* MBProgressHUD */ = {

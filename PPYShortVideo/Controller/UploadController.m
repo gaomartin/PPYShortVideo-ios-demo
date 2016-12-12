@@ -56,10 +56,11 @@
         [weakSelf processMessage:type code:errcode info:msg];
     }];
 }
+
 - (IBAction)doExit:(id)sender {
+    [self notifyMessageOnUI:@"后台上传中"];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark --Getter,Setter--
 -(NSString *)recordFilePath{
@@ -76,8 +77,6 @@
     }
     return _progressView;
 }
-
-
 
 #pragma mark --Presenter--
 -(void)presentProgressView{
