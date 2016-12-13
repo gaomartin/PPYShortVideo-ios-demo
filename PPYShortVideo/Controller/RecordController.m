@@ -11,7 +11,7 @@
 #import <PPYLiveKit/PPYLiveKit.h>
 #import "UploadController.h"
 
-@interface RecordController () <PPYPushEngineDelegate>
+@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *captureView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBeatify;
 @property (weak, nonatomic) IBOutlet UIButton *btnTorch;
@@ -37,6 +37,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [self initUI];
 }
+
 -(void)dealloc{
     if(self.isRecording){
         [self stopRecord];
@@ -57,8 +58,27 @@
     self.lblRecordTime.text =  [NSString stringWithFormat:@"0s"];
     self.progressTime.progress = 0;
     self.pushEngine.preview = self.captureView;
+    
+    [self addTapGesture:self.captureView];
 }
 
+#pragma mark - UITapGestureRecognizer
+- (void)addTapGesture:(UIView *)view
+{
+    // 单击事件
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleClickEvent:)];
+    gesture.numberOfTapsRequired = 1;
+    gesture.delegate = self;
+    [view addGestureRecognizer:gesture];
+    gesture.cancelsTouchesInView = YES;
+    gesture = nil;
+}
+
+- (void)handleSingleClickEvent:(UITapGestureRecognizer *)gesture
+{
+    CGPoint touchPoint = [gesture locationInView:self.captureView];
+    [self.pushEngine doFocusOnPoint:touchPoint onView:self.captureView needDisplayLocation:YES];
+}
 
 - (IBAction)doBeauty:(id)sender {
     self.pushEngine.beautify = !self.pushEngine.isBeautify;
@@ -67,8 +87,8 @@
     }else{
         [self.btnBeatify setImage:[UIImage imageNamed:@"美颜.png"] forState:UIControlStateNormal];
     }
-    
 }
+
 - (IBAction)doTorch:(id)sender {
     if(self.pushEngine.hasTorch){
         self.pushEngine.torch = !self.pushEngine.isTorch;
@@ -83,6 +103,7 @@
 -(void)controlTorch{
     
 }
+
 - (IBAction)doSwitchCamera:(id)sender {
     if(self.pushEngine.hasTorch){  // 翻转摄像头之前关闭闪光灯
         self.pushEngine.torch = NO;
@@ -209,20 +230,27 @@
     if(self.pushEngine.hasTorch){
         self.pushEngine.torch = NO;
     }
+    
+    if(self.pushEngine.hasFocus){//自动对焦
+        self.pushEngine.autoFocus = YES;
+    }
 }
 
 -(void)startRecord{
     [self.pushEngine start];
     self.btnRecord.userInteractionEnabled = NO;
 }
+
 -(void)didRecordStarted{
     self.isRecording = YES;
     [self.btnRecord setImage:[UIImage imageNamed:@"暂停.png"] forState:UIControlStateNormal];
     self.btnRecord.userInteractionEnabled = YES;
 }
+
 -(void)stopRecord{
     [self.pushEngine stop];
 }
+
 -(void)didRecordStoped{
     self.isRecording = NO;
     [self.navigationController pushViewController:[[UploadController alloc]init] animated:YES];

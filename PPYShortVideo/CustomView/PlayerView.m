@@ -228,6 +228,7 @@
 -(void)didPPYPlayEngineVideoResolutionCaptured:(int)width VideoHeight:(int)height{
     JPlayControllerLog(@"width = %d,height = %d",width,height);
 }
+
 -(void)playControlPanelDidClickStartOrPauseButton:(JGPlayerControlPanel *)control{
     switch (control.state) {
         case JGPlayerControlState_Init:
@@ -241,6 +242,7 @@
             break;
     }
 }
+
 -(void)playControlPanel:(JGPlayerControlPanel *)controlPanel didSliderValueChanged:(float)newValue{
     [[PPYPlayEngine shareInstance] seekToPosition:newValue * [PPYPlayEngine shareInstance].duration];
 }
