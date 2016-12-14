@@ -10,21 +10,31 @@
 #import "Masonry.h"
 #import <PPYLiveKit/PPYLiveKit.h>
 #import "UploadController.h"
+#import "PPProgressView.h"
+
+#define KMAX_RECORD_TIME  1000
 
 @interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *captureView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBeatify;
 @property (weak, nonatomic) IBOutlet UIButton *btnTorch;
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 @property (weak, nonatomic) IBOutlet UILabel *lblRecordTime;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressTime;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgDot;
 @property (weak, nonatomic) IBOutlet UIButton *btnRecord;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
+@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *localBtn;
 
 @property (nonatomic, strong) PPYPushEngine *pushEngine;
 @property (copy, nonatomic) NSString *recordPath;
 
 @property (assign, nonatomic) BOOL isRecording;
+
+@property (nonatomic, strong) PPProgressView *progressView;
+@property (assign, nonatomic) PPProgressViewStatus status;
 
 @end
 
@@ -57,10 +67,13 @@
     [self.btnBeatify setImage:[UIImage imageNamed:@"美颜开.png"] forState:UIControlStateNormal];
     [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
     self.lblRecordTime.text =  [NSString stringWithFormat:@"0s"];
-    self.progressTime.progress = 0;
+    
     self.pushEngine.preview = self.captureView;
     
     [self addTapGesture:self.captureView];
+    
+    self.progressView = [[PPProgressView alloc] initWithFrame:CGRectMake(0, self.captureView.frame.size.height - 3, self.captureView.frame.size.width, 3)];
+    [self.captureView addSubview:self.progressView];
 }
 
 #pragma mark - UITapGestureRecognizer
@@ -148,6 +161,27 @@
     }
 }
 
+- (IBAction)deleteBtnClicked:(id)sender
+{
+    if (self.status == PPProgressViewStatus_wait) {
+        self.status = PPProgressViewStatus_Cancel;
+        [self.progressView refreshProgressStatus:self.status];
+    } else if (self.status == PPProgressViewStatus_Cancel) {
+        [self.progressView deleteLastProgress];
+        self.status = PPProgressViewStatus_wait;
+    }
+}
+
+- (IBAction)localBtnClicked:(id)sender
+{
+    
+}
+
+- (IBAction)confirmBtnClicked:(id)sender
+{
+    
+}
+
 #pragma mark --<PPYPushEngineDelegate>
 -(void)didStreamStateChanged:(PPYPushEngineStreamStatus)status{
     
@@ -204,10 +238,10 @@
             
             break;
         case PPYPushEngineInfo_PublishTime:
-            self.lblRecordTime.text = [NSString stringWithFormat:@"%.1fs",(float)value/10];
-            self.progressTime.progress = ((float)value)/3000;
-            self.imgDot.hidden = value%5;
-            if(value >= 3000){   //步长100ms， 上限5分钟
+            self.lblRecordTime.text = [NSString stringWithFormat:@"%.1fs",(float)value / 10];
+           [self.progressView refreshProgressWithValue:((float)value)/KMAX_RECORD_TIME];
+            self.imgDot.hidden = value % 5;
+            if(value >= KMAX_RECORD_TIME){   //步长100ms， 上限5分钟
                 [self stopRecord];
             }
             break;
@@ -238,14 +272,27 @@
 }
 
 -(void)startRecord{
-    [self.pushEngine start];
-    self.btnRecord.userInteractionEnabled = NO;
+    
+    if (self.status == PPProgressViewStatus_Cancel) {
+        self.status = PPProgressViewStatus_wait;
+        [self.progressView refreshProgressStatus:self.status];
+    } else {
+        [self.pushEngine start];
+        self.btnRecord.userInteractionEnabled = NO;
+        self.localBtn.hidden = YES;
+        self.deleteBtn.hidden = YES;
+        self.confirmBtn.hidden = YES;
+    }
 }
 
 -(void)didRecordStarted{
     self.isRecording = YES;
     [self.btnRecord setImage:[UIImage imageNamed:@"暂停.png"] forState:UIControlStateNormal];
     self.btnRecord.userInteractionEnabled = YES;
+    
+    self.status = PPProgressViewStatus_refreshing;
+    [self.progressView refreshProgressStatus:self.status];
+    
 }
 
 -(void)stopRecord{
@@ -254,7 +301,14 @@
 
 -(void)didRecordStoped{
     self.isRecording = NO;
-    [self.navigationController pushViewController:[[UploadController alloc]init] animated:YES];
+    //[self.navigationController pushViewController:[[UploadController alloc]init] animated:YES];
+    
+    self.status = PPProgressViewStatus_wait;
+    [self.progressView refreshProgressStatus:self.status];
+    
+    [self.btnRecord setImage:[UIImage imageNamed:@"按住拍摄_未按"] forState:UIControlStateNormal];
+    self.deleteBtn.hidden = NO;
+    self.confirmBtn.hidden = NO;
 }
 
 @end

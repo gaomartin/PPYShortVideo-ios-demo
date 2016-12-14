@@ -2,6 +2,10 @@
   "images" : [
     {
       "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
       "filename" : "播放进度右侧白色发光端点@2x.png",
       "scale" : "2x"
     },

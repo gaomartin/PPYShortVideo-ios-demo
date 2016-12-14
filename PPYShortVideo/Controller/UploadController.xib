@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -35,7 +35,7 @@
                         <constraint firstAttribute="width" constant="40" id="ftK-Lx-cwG"/>
                         <constraint firstAttribute="height" constant="40" id="mv2-EF-90e"/>
                     </constraints>
-                    <state key="normal" image="上传.png"/>
+                    <state key="normal" image="上传"/>
                     <connections>
                         <action selector="doUpload:" destination="-1" eventType="touchUpInside" id="oLW-8m-v8i"/>
                     </connections>
@@ -46,7 +46,7 @@
                         <constraint firstAttribute="width" constant="40" id="cSU-BO-y4w"/>
                         <constraint firstAttribute="height" constant="40" id="oXM-8s-2gJ"/>
                     </constraints>
-                    <state key="normal" image="左上角的关闭.png"/>
+                    <state key="normal" image="左上角的关闭"/>
                     <connections>
                         <action selector="doExit:" destination="-1" eventType="touchUpInside" id="omg-zn-c0u"/>
                     </connections>
@@ -67,7 +67,7 @@
         </view>
     </objects>
     <resources>
-        <image name="上传.png" width="22" height="22"/>
-        <image name="左上角的关闭.png" width="16" height="17"/>
+        <image name="上传" width="22" height="22"/>
+        <image name="左上角的关闭" width="16" height="17"/>
     </resources>
 </document>

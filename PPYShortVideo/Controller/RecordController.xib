@@ -7,20 +7,21 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordController">
             <connections>
                 <outlet property="btnBeatify" destination="OHp-g8-hur" id="Ws4-M1-d7P"/>
                 <outlet property="btnCamera" destination="dHk-zR-J2k" id="j3V-fv-zHr"/>
-                <outlet property="btnRecord" destination="PGM-y1-rQe" id="i0D-vH-89e"/>
+                <outlet property="btnRecord" destination="lcA-3h-mlT" id="aH4-0M-Tkv"/>
                 <outlet property="btnTorch" destination="10x-wf-tDX" id="Dvb-z5-8dV"/>
                 <outlet property="captureView" destination="KEj-5Q-59B" id="2BB-FM-9yR"/>
-                <outlet property="imgDot" destination="ZXq-K6-MMr" id="YuB-Ts-nQ0"/>
-                <outlet property="lblRecordTime" destination="V1J-2Y-zS2" id="d86-pn-u1V"/>
-                <outlet property="progressTime" destination="SYk-Zh-iBa" id="85a-rt-exu"/>
+                <outlet property="confirmBtn" destination="YFp-Pa-iHX" id="upi-ZY-8Vp"/>
+                <outlet property="deleteBtn" destination="0fB-wO-NWI" id="zFS-2a-kfd"/>
+                <outlet property="imgDot" destination="J8h-lf-WhF" id="T75-Yh-Hr1"/>
+                <outlet property="lblRecordTime" destination="iBX-kG-3LN" id="ced-1h-oKU"/>
+                <outlet property="localBtn" destination="DYa-ld-8Ll" id="CRP-jG-fiV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,7 +39,7 @@
                                 <constraint firstAttribute="width" constant="60" id="yAW-aQ-GHq"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                            <state key="normal" image="左上角的关闭.png">
+                            <state key="normal" image="左上角的关闭">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -50,7 +51,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="E2D-qu-cAC"/>
                             </constraints>
-                            <state key="normal" image="美颜.png"/>
+                            <state key="normal" image="美颜"/>
                             <connections>
                                 <action selector="doBeauty:" destination="-1" eventType="touchUpInside" id="nlb-pF-lfd"/>
                             </connections>
@@ -60,7 +61,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="9t7-UN-SN2"/>
                             </constraints>
-                            <state key="normal" image="闪光灯.png"/>
+                            <state key="normal" image="闪光灯"/>
                             <connections>
                                 <action selector="doTorch:" destination="-1" eventType="touchUpInside" id="pee-JF-ul9"/>
                             </connections>
@@ -70,7 +71,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="PgL-f1-gFR"/>
                             </constraints>
-                            <state key="normal" image="摄像头转换.png"/>
+                            <state key="normal" image="摄像头转换"/>
                             <connections>
                                 <action selector="doSwitchCamera:" destination="-1" eventType="touchUpInside" id="OfH-BY-JNO"/>
                             </connections>
@@ -106,109 +107,124 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SYk-Zh-iBa">
-                            <rect key="frame" x="0.0" y="318" width="320" height="2"/>
-                            <color key="progressTintColor" red="1" green="0.50659576679999996" blue="0.44526031900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </progressView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="SYk-Zh-iBa" secondAttribute="bottom" id="2WE-Gt-DGJ"/>
-                        <constraint firstItem="SYk-Zh-iBa" firstAttribute="leading" secondItem="KEj-5Q-59B" secondAttribute="leading" id="EfM-35-zwF"/>
+                        <constraint firstAttribute="bottom" secondItem="2rM-T4-Iyg" secondAttribute="bottom" constant="5" id="NuM-Kt-SnY"/>
                         <constraint firstAttribute="trailing" secondItem="2rM-T4-Iyg" secondAttribute="trailing" id="adS-lA-tdw"/>
-                        <constraint firstItem="2rM-T4-Iyg" firstAttribute="trailing" secondItem="SYk-Zh-iBa" secondAttribute="trailing" id="d08-V9-Fv9"/>
-                        <constraint firstItem="SYk-Zh-iBa" firstAttribute="top" secondItem="2rM-T4-Iyg" secondAttribute="bottom" constant="3" id="yU4-C3-4um"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHS-in-NjW" userLabel="bottom view">
                     <rect key="frame" x="0.0" y="400" width="320" height="168"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="录制时间前面的小红点.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZXq-K6-MMr">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="录制时间前面的小红点" translatesAutoresizingMaskIntoConstraints="NO" id="J8h-lf-WhF">
                             <rect key="frame" x="128" y="38" width="7" height="7"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="7" id="la6-E2-3J7"/>
+                                <constraint firstAttribute="height" constant="7" id="LCP-PC-Ynj"/>
+                                <constraint firstAttribute="width" constant="7" id="mMB-PL-vwB"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1J-2Y-zS2">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBX-kG-3LN">
                             <rect key="frame" x="135" y="30" width="50" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="QBE-k1-EOf"/>
+                                <constraint firstAttribute="height" constant="18" id="jZB-bZ-qVR"/>
+                                <constraint firstAttribute="width" constant="50" id="qp6-y0-ea5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGM-y1-rQe" userLabel="录制">
-                            <rect key="frame" x="130" y="54" width="60" height="60"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fB-wO-NWI">
+                            <rect key="frame" x="30" y="53.5" width="60" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="EFv-Tc-0N5"/>
-                                <constraint firstAttribute="height" constant="60" id="ehW-E7-c46"/>
+                                <constraint firstAttribute="height" constant="60" id="B2D-p9-IJ7"/>
+                                <constraint firstAttribute="width" constant="60" id="xIa-uw-ZQ6"/>
                             </constraints>
-                            <state key="normal" title="Button" image="按住拍摄_未按.png"/>
+                            <state key="normal" image="组-8"/>
                             <connections>
-                                <action selector="doRecord:" destination="-1" eventType="touchUpInside" id="2R2-Wv-siw"/>
+                                <action selector="deleteBtnClicked:" destination="-1" eventType="touchUpInside" id="dLL-an-gl6"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3V-w0-4Qf" userLabel="取消">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYa-ld-8Ll">
                             <rect key="frame" x="30" y="54" width="60" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="60" id="8TH-iQ-DSj"/>
-                            </constraints>
-                            <state key="normal" title="X"/>
+                            <state key="normal" image="组-5"/>
+                            <connections>
+                                <action selector="localBtnClicked:" destination="-1" eventType="touchUpInside" id="boo-cT-8yb"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCZ-nq-hjO" userLabel="确定">
-                            <rect key="frame" x="230" y="54" width="60" height="60"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcA-3h-mlT">
+                            <rect key="frame" x="130" y="54" width="60" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="P7p-LD-Z8a"/>
-                                <constraint firstAttribute="height" constant="60" id="cMS-dr-uBs"/>
+                                <constraint firstAttribute="height" constant="60" id="NcT-vb-5Iu"/>
+                                <constraint firstAttribute="width" constant="60" id="RJ7-t5-DvR"/>
                             </constraints>
-                            <state key="normal" title="go"/>
+                            <state key="normal" image="按住拍摄_未按"/>
+                            <connections>
+                                <action selector="doRecord:" destination="-1" eventType="touchUpInside" id="gAL-nm-SUj"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFp-Pa-iHX">
+                            <rect key="frame" x="235" y="54" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="BWF-rf-iUd"/>
+                                <constraint firstAttribute="height" constant="60" id="nPM-0R-V8M"/>
+                            </constraints>
+                            <state key="normal" image="组-12"/>
+                            <connections>
+                                <action selector="confirmBtnClicked:" destination="-1" eventType="touchUpInside" id="moM-1c-ZE7"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="ZXq-K6-MMr" firstAttribute="top" secondItem="SHS-in-NjW" secondAttribute="top" constant="38" id="01K-04-wMU"/>
-                        <constraint firstItem="PGM-y1-rQe" firstAttribute="centerX" secondItem="SHS-in-NjW" secondAttribute="centerX" id="0jw-Gc-pR2"/>
-                        <constraint firstItem="PGM-y1-rQe" firstAttribute="top" secondItem="ZXq-K6-MMr" secondAttribute="bottom" constant="9" id="0vj-9k-Z2n"/>
-                        <constraint firstItem="P3V-w0-4Qf" firstAttribute="top" secondItem="SHS-in-NjW" secondAttribute="top" constant="54" id="26y-C4-EKD"/>
-                        <constraint firstItem="P3V-w0-4Qf" firstAttribute="bottom" secondItem="PGM-y1-rQe" secondAttribute="bottom" id="6W8-rX-sCN"/>
-                        <constraint firstItem="V1J-2Y-zS2" firstAttribute="leading" secondItem="ZXq-K6-MMr" secondAttribute="trailing" id="E72-QL-asJ"/>
-                        <constraint firstItem="YCZ-nq-hjO" firstAttribute="baseline" secondItem="P3V-w0-4Qf" secondAttribute="firstBaseline" id="I5W-89-Zyn"/>
-                        <constraint firstItem="P3V-w0-4Qf" firstAttribute="leading" secondItem="SHS-in-NjW" secondAttribute="leading" constant="30" id="Lz5-P7-6zB"/>
-                        <constraint firstAttribute="trailing" secondItem="YCZ-nq-hjO" secondAttribute="trailing" constant="30" id="Mn6-gW-XP1"/>
-                        <constraint firstItem="P3V-w0-4Qf" firstAttribute="top" secondItem="PGM-y1-rQe" secondAttribute="top" id="RqI-p8-lcv"/>
-                        <constraint firstItem="V1J-2Y-zS2" firstAttribute="centerX" secondItem="PGM-y1-rQe" secondAttribute="centerX" id="STf-BZ-lSr"/>
-                        <constraint firstItem="PGM-y1-rQe" firstAttribute="top" secondItem="V1J-2Y-zS2" secondAttribute="bottom" constant="6" id="d2S-36-gv1"/>
-                        <constraint firstItem="P3V-w0-4Qf" firstAttribute="centerY" secondItem="SHS-in-NjW" secondAttribute="centerY" id="h97-ry-9pm"/>
-                        <constraint firstItem="P3V-w0-4Qf" firstAttribute="baseline" secondItem="YCZ-nq-hjO" secondAttribute="firstBaseline" id="jpe-EF-bMK"/>
-                        <constraint firstItem="PGM-y1-rQe" firstAttribute="top" secondItem="YCZ-nq-hjO" secondAttribute="top" id="qlK-yz-axS"/>
+                        <constraint firstItem="YFp-Pa-iHX" firstAttribute="top" secondItem="lcA-3h-mlT" secondAttribute="top" id="1dD-mo-8rx"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="baseline" secondItem="DYa-ld-8Ll" secondAttribute="baseline" id="8JT-Py-ItE"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="trailing" secondItem="DYa-ld-8Ll" secondAttribute="trailing" id="DFf-sv-7DY"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="bottom" secondItem="lcA-3h-mlT" secondAttribute="bottom" id="EUZ-af-hzq"/>
+                        <constraint firstAttribute="trailing" secondItem="YFp-Pa-iHX" secondAttribute="trailing" constant="25" id="HXi-E8-FRp"/>
+                        <constraint firstItem="YFp-Pa-iHX" firstAttribute="baseline" secondItem="0fB-wO-NWI" secondAttribute="baseline" id="IzN-2p-13B"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="firstBaseline" secondItem="DYa-ld-8Ll" secondAttribute="firstBaseline" id="PJ8-Kv-iyN"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="top" secondItem="DYa-ld-8Ll" secondAttribute="top" id="Q4Z-ul-313"/>
+                        <constraint firstItem="lcA-3h-mlT" firstAttribute="top" secondItem="J8h-lf-WhF" secondAttribute="bottom" constant="9" id="aEw-pf-rxO"/>
+                        <constraint firstItem="lcA-3h-mlT" firstAttribute="top" secondItem="iBX-kG-3LN" secondAttribute="bottom" constant="6" id="eGh-vm-1ap"/>
+                        <constraint firstItem="YFp-Pa-iHX" firstAttribute="firstBaseline" secondItem="0fB-wO-NWI" secondAttribute="firstBaseline" id="gt5-BU-ImD"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="top" secondItem="lcA-3h-mlT" secondAttribute="top" id="hF5-4b-1xs"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="leading" secondItem="SHS-in-NjW" secondAttribute="leading" constant="30" id="ju7-gU-myb"/>
+                        <constraint firstItem="iBX-kG-3LN" firstAttribute="leading" secondItem="J8h-lf-WhF" secondAttribute="trailing" id="oK7-zC-W1W"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="leading" secondItem="DYa-ld-8Ll" secondAttribute="leading" id="pUE-jV-gzX"/>
+                        <constraint firstItem="iBX-kG-3LN" firstAttribute="centerX" secondItem="SHS-in-NjW" secondAttribute="centerX" id="s8e-Gs-kjq"/>
+                        <constraint firstItem="iBX-kG-3LN" firstAttribute="centerX" secondItem="lcA-3h-mlT" secondAttribute="centerX" id="uOQ-ca-mIf"/>
+                        <constraint firstItem="0fB-wO-NWI" firstAttribute="centerY" secondItem="SHS-in-NjW" secondAttribute="centerY" id="zzf-BX-A0l"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="SHS-in-NjW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="400" id="1gh-AF-bIR"/>
                 <constraint firstItem="MQd-SD-mup" firstAttribute="trailing" secondItem="KEj-5Q-59B" secondAttribute="trailing" id="CVA-kY-xZO"/>
+                <constraint firstItem="SHS-in-NjW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="400" id="JSk-s7-CDr"/>
                 <constraint firstItem="KEj-5Q-59B" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="Lfg-MN-bXC"/>
                 <constraint firstAttribute="trailing" secondItem="MQd-SD-mup" secondAttribute="trailing" id="MaT-n9-Z8z"/>
+                <constraint firstAttribute="bottom" secondItem="SHS-in-NjW" secondAttribute="bottom" id="P6g-bz-UGA"/>
                 <constraint firstItem="MQd-SD-mup" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="ULZ-RY-yHN"/>
-                <constraint firstItem="KEj-5Q-59B" firstAttribute="trailing" secondItem="SHS-in-NjW" secondAttribute="trailing" id="Yum-RH-sp9"/>
-                <constraint firstAttribute="bottom" secondItem="SHS-in-NjW" secondAttribute="bottom" id="a6z-4K-3Uk"/>
-                <constraint firstItem="SHS-in-NjW" firstAttribute="top" secondItem="KEj-5Q-59B" secondAttribute="bottom" id="aYI-Yt-9uz"/>
+                <constraint firstItem="SHS-in-NjW" firstAttribute="top" secondItem="KEj-5Q-59B" secondAttribute="bottom" id="VdF-MA-7IB"/>
+                <constraint firstItem="SHS-in-NjW" firstAttribute="trailing" secondItem="KEj-5Q-59B" secondAttribute="trailing" id="XQ3-IU-DVe"/>
                 <constraint firstItem="MQd-SD-mup" firstAttribute="leading" secondItem="KEj-5Q-59B" secondAttribute="leading" id="eHH-XK-BHJ"/>
                 <constraint firstItem="MQd-SD-mup" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h74-cO-6vX"/>
-                <constraint firstItem="KEj-5Q-59B" firstAttribute="leading" secondItem="SHS-in-NjW" secondAttribute="leading" id="mGf-Hb-VxL"/>
+                <constraint firstItem="SHS-in-NjW" firstAttribute="leading" secondItem="KEj-5Q-59B" secondAttribute="leading" id="p5y-p5-E67"/>
                 <constraint firstItem="KEj-5Q-59B" firstAttribute="top" secondItem="MQd-SD-mup" secondAttribute="bottom" id="yE2-W5-uS8"/>
             </constraints>
-            <point key="canvasLocation" x="24.5" y="60.5"/>
+            <point key="canvasLocation" x="-139" y="16"/>
         </view>
     </objects>
     <resources>
-        <image name="左上角的关闭.png" width="16" height="17"/>
-        <image name="录制时间前面的小红点.png" width="6" height="6"/>
-        <image name="按住拍摄_未按.png" width="86" height="86"/>
-        <image name="摄像头转换.png" width="22" height="19"/>
-        <image name="美颜.png" width="23" height="21"/>
-        <image name="闪光灯.png" width="12" height="21"/>
+        <image name="左上角的关闭" width="16" height="17"/>
+        <image name="录制时间前面的小红点" width="6" height="6"/>
+        <image name="按住拍摄_未按" width="86" height="86"/>
+        <image name="摄像头转换" width="22" height="19"/>
+        <image name="组-12" width="55" height="55"/>
+        <image name="组-5" width="55" height="55"/>
+        <image name="组-8" width="55" height="55"/>
+        <image name="美颜" width="23" height="21"/>
+        <image name="闪光灯" width="12" height="21"/>
     </resources>
 </document>

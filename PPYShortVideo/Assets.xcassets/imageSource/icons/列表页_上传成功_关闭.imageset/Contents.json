@@ -2,6 +2,10 @@
   "images" : [
     {
       "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
       "filename" : "列表页_上传成功_关闭@2x.png",
       "scale" : "2x"
     },
