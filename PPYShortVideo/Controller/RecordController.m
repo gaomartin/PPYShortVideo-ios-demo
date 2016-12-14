@@ -25,6 +25,7 @@
 @property (copy, nonatomic) NSString *recordPath;
 
 @property (assign, nonatomic) BOOL isRecording;
+
 @end
 
 @implementation RecordController

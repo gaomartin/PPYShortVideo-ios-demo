@@ -19,6 +19,8 @@
 
 @property (copy, nonatomic) NSString *recordFilePath;
 @property (strong, nonatomic) JGCycleProgressView *progressView;
+@property (assign, nonatomic) BOOL isUploading;
+
 @end
 
 @implementation UploadController
@@ -36,6 +38,7 @@
 #pragma mark --Actions--
 - (IBAction)doUpload:(id)sender {
     
+    self.isUploading = YES;
     PlayListHelper *helper = [[PlayListHelper alloc]init];
 
     NSLog(@"self.recordFilepath = %@",self.recordFilePath);
@@ -48,17 +51,22 @@
             weakSelf.btnUpload.userInteractionEnabled = NO;
         });
     } Success:^{
+        self.isUploading = NO;
         weakSelf.btnUpload.userInteractionEnabled = YES;
         [weakSelf.navigationController dismissViewControllerAnimated:NO completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"kUploadSuccess" object:nil];
     } Failured:^(NetworkErrorType type, int errcode, NSString *msg) {
         weakSelf.btnUpload.userInteractionEnabled = YES;
         [weakSelf processMessage:type code:errcode info:msg];
+        self.isUploading = NO;
     }];
 }
 
 - (IBAction)doExit:(id)sender {
-    [self notifyMessageOnUI:@"后台上传中"];
+    if (self.isUploading) {
+        [self notifyMessageOnUI:@"后台上传中"];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

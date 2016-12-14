@@ -21,9 +21,7 @@ FOUNDATION_EXPORT const unsigned char PPYLiveKitVersionString[];
 #import <PPYLiveKit/PPYLiveKit.h>
 #import <PPYLiveKit/PPYPushEngine.h>
 #import <PPYLiveKit/PPYPlayEngine.h>
-//#import <PPYLiveKit/PPYVideoCapture.h>
 #import <PPYLiveKit/PPYVideoConfiguration.h>
-//#import <PPYLiveKit/PPYAudioCapture.h>
 #import <PPYLiveKit/PPYAudioConfiguration.h>
 #import <PPYLiveKit/PPYMediaUtils.h>
 
