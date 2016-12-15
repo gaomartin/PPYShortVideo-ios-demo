@@ -21,6 +21,11 @@
 		4B239C721DFAB75800D01B55 /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */; };
 		4B239C731DFAB75800D01B55 /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B239C751DFAB75800D01B55 /* PPYLiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B754FB81E0266A6005814F8 /* LocalVideoAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B754FB61E0266A6005814F8 /* LocalVideoAddViewController.m */; };
+		4B754FB91E0266A6005814F8 /* LocalVideoAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B754FB71E0266A6005814F8 /* LocalVideoAddViewController.xib */; };
+		4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */; };
+		4B754FCA1E02792F005814F8 /* LocalVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B754FC81E02792F005814F8 /* LocalVideoCell.m */; };
+		4B754FCB1E02792F005814F8 /* LocalVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B754FC91E02792F005814F8 /* LocalVideoCell.xib */; };
 		4BD0AA1B1DFFEF330063D2E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842472F11DCC7FA0007B4D44 /* Assets.xcassets */; };
 		842472E71DCC7FA0007B4D44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 842472E61DCC7FA0007B4D44 /* main.m */; };
 		842472EA1DCC7FA0007B4D44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 842472E91DCC7FA0007B4D44 /* AppDelegate.m */; };
@@ -105,6 +110,14 @@
 		4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayerFramework.framework; sourceTree = "<group>"; };
 		4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaStreamerFramework.framework; sourceTree = "<group>"; };
 		4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYLiveKit.framework; sourceTree = "<group>"; };
+		4B754FB51E0266A6005814F8 /* LocalVideoAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVideoAddViewController.h; sourceTree = "<group>"; };
+		4B754FB61E0266A6005814F8 /* LocalVideoAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoAddViewController.m; sourceTree = "<group>"; };
+		4B754FB71E0266A6005814F8 /* LocalVideoAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalVideoAddViewController.xib; sourceTree = "<group>"; };
+		4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumVideoInfo.h; sourceTree = "<group>"; };
+		4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumVideoInfo.m; sourceTree = "<group>"; };
+		4B754FC71E02792F005814F8 /* LocalVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVideoCell.h; sourceTree = "<group>"; };
+		4B754FC81E02792F005814F8 /* LocalVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoCell.m; sourceTree = "<group>"; };
+		4B754FC91E02792F005814F8 /* LocalVideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalVideoCell.xib; sourceTree = "<group>"; };
 		842472E21DCC7FA0007B4D44 /* PPYShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPYShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842472E61DCC7FA0007B4D44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		842472E81DCC7FA0007B4D44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -251,6 +264,28 @@
 			path = CoreLib;
 			sourceTree = "<group>";
 		};
+		4B754FB41E026665005814F8 /* 镜头添加 */ = {
+			isa = PBXGroup;
+			children = (
+				4B754FB51E0266A6005814F8 /* LocalVideoAddViewController.h */,
+				4B754FB61E0266A6005814F8 /* LocalVideoAddViewController.m */,
+				4B754FB71E0266A6005814F8 /* LocalVideoAddViewController.xib */,
+				4B754FC71E02792F005814F8 /* LocalVideoCell.h */,
+				4B754FC81E02792F005814F8 /* LocalVideoCell.m */,
+				4B754FC91E02792F005814F8 /* LocalVideoCell.xib */,
+			);
+			path = "镜头添加";
+			sourceTree = "<group>";
+		};
+		4B754FC31E026A10005814F8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */,
+				4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		842472D91DCC7FA0007B4D44 = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +306,7 @@
 		842472E41DCC7FA0007B4D44 /* PPYShortVideo */ = {
 			isa = PBXGroup;
 			children = (
+				4B754FC31E026A10005814F8 /* Model */,
 				842472E81DCC7FA0007B4D44 /* AppDelegate.h */,
 				842472E91DCC7FA0007B4D44 /* AppDelegate.m */,
 				4B02DF311E010D8F00DE345F /* Category */,
@@ -297,6 +333,7 @@
 		842473011DCC8104007B4D44 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B754FB41E026665005814F8 /* 镜头添加 */,
 				842473E31DD1CD05007B4D44 /* 播放 */,
 				8424739E1DD19FAF007B4D44 /* 播放列表 */,
 				842473121DD0310D007B4D44 /* 录制 */,
@@ -557,7 +594,9 @@
 			files = (
 				4BD0AA1B1DFFEF330063D2E9 /* Assets.xcassets in Resources */,
 				842473A81DD1A181007B4D44 /* PlayListController.xib in Resources */,
+				4B754FB91E0266A6005814F8 /* LocalVideoAddViewController.xib in Resources */,
 				842472F51DCC7FA0007B4D44 /* LaunchScreen.storyboard in Resources */,
+				4B754FCB1E02792F005814F8 /* LocalVideoCell.xib in Resources */,
 				842474001DD444D0007B4D44 /* UploadController.xib in Resources */,
 				842473AD1DD1A27F007B4D44 /* FlowCell.xib in Resources */,
 				84FEF3FF1DDEE47C008D4EDD /* JGPlayerControlPanel.xib in Resources */,
@@ -597,7 +636,10 @@
 				842473FF1DD444D0007B4D44 /* UploadController.m in Sources */,
 				4B02DF421E010D8F00DE345F /* NSArray+ObjectAtIndexWithBoundsCheck.m in Sources */,
 				842473B41DD1A2E6007B4D44 /* NSObject+YYModel.m in Sources */,
+				4B754FCA1E02792F005814F8 /* LocalVideoCell.m in Sources */,
+				4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */,
 				842473841DD094BE007B4D44 /* MASCompositeConstraint.m in Sources */,
+				4B754FB81E0266A6005814F8 /* LocalVideoAddViewController.m in Sources */,
 				842473F81DD40CB0007B4D44 /* PlayListHelper.m in Sources */,
 				842473881DD094BE007B4D44 /* MASViewAttribute.m in Sources */,
 				842473F41DD2C360007B4D44 /* WebAPI.m in Sources */,

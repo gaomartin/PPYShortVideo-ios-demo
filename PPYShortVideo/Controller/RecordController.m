@@ -11,6 +11,7 @@
 #import <PPYLiveKit/PPYLiveKit.h>
 #import "UploadController.h"
 #import "PPProgressView.h"
+#import "LocalVideoAddViewController.h"
 
 #define KMAX_RECORD_TIME  1000
 
@@ -174,7 +175,8 @@
 
 - (IBAction)localBtnClicked:(id)sender
 {
-    
+    LocalVideoAddViewController *localView = [[LocalVideoAddViewController alloc] init];
+    [self presentViewController:localView animated:YES completion:nil];
 }
 
 - (IBAction)confirmBtnClicked:(id)sender
@@ -292,7 +294,6 @@
     
     self.status = PPProgressViewStatus_refreshing;
     [self.progressView refreshProgressStatus:self.status];
-    
 }
 
 -(void)stopRecord{
