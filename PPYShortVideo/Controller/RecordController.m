@@ -55,6 +55,7 @@
         [self stopRecord];
     }
 }
+
 -(void)initData{
     //设置录制路径
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -181,7 +182,7 @@
 
 - (IBAction)confirmBtnClicked:(id)sender
 {
-    
+     [self.navigationController pushViewController:[[UploadController alloc]init] animated:YES];
 }
 
 #pragma mark --<PPYPushEngineDelegate>
@@ -302,7 +303,6 @@
 
 -(void)didRecordStoped{
     self.isRecording = NO;
-    //[self.navigationController pushViewController:[[UploadController alloc]init] animated:YES];
     
     self.status = PPProgressViewStatus_wait;
     [self.progressView refreshProgressStatus:self.status];

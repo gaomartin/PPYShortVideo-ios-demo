@@ -47,18 +47,17 @@
         imageView.image = info.thumbnail;
         imageView.hidden = NO;
         label.text = [NSString stringWithFormat:@"%@",[self timeformatFromSeconds:[info.duration integerValue]]];
-        NSLog(@"duration=%@", info.duration);
     }
 }
 
 - (NSString*)timeformatFromSeconds:(NSInteger)seconds
 {
     //format of hour
-    NSString *str_hour = [NSString stringWithFormat:@"%02d",seconds/3600];
+    NSString *str_hour = [NSString stringWithFormat:@"%02zd",seconds/3600];
     //format of minute
-    NSString *str_minute = [NSString stringWithFormat:@"%02d",(seconds%3600)/60];
+    NSString *str_minute = [NSString stringWithFormat:@"%02zd",(seconds%3600)/60];
     //format of second
-    NSString *str_second = [NSString stringWithFormat:@"%02d",seconds%60];
+    NSString *str_second = [NSString stringWithFormat:@"%02zd",seconds%60];
     //format of time
     NSString *format_time = @"00:00";
     
