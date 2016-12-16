@@ -168,7 +168,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     for (UICollectionViewLayoutAttributes *layoutAttr in layoutAttrsInRect) {
         CGFloat xd = layoutAttr.center.x - point.x;
         CGFloat yd = layoutAttr.center.y - point.y;
-        NSInteger dist = sqrtf(xd*xd + yd*yd);
+        NSInteger dist = sqrtf(xd*xd*1.8 + yd*yd*1.5);//import code
         if (dist < closestDist) {
             closestDist = dist;
             indexPath = layoutAttr.indexPath;

@@ -15,10 +15,14 @@
 
 #define kItemCountInVideoListCell 4
 
-@interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UICollectionViewDataSource_Draggable,UICollectionViewDelegate>
+
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIView *bottomView;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *albumVideoInfos;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *selectVideoArray;
 @property (nonatomic, assign) BOOL isDraging;
 
@@ -34,13 +38,13 @@
     _selectVideoArray = [NSMutableArray array];
     [self loadLocalVideo];
     
+    [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)loadLocalVideo
 {
@@ -66,7 +70,8 @@
             //没有更多的group时，即可认为已经加载完成。
             NSLog(@"after load, the total alumvideo count is %zd",_albumVideoInfos.count);
             dispatch_async(dispatch_get_main_queue(), ^{
-                _selectVideoArray = _albumVideoInfos;//test
+                [_selectVideoArray addObject:_albumVideoInfos];//test
+                [self.collectionView reloadData];
             });
         }
         
@@ -120,22 +125,23 @@
 }
 
 #pragma mark - UICollectionView
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return _selectVideoArray.count;
+    return [self.selectVideoArray count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[_selectVideoArray objectAtIndex:section] count];
+    return [[self.selectVideoArray objectAtIndex:section] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SelectVideoViewCell *cell = (SelectVideoViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    
-    AlbumVideoInfo *videoInfo = [self.selectVideoArray objectAtIndex:indexPath.section];
+    NSMutableArray *data = [self.selectVideoArray objectAtIndex:indexPath.section];
+    AlbumVideoInfo *videoInfo = [data objectAtIndex:indexPath.row];
     cell.imageView.image = videoInfo.thumbnail;
     
     if (_isDraging) {
@@ -182,10 +188,6 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    // Prevent item from being moved to index 0
-    //    if (toIndexPath.item == 0) {
-    //        return NO;
-    //    }
     return YES;
 }
 
@@ -198,7 +200,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     _isDraging = NO;
-    [self performSelector:@selector(reloadDataWith:) withObject:collectionView afterDelay:0.3];
+    [self performSelector:@selector(reloadDataWith:) withObject:collectionView afterDelay:0.5];
 }
 
 - (void)reloadDataWith:(UICollectionView *)collectionView
