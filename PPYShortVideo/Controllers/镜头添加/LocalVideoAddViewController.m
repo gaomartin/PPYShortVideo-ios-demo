@@ -10,21 +10,19 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AlbumVideoInfo.h"
 #import "LocalVideoCell.h"
-#import "UICollectionView+Draggable.h"
 #import "SelectVideoViewCell.h"
+#import "XWDragCellCollectionView.h"
 
 #define kItemCountInVideoListCell 4
 
-@interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UICollectionViewDataSource_Draggable,UICollectionViewDelegate>
-
+@interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,XWDragCellCollectionViewDataSource, XWDragCellCollectionViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIView *bottomView;
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet XWDragCellCollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *albumVideoInfos;
 @property (nonatomic, strong) NSMutableArray *selectVideoArray;
-@property (nonatomic, assign) BOOL isDraging;
 
 @end
 
@@ -39,6 +37,8 @@
     [self loadLocalVideo];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
+    self.collectionView.shakeLevel = 3.0f;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,7 +88,12 @@
 
 - (IBAction)cameraBtnClicked:(id)sender
 {
-    
+    if (self.collectionView.isEditing) {
+        [self.collectionView xw_stopEditingModel];
+
+    }else{
+        [self.collectionView xw_enterEditingModel];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -124,98 +129,56 @@
     return 80;
 }
 
-#pragma mark - UICollectionView
+#pragma mark - <XWDragCellCollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return [self.selectVideoArray count];
+    return self.selectVideoArray.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[self.selectVideoArray objectAtIndex:section] count];
+    NSArray *sec = _selectVideoArray[section];
+    return sec.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SelectVideoViewCell *cell = (SelectVideoViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    SelectVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NSMutableArray *data = [self.selectVideoArray objectAtIndex:indexPath.section];
-    AlbumVideoInfo *videoInfo = [data objectAtIndex:indexPath.row];
+    AlbumVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
     cell.imageView.image = videoInfo.thumbnail;
-    
-    if (_isDraging) {
-        [self shakeWithCell:cell];
-    } else {
-        [self stopShakeWithCell:cell];
-    }
-    
     return cell;
 }
 
-- (void)shakeWithCell:(SelectVideoViewCell *)cell
+- (NSArray *)dataSourceArrayOfCollectionView:(XWDragCellCollectionView *)collectionView
 {
-    NSLog(@"shake");
-    srand([[NSDate date] timeIntervalSince1970]);
-    float rand=(float)random();
-    CFTimeInterval t=rand*0.0000000001;
-    
-    [UIView animateWithDuration:0.1 delay:t options:0  animations:^
-     {
-         cell.transform=CGAffineTransformMakeRotation(-0.05);
-     } completion:^(BOOL finished)
-     {
-         [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse|UIViewAnimationOptionAllowUserInteraction  animations:^
-          {
-              cell.transform=CGAffineTransformMakeRotation(0.05);
-          } completion:^(BOOL finished) {}];
-     }];
+    return _selectVideoArray;
 }
 
--(void)stopShakeWithCell:(SelectVideoViewCell *)cell
+#pragma mark - <XWDragCellCollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"stop shake");
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState animations:^
-     {
-         cell.transform=CGAffineTransformIdentity;
-     } completion:^(BOOL finished) {}];
+    AlbumVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
+    NSLog(@"点击了%@",videoInfo.name);
 }
 
-- (BOOL)collectionView:(LSCollectionViewHelper *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)dragCellCollectionView:(XWDragCellCollectionView *)collectionView newDataArrayAfterMove:(NSArray *)newDataArray
 {
-    return YES;
+    _selectVideoArray = [NSMutableArray arrayWithArray:newDataArray];
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)dragCellCollectionView:(XWDragCellCollectionView *)collectionView cellWillBeginMoveAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    [self.collectionView xw_enterEditingModel];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didLongpressOnItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)dragCellCollectionViewCellEndMoving:(XWDragCellCollectionView *)collectionView
 {
-    _isDraging = YES;
-    [collectionView reloadData];
+    [self.collectionView xw_stopEditingModel];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didMoveItemAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-    _isDraging = NO;
-    [self performSelector:@selector(reloadDataWith:) withObject:collectionView afterDelay:0.5];
-}
 
-- (void)reloadDataWith:(UICollectionView *)collectionView
-{
-    [collectionView reloadData];
-}
-
-- (void)collectionView:(LSCollectionViewHelper *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-    NSMutableArray *data1 = [self.selectVideoArray objectAtIndex:fromIndexPath.section];
-    NSMutableArray *data2 = [self.selectVideoArray objectAtIndex:toIndexPath.section];
-    NSString *index = [data1 objectAtIndex:fromIndexPath.item];
-    
-    [data1 removeObjectAtIndex:fromIndexPath.item];
-    [data2 insertObject:index atIndex:toIndexPath.item];
-}
 
 @end

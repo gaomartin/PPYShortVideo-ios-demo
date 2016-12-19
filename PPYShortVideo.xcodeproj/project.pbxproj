@@ -20,6 +20,7 @@
 		4B239C721DFAB75800D01B55 /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */; };
 		4B239C731DFAB75800D01B55 /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B239C751DFAB75800D01B55 /* PPYLiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B2F66451E07783D0080B941 /* XWDragCellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */; };
 		4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */; };
 		4B754FF21E03C7C9005814F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B754FF11E03C7C9005814F8 /* CoreGraphics.framework */; };
 		4B754FF41E03C7D1005814F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B754FF31E03C7D1005814F8 /* QuartzCore.framework */; };
@@ -55,10 +56,6 @@
 		4B7550631E03CBD5005814F8 /* JGPlayerControlPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B75505B1E03CBD5005814F8 /* JGPlayerControlPanel.xib */; };
 		4B7550641E03CBD5005814F8 /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B75505D1E03CBD5005814F8 /* PlayerView.m */; };
 		4B7550651E03CBD5005814F8 /* PPProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B75505F1E03CBD5005814F8 /* PPProgressView.m */; };
-		4B7550731E03CC93005814F8 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550691E03CC93005814F8 /* LSCollectionViewHelper.m */; };
-		4B7550741E03CC93005814F8 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B75506B1E03CC93005814F8 /* LSCollectionViewLayoutHelper.m */; };
-		4B7550751E03CC93005814F8 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B75506E1E03CC93005814F8 /* DraggableCollectionViewFlowLayout.m */; };
-		4B7550761E03CC93005814F8 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550701E03CC93005814F8 /* UICollectionView+Draggable.m */; };
 		4B7550CB1E03CD39005814F8 /* FlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550AD1E03CD39005814F8 /* FlowCell.m */; };
 		4B7550CC1E03CD39005814F8 /* FlowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550AE1E03CD39005814F8 /* FlowCell.xib */; };
 		4B7550CD1E03CD39005814F8 /* LocalVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550B01E03CD39005814F8 /* LocalVideoCell.m */; };
@@ -116,6 +113,8 @@
 		4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayerFramework.framework; sourceTree = "<group>"; };
 		4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaStreamerFramework.framework; sourceTree = "<group>"; };
 		4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYLiveKit.framework; sourceTree = "<group>"; };
+		4B2F66431E07783D0080B941 /* XWDragCellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWDragCellCollectionView.h; sourceTree = "<group>"; };
+		4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWDragCellCollectionView.m; sourceTree = "<group>"; };
 		4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumVideoInfo.h; sourceTree = "<group>"; };
 		4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumVideoInfo.m; sourceTree = "<group>"; };
 		4B754FF11E03C7C9005814F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -190,16 +189,6 @@
 		4B75505D1E03CBD5005814F8 /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		4B75505E1E03CBD5005814F8 /* PPProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPProgressView.h; sourceTree = "<group>"; };
 		4B75505F1E03CBD5005814F8 /* PPProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPProgressView.m; sourceTree = "<group>"; };
-		4B7550681E03CC93005814F8 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
-		4B7550691E03CC93005814F8 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
-		4B75506A1E03CC93005814F8 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
-		4B75506B1E03CC93005814F8 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
-		4B75506D1E03CC93005814F8 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		4B75506E1E03CC93005814F8 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		4B75506F1E03CC93005814F8 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
-		4B7550701E03CC93005814F8 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
-		4B7550711E03CC93005814F8 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
-		4B7550721E03CC93005814F8 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
 		4B7550AC1E03CD39005814F8 /* FlowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowCell.h; sourceTree = "<group>"; };
 		4B7550AD1E03CD39005814F8 /* FlowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowCell.m; sourceTree = "<group>"; };
 		4B7550AE1E03CD39005814F8 /* FlowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlowCell.xib; sourceTree = "<group>"; };
@@ -334,7 +323,6 @@
 		4B7550071E03CBC3005814F8 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
-				4B7550661E03CC93005814F8 /* DraggableCollectionView */,
 				4B7550081E03CBC3005814F8 /* AFNetworking */,
 				4B7550161E03CBC3005814F8 /* Masonry */,
 				4B7550301E03CBC3005814F8 /* MBProgressHUD */,
@@ -443,41 +431,10 @@
 				4B75505D1E03CBD5005814F8 /* PlayerView.m */,
 				4B75505E1E03CBD5005814F8 /* PPProgressView.h */,
 				4B75505F1E03CBD5005814F8 /* PPProgressView.m */,
+				4B2F66431E07783D0080B941 /* XWDragCellCollectionView.h */,
+				4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */,
 			);
 			path = CustomView;
-			sourceTree = "<group>";
-		};
-		4B7550661E03CC93005814F8 /* DraggableCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				4B7550671E03CC93005814F8 /* Helpers */,
-				4B75506C1E03CC93005814F8 /* Layout */,
-				4B75506F1E03CC93005814F8 /* UICollectionView+Draggable.h */,
-				4B7550701E03CC93005814F8 /* UICollectionView+Draggable.m */,
-				4B7550711E03CC93005814F8 /* UICollectionViewDataSource_Draggable.h */,
-				4B7550721E03CC93005814F8 /* UICollectionViewLayout_Warpable.h */,
-			);
-			path = DraggableCollectionView;
-			sourceTree = "<group>";
-		};
-		4B7550671E03CC93005814F8 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				4B7550681E03CC93005814F8 /* LSCollectionViewHelper.h */,
-				4B7550691E03CC93005814F8 /* LSCollectionViewHelper.m */,
-				4B75506A1E03CC93005814F8 /* LSCollectionViewLayoutHelper.h */,
-				4B75506B1E03CC93005814F8 /* LSCollectionViewLayoutHelper.m */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		4B75506C1E03CC93005814F8 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				4B75506D1E03CC93005814F8 /* DraggableCollectionViewFlowLayout.h */,
-				4B75506E1E03CC93005814F8 /* DraggableCollectionViewFlowLayout.m */,
-			);
-			path = Layout;
 			sourceTree = "<group>";
 		};
 		4B7550AA1E03CD39005814F8 /* Controllers */ = {
@@ -674,6 +631,7 @@
 				4B7550451E03CBC3005814F8 /* MASCompositeConstraint.m in Sources */,
 				4B02DF471E010D8F00DE345F /* NSObject+SafeValueWithJSON.m in Sources */,
 				4B75504D1E03CBC3005814F8 /* View+MASAdditions.m in Sources */,
+				4B2F66451E07783D0080B941 /* XWDragCellCollectionView.m in Sources */,
 				4B7550DA1E03CD39005814F8 /* UploadController.m in Sources */,
 				4B7550D81E03CD39005814F8 /* RecordController.m in Sources */,
 				4B7550441E03CBC3005814F8 /* AFURLSessionManager.m in Sources */,
@@ -685,21 +643,17 @@
 				4B02DF421E010D8F00DE345F /* NSArray+ObjectAtIndexWithBoundsCheck.m in Sources */,
 				4B7550CF1E03CD39005814F8 /* SelectVideoViewCell.m in Sources */,
 				4B7550CB1E03CD39005814F8 /* FlowCell.m in Sources */,
-				4B7550751E03CC93005814F8 /* DraggableCollectionViewFlowLayout.m in Sources */,
 				4B7550501E03CBC3005814F8 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				4B7550401E03CBC3005814F8 /* AFNetworkReachabilityManager.m in Sources */,
 				4B754FFE1E03CA29005814F8 /* main.m in Sources */,
-				4B7550731E03CC93005814F8 /* LSCollectionViewHelper.m in Sources */,
 				4B7550DC1E03CD39005814F8 /* LocalVideoAddViewController.m in Sources */,
 				4B75503F1E03CBC3005814F8 /* AFHTTPSessionManager.m in Sources */,
 				4B7550511E03CBC3005814F8 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				4B7550741E03CC93005814F8 /* LSCollectionViewLayoutHelper.m in Sources */,
 				4B7550621E03CBD5005814F8 /* JGPlayerControlPanel.m in Sources */,
 				4B7550D71E03CD39005814F8 /* PlayListHelper.m in Sources */,
 				4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */,
 				4B7550D51E03CD39005814F8 /* PlayListController.m in Sources */,
 				4B7550051E03CBAD005814F8 /* WebAPI.m in Sources */,
-				4B7550761E03CC93005814F8 /* UICollectionView+Draggable.m in Sources */,
 				4B7550481E03CBC3005814F8 /* MASLayoutConstraint.m in Sources */,
 				4B75504C1E03CBC3005814F8 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				4B7550061E03CBAD005814F8 /* WebAPIResponseModels.m in Sources */,
