@@ -11,4 +11,6 @@
 
 @interface CaptureView : UIView
 
+@property (copy, nonatomic) NSString *recordPath;
+
 @end

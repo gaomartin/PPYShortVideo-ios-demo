@@ -14,6 +14,14 @@
 		4B02DF461E010D8F00DE345F /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B02DF3C1E010D8F00DE345F /* NSDictionary+StringValue.m */; };
 		4B02DF471E010D8F00DE345F /* NSObject+SafeValueWithJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B02DF3E1E010D8F00DE345F /* NSObject+SafeValueWithJSON.m */; };
 		4B02DF481E010D8F00DE345F /* UIColor+BZHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B02DF411E010D8F00DE345F /* UIColor+BZHex.m */; };
+		4B1703E01E07C249006E3566 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703D61E07C249006E3566 /* mainViewController.m */; };
+		4B1703E11E07C249006E3566 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703D71E07C249006E3566 /* mainViewController.xib */; };
+		4B1703E21E07C249006E3566 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DA1E07C249006E3566 /* RecordController.m */; };
+		4B1703E31E07C249006E3566 /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703DB1E07C249006E3566 /* RecordController.xib */; };
+		4B1703E41E07C249006E3566 /* UploadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DE1E07C249006E3566 /* UploadController.m */; };
+		4B1703E51E07C249006E3566 /* UploadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703DF1E07C249006E3566 /* UploadController.xib */; };
+		4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */; };
+		4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */; };
 		4B239C6F1DFAAA0500D01B55 /* PPYLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */; };
 		4B239C701DFAB75800D01B55 /* MediaPlayerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */; };
 		4B239C711DFAB75800D01B55 /* MediaPlayerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -62,17 +70,11 @@
 		4B7550CE1E03CD39005814F8 /* LocalVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550B11E03CD39005814F8 /* LocalVideoCell.xib */; };
 		4B7550CF1E03CD39005814F8 /* SelectVideoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550B31E03CD39005814F8 /* SelectVideoViewCell.m */; };
 		4B7550D01E03CD39005814F8 /* SelectVideoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550B41E03CD39005814F8 /* SelectVideoViewCell.xib */; };
-		4B7550D11E03CD39005814F8 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550B61E03CD39005814F8 /* mainViewController.m */; };
-		4B7550D21E03CD39005814F8 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550B71E03CD39005814F8 /* mainViewController.xib */; };
 		4B7550D31E03CD39005814F8 /* PlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550BA1E03CD39005814F8 /* PlayerController.m */; };
 		4B7550D41E03CD39005814F8 /* PlayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550BB1E03CD39005814F8 /* PlayerController.xib */; };
 		4B7550D51E03CD39005814F8 /* PlayListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550BD1E03CD39005814F8 /* PlayListController.m */; };
 		4B7550D61E03CD39005814F8 /* PlayListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550BE1E03CD39005814F8 /* PlayListController.xib */; };
 		4B7550D71E03CD39005814F8 /* PlayListHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C01E03CD39005814F8 /* PlayListHelper.m */; };
-		4B7550D81E03CD39005814F8 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C21E03CD39005814F8 /* RecordController.m */; };
-		4B7550D91E03CD39005814F8 /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550C31E03CD39005814F8 /* RecordController.xib */; };
-		4B7550DA1E03CD39005814F8 /* UploadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C51E03CD39005814F8 /* UploadController.m */; };
-		4B7550DB1E03CD39005814F8 /* UploadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550C61E03CD39005814F8 /* UploadController.xib */; };
 		4B7550DC1E03CD39005814F8 /* LocalVideoAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C91E03CD39005814F8 /* LocalVideoAddViewController.m */; };
 		4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550CA1E03CD39005814F8 /* LocalVideoAddViewController.xib */; };
 		842472EA1DCC7FA0007B4D44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 842472E91DCC7FA0007B4D44 /* AppDelegate.m */; };
@@ -110,6 +112,19 @@
 		4B02DF3F1E010D8F00DE345F /* PPObjectSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPObjectSafe.h; sourceTree = "<group>"; };
 		4B02DF401E010D8F00DE345F /* UIColor+BZHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BZHex.h"; sourceTree = "<group>"; };
 		4B02DF411E010D8F00DE345F /* UIColor+BZHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BZHex.m"; sourceTree = "<group>"; };
+		4B1703D51E07C249006E3566 /* mainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
+		4B1703D61E07C249006E3566 /* mainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
+		4B1703D71E07C249006E3566 /* mainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainViewController.xib; sourceTree = "<group>"; };
+		4B1703D91E07C249006E3566 /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
+		4B1703DA1E07C249006E3566 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
+		4B1703DB1E07C249006E3566 /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordController.xib; sourceTree = "<group>"; };
+		4B1703DD1E07C249006E3566 /* UploadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadController.h; sourceTree = "<group>"; };
+		4B1703DE1E07C249006E3566 /* UploadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadController.m; sourceTree = "<group>"; };
+		4B1703DF1E07C249006E3566 /* UploadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadController.xib; sourceTree = "<group>"; };
+		4B1703E61E07C2A1006E3566 /* SLKMediaProcesserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaProcesserViewController.h; sourceTree = "<group>"; };
+		4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaProcesserViewController.m; sourceTree = "<group>"; };
+		4B1703E91E07C7A2006E3566 /* SLKMediaInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaInfoViewController.h; sourceTree = "<group>"; };
+		4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaInfoViewController.m; sourceTree = "<group>"; };
 		4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayerFramework.framework; sourceTree = "<group>"; };
 		4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaStreamerFramework.framework; sourceTree = "<group>"; };
 		4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYLiveKit.framework; sourceTree = "<group>"; };
@@ -198,9 +213,6 @@
 		4B7550B21E03CD39005814F8 /* SelectVideoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectVideoViewCell.h; sourceTree = "<group>"; };
 		4B7550B31E03CD39005814F8 /* SelectVideoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectVideoViewCell.m; sourceTree = "<group>"; };
 		4B7550B41E03CD39005814F8 /* SelectVideoViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectVideoViewCell.xib; sourceTree = "<group>"; };
-		4B7550B51E03CD39005814F8 /* mainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
-		4B7550B61E03CD39005814F8 /* mainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
-		4B7550B71E03CD39005814F8 /* mainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainViewController.xib; sourceTree = "<group>"; };
 		4B7550B91E03CD39005814F8 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
 		4B7550BA1E03CD39005814F8 /* PlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerController.m; sourceTree = "<group>"; };
 		4B7550BB1E03CD39005814F8 /* PlayerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerController.xib; sourceTree = "<group>"; };
@@ -209,12 +221,6 @@
 		4B7550BE1E03CD39005814F8 /* PlayListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayListController.xib; sourceTree = "<group>"; };
 		4B7550BF1E03CD39005814F8 /* PlayListHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListHelper.h; sourceTree = "<group>"; };
 		4B7550C01E03CD39005814F8 /* PlayListHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListHelper.m; sourceTree = "<group>"; };
-		4B7550C11E03CD39005814F8 /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
-		4B7550C21E03CD39005814F8 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
-		4B7550C31E03CD39005814F8 /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordController.xib; sourceTree = "<group>"; };
-		4B7550C41E03CD39005814F8 /* UploadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadController.h; sourceTree = "<group>"; };
-		4B7550C51E03CD39005814F8 /* UploadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadController.m; sourceTree = "<group>"; };
-		4B7550C61E03CD39005814F8 /* UploadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadController.xib; sourceTree = "<group>"; };
 		4B7550C81E03CD39005814F8 /* LocalVideoAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVideoAddViewController.h; sourceTree = "<group>"; };
 		4B7550C91E03CD39005814F8 /* LocalVideoAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoAddViewController.m; sourceTree = "<group>"; };
 		4B7550CA1E03CD39005814F8 /* LocalVideoAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalVideoAddViewController.xib; sourceTree = "<group>"; };
@@ -267,6 +273,40 @@
 				4B02DF3F1E010D8F00DE345F /* PPObjectSafe.h */,
 			);
 			path = SafeValue;
+			sourceTree = "<group>";
+		};
+		4B1703D41E07C249006E3566 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4B1703D51E07C249006E3566 /* mainViewController.h */,
+				4B1703D61E07C249006E3566 /* mainViewController.m */,
+				4B1703D71E07C249006E3566 /* mainViewController.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4B1703D81E07C249006E3566 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				4B1703E91E07C7A2006E3566 /* SLKMediaInfoViewController.h */,
+				4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */,
+				4B1703E61E07C2A1006E3566 /* SLKMediaProcesserViewController.h */,
+				4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */,
+				4B1703D91E07C249006E3566 /* RecordController.h */,
+				4B1703DA1E07C249006E3566 /* RecordController.m */,
+				4B1703DB1E07C249006E3566 /* RecordController.xib */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		4B1703DC1E07C249006E3566 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				4B1703DD1E07C249006E3566 /* UploadController.h */,
+				4B1703DE1E07C249006E3566 /* UploadController.m */,
+				4B1703DF1E07C249006E3566 /* UploadController.xib */,
+			);
+			path = Upload;
 			sourceTree = "<group>";
 		};
 		4B239C691DFAAA0500D01B55 /* CoreLib */ = {
@@ -440,17 +480,11 @@
 		4B7550AA1E03CD39005814F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B1703D41E07C249006E3566 /* Main */,
+				4B1703D81E07C249006E3566 /* Record */,
+				4B1703DC1E07C249006E3566 /* Upload */,
 				4B7550AB1E03CD39005814F8 /* cells */,
-				4B7550B51E03CD39005814F8 /* mainViewController.h */,
-				4B7550B61E03CD39005814F8 /* mainViewController.m */,
-				4B7550B71E03CD39005814F8 /* mainViewController.xib */,
 				4B7550B81E03CD39005814F8 /* Player */,
-				4B7550C11E03CD39005814F8 /* RecordController.h */,
-				4B7550C21E03CD39005814F8 /* RecordController.m */,
-				4B7550C31E03CD39005814F8 /* RecordController.xib */,
-				4B7550C41E03CD39005814F8 /* UploadController.h */,
-				4B7550C51E03CD39005814F8 /* UploadController.m */,
-				4B7550C61E03CD39005814F8 /* UploadController.xib */,
 				4B7550C71E03CD39005814F8 /* 镜头添加 */,
 			);
 			path = Controllers;
@@ -592,16 +626,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B7550D01E03CD39005814F8 /* SelectVideoViewCell.xib in Resources */,
+				4B1703E11E07C249006E3566 /* mainViewController.xib in Resources */,
 				4B7550D61E03CD39005814F8 /* PlayListController.xib in Resources */,
 				4B754FFB1E03CA29005814F8 /* Assets.xcassets in Resources */,
 				4B754FFC1E03CA29005814F8 /* LaunchScreen.storyboard in Resources */,
-				4B7550D21E03CD39005814F8 /* mainViewController.xib in Resources */,
 				4B7550631E03CBD5005814F8 /* JGPlayerControlPanel.xib in Resources */,
-				4B7550DB1E03CD39005814F8 /* UploadController.xib in Resources */,
+				4B1703E51E07C249006E3566 /* UploadController.xib in Resources */,
 				4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */,
 				4B7550D41E03CD39005814F8 /* PlayerController.xib in Resources */,
+				4B1703E31E07C249006E3566 /* RecordController.xib in Resources */,
 				4B7550CE1E03CD39005814F8 /* LocalVideoCell.xib in Resources */,
-				4B7550D91E03CD39005814F8 /* RecordController.xib in Resources */,
 				4B7550CC1E03CD39005814F8 /* FlowCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B1703E21E07C249006E3566 /* RecordController.m in Sources */,
 				4B75504A1E03CBC3005814F8 /* MASViewConstraint.m in Sources */,
 				4B7550CD1E03CD39005814F8 /* LocalVideoCell.m in Sources */,
 				4B75504E1E03CBC3005814F8 /* ViewController+MASAdditions.m in Sources */,
@@ -624,7 +659,6 @@
 				4B7550521E03CBC3005814F8 /* NSObject+YYModel.m in Sources */,
 				4B02DF431E010D8F00DE345F /* NSArray+SafeValue.m in Sources */,
 				4B7550491E03CBC3005814F8 /* MASViewAttribute.m in Sources */,
-				4B7550D11E03CD39005814F8 /* mainViewController.m in Sources */,
 				4B02DF451E010D8F00DE345F /* NSDictionary+SafeValue.m in Sources */,
 				4B75504B1E03CBC3005814F8 /* NSArray+MASAdditions.m in Sources */,
 				4B75504F1E03CBC3005814F8 /* MBProgressHUD.m in Sources */,
@@ -632,10 +666,9 @@
 				4B02DF471E010D8F00DE345F /* NSObject+SafeValueWithJSON.m in Sources */,
 				4B75504D1E03CBC3005814F8 /* View+MASAdditions.m in Sources */,
 				4B2F66451E07783D0080B941 /* XWDragCellCollectionView.m in Sources */,
-				4B7550DA1E03CD39005814F8 /* UploadController.m in Sources */,
-				4B7550D81E03CD39005814F8 /* RecordController.m in Sources */,
 				4B7550441E03CBC3005814F8 /* AFURLSessionManager.m in Sources */,
 				4B02DF441E010D8F00DE345F /* NSArray+StringValue.m in Sources */,
+				4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */,
 				4B7550461E03CBC3005814F8 /* MASConstraint.m in Sources */,
 				4B7550531E03CBC3005814F8 /* YYClassInfo.m in Sources */,
 				4B7550411E03CBC3005814F8 /* AFSecurityPolicy.m in Sources */,
@@ -661,7 +694,10 @@
 				4B7550431E03CBC3005814F8 /* AFURLResponseSerialization.m in Sources */,
 				4B7550601E03CBD5005814F8 /* CaptureView.m in Sources */,
 				4B7550611E03CBD5005814F8 /* JGCycleProgressView.m in Sources */,
+				4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */,
 				4B7550D31E03CD39005814F8 /* PlayerController.m in Sources */,
+				4B1703E41E07C249006E3566 /* UploadController.m in Sources */,
+				4B1703E01E07C249006E3566 /* mainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

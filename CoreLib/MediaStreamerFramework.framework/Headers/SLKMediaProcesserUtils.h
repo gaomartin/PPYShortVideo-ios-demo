@@ -15,6 +15,8 @@
 
 + (CVPixelBufferRef)getCoverImageWithInputFile:(NSString*)inputFile OutputWidth:(int)width OutputHeight:(int)height;
 
-+ (BOOL)getCoverImageFileWithInputFile:(NSString*)inputFile OutputWidth:(int)width OutputHeight:(int)height OutputFile:(NSString*)outputFile;
++ (BOOL)getCoverImageFileWithInputFile:(NSString*)inputFile OutputWidth:(int)width OutputHeight:(int)height OutputPNGFile:(NSString*)outputFile;
+
++ (BOOL)getCoverImageFileWithInputFile:(NSString*)inputFile OutputWidth:(int)width OutputHeight:(int)height OutputJPEGFile:(NSString*)outputFile;
 
 @end

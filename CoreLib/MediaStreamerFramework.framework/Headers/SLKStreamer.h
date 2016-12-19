@@ -10,6 +10,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <AVFoundation/AVFoundation.h>
 
+#import "SLKStreamerOptions.h"
+
 enum slk_media_streamer_error_type {
     SLK_MEDIA_STREAMER_ERROR_UNKNOWN = -1,
     SLK_MEDIA_STREAMER_ERROR_CONNECT_FAIL = 0,
@@ -47,6 +49,11 @@ enum slk_media_streamer_info_type {
 
 @interface SLKStreamer : NSObject
 
+- (instancetype) init;
+
+- (void)initializeWithOptions:(SLKStreamerOptions*)options;
+
+//Deprecated API
 - (instancetype) initWithVideoSize:(CGSize)videoSize
                         FrameRate:(int)fps
                         Bitrate:(int)bps

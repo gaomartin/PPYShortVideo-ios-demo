@@ -76,14 +76,14 @@ typedef NS_ENUM(int,PPYPushEngineStreamInfoType){
 #pragma -- Interface--
 
 #pragma --Push Interface--
-- (void)start;
+- (void)startWithAddress:(NSString *)rtmpAddr;;
 - (void)resume;
 - (void)pause;
 - (void)stop;
--(void)teardown;
+- (void)teardown;
 
 #pragma --Inialize--
 -(instancetype)initWithAudioConfiguration:(PPYAudioConfiguration *)audioConfig
-                    andVideoConfiguration:(PPYVideoConfiguration *)videoConfig
-                          pushRTMPAddress:(NSString *)rtmpAddr;
+                    andVideoConfiguration:(PPYVideoConfiguration *)videoConfig;
+
 @end
