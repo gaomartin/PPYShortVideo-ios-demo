@@ -15,5 +15,11 @@
     // Initialization code
 }
 
+- (IBAction)deleteBtnClicked:(id)sender;
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(deleteCell:)]) {
+        [self.delegate deleteCell:self];
+    }
+}
 
 @end

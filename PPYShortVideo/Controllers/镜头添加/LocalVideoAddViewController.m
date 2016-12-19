@@ -15,7 +15,7 @@
 
 #define kItemCountInVideoListCell 4
 
-@interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,XWDragCellCollectionViewDataSource, XWDragCellCollectionViewDelegate>
+@interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,XWDragCellCollectionViewDataSource, XWDragCellCollectionViewDelegate, PPCollectionCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIView *bottomView;
@@ -38,8 +38,8 @@
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.shakeLevel = 3.0f;
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -88,12 +88,7 @@
 
 - (IBAction)cameraBtnClicked:(id)sender
 {
-    if (self.collectionView.isEditing) {
-        [self.collectionView xw_stopEditingModel];
-
-    }else{
-        [self.collectionView xw_enterEditingModel];
-    }
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -145,7 +140,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SelectVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
+    cell.delegate = self;
     AlbumVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
     cell.imageView.image = videoInfo.thumbnail;
     return cell;
@@ -169,16 +164,16 @@
     _selectVideoArray = [NSMutableArray arrayWithArray:newDataArray];
 }
 
-- (void)dragCellCollectionView:(XWDragCellCollectionView *)collectionView cellWillBeginMoveAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - PPCollectionCellDelegate
+- (void)deleteCell:(SelectVideoViewCell *)cell
 {
-    [self.collectionView xw_enterEditingModel];
+    for (AlbumVideoInfo *videoInfo in _selectVideoArray[0]) {
+        if (cell.imageView.image == videoInfo.thumbnail) {
+            [_selectVideoArray[0] removeObject:videoInfo];
+            [self.collectionView reloadData];
+            return;
+        }
+    }
 }
-
-- (void)dragCellCollectionViewCellEndMoving:(XWDragCellCollectionView *)collectionView
-{
-    [self.collectionView xw_stopEditingModel];
-}
-
-
 
 @end

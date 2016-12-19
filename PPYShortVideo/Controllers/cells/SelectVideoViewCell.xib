@@ -26,6 +26,9 @@
                         <rect key="frame" x="52" y="-1" width="17" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="组-22"/>
+                        <connections>
+                            <action selector="deleteBtnClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="0kW-pt-2u6"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
