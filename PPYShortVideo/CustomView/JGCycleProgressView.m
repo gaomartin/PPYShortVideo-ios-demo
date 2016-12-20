@@ -36,6 +36,7 @@
         make.center.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(kRadius * 2, kRadius * 2));
     }];
+    self.label.text = @"0%";
 }
 
 -(instancetype)initWithFrame:(CGRect)frame{

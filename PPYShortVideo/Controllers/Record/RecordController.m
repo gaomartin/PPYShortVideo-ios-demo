@@ -15,7 +15,12 @@
 #import "JGCycleProgressView.h"
 #import "BZVideoEditViewController.h"
 
+#ifdef DEBUG
 #define KMAX_RECORD_TIME  1000
+#else
+#define KMAX_RECORD_TIME  3000
+#endif
+
 
 @interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,SLKMediaMergerDelegate>
 
@@ -208,6 +213,7 @@
         [self.progressView refreshProgressStatus:self.status];
     } else if (self.status == PPProgressViewStatus_Cancel) {
         [self.progressView deleteLastProgress];
+        [self.recordInfoArray removeLastObject];
         self.status = PPProgressViewStatus_wait;
     }
 }
@@ -409,7 +415,7 @@
     [self.slkMediaMaterialGroup removeAllMediaMaterials];
     
     [self.slkMediaMerger start];
-    //[self presentCycleProgressView];
+    [self presentCycleProgressView];
 }
 
 #pragma mark - SLKMediaMergerDelegate
@@ -424,19 +430,17 @@
     if (infoType == SLK_MEDIA_PROCESSER_INFO_WRITE_TIMESTAMP) {
         NSLog(@"Write TimeStamp:%d",infoValue);
         
-//        __weak typeof(self) weakSelf = self;
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // 更UI
-//            weakSelf.cycleProgressView.label.text = [NSString stringWithFormat:@"%zd%%",(int)(infoValue /weakSelf.totalDuration * 100)];
-//            [weakSelf.cycleProgressView drawProgress:infoValue/weakSelf.totalDuration];
-//        });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 更UI
+            self.cycleProgressView.label.text = [NSString stringWithFormat:@"%zd%%",(int)(infoValue /self.totalDuration * 100 * 1000)];
+            [self.cycleProgressView drawProgress:infoValue/self.totalDuration * 1000];
+        });
     }
 }
 
 - (void)didEnd
 {
     NSLog(@"didEnd");
-    //[self removeCycleProgressView];
     [self pushToEditView];
 }
 
@@ -444,8 +448,9 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.slkMediaMerger stop];
-        
         [self.slkMediaMerger terminate];
+        [self  removeCycleProgressView];
+        [self.recordInfoArray removeAllObjects];
         
         BZVideoEditViewController *editView = [[BZVideoEditViewController alloc] init];
         editView.mediaProduct = self.slkMediaProduct;
@@ -464,14 +469,20 @@
 
 -(void)presentCycleProgressView
 {
+    self.view.userInteractionEnabled = NO;
     [self.view addSubview:self.cycleProgressView];
-    self.cycleProgressView.center = self.view.center;
+    [self.cycleProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+    }];
 }
 
 - (void)removeCycleProgressView
 {
+    self.view.userInteractionEnabled = YES;
     if (self.cycleProgressView.superview) {
         [self.cycleProgressView removeFromSuperview];
+        self.cycleProgressView = nil;
     }
 }
 
