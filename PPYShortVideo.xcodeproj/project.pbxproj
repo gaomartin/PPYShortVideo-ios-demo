@@ -22,12 +22,15 @@
 		4B1703E51E07C249006E3566 /* UploadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703DF1E07C249006E3566 /* UploadController.xib */; };
 		4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */; };
 		4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */; };
-		4B239C6F1DFAAA0500D01B55 /* PPYLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */; };
-		4B239C701DFAB75800D01B55 /* MediaPlayerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */; };
-		4B239C711DFAB75800D01B55 /* MediaPlayerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4B239C721DFAB75800D01B55 /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */; };
-		4B239C731DFAB75800D01B55 /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4B239C751DFAB75800D01B55 /* PPYLiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B1703F21E08C1DF006E3566 /* BZVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */; };
+		4B1703F71E08D1EC006E3566 /* BZVideoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F51E08D1EC006E3566 /* BZVideoEditViewController.m */; };
+		4B1703F81E08D1EC006E3566 /* BZVideoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703F61E08D1EC006E3566 /* BZVideoEditViewController.xib */; };
+		4B17040B1E092594006E3566 /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704081E092594006E3566 /* MediaStreamerFramework.framework */; };
+		4B17040D1E092594006E3566 /* MediaPlayerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */; };
+		4B17040F1E092601006E3566 /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704081E092594006E3566 /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B1704101E092601006E3566 /* PPYLiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704091E092594006E3566 /* PPYLiveKit.framework */; };
+		4B1704111E092601006E3566 /* PPYLiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704091E092594006E3566 /* PPYLiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4B1704131E092601006E3566 /* MediaPlayerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B2F66451E07783D0080B941 /* XWDragCellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */; };
 		4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */; };
 		4B754FF21E03C7C9005814F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B754FF11E03C7C9005814F8 /* CoreGraphics.framework */; };
@@ -87,9 +90,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4B239C731DFAB75800D01B55 /* MediaStreamerFramework.framework in Embed Frameworks */,
-				4B239C711DFAB75800D01B55 /* MediaPlayerFramework.framework in Embed Frameworks */,
-				4B239C751DFAB75800D01B55 /* PPYLiveKit.framework in Embed Frameworks */,
+				4B17040F1E092601006E3566 /* MediaStreamerFramework.framework in Embed Frameworks */,
+				4B1704131E092601006E3566 /* MediaPlayerFramework.framework in Embed Frameworks */,
+				4B1704111E092601006E3566 /* PPYLiveKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,9 +128,20 @@
 		4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaProcesserViewController.m; sourceTree = "<group>"; };
 		4B1703E91E07C7A2006E3566 /* SLKMediaInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaInfoViewController.h; sourceTree = "<group>"; };
 		4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaInfoViewController.m; sourceTree = "<group>"; };
-		4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayerFramework.framework; sourceTree = "<group>"; };
-		4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaStreamerFramework.framework; sourceTree = "<group>"; };
-		4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYLiveKit.framework; sourceTree = "<group>"; };
+		4B1703F01E08C1DF006E3566 /* BZVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoInfo.h; sourceTree = "<group>"; };
+		4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoInfo.m; sourceTree = "<group>"; };
+		4B1703F41E08D1EC006E3566 /* BZVideoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoEditViewController.h; sourceTree = "<group>"; };
+		4B1703F51E08D1EC006E3566 /* BZVideoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoEditViewController.m; sourceTree = "<group>"; };
+		4B1703F61E08D1EC006E3566 /* BZVideoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZVideoEditViewController.xib; sourceTree = "<group>"; };
+		4B1703FC1E091E8D006E3566 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4B1703FE1E091E94006E3566 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4B1704001E091ED5006E3566 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		4B1704021E091F24006E3566 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		4B1704041E091F57006E3566 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4B1704061E091FDA006E3566 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4B1704081E092594006E3566 /* MediaStreamerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaStreamerFramework.framework; sourceTree = "<group>"; };
+		4B1704091E092594006E3566 /* PPYLiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYLiveKit.framework; sourceTree = "<group>"; };
+		4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayerFramework.framework; sourceTree = "<group>"; };
 		4B2F66431E07783D0080B941 /* XWDragCellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWDragCellCollectionView.h; sourceTree = "<group>"; };
 		4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWDragCellCollectionView.m; sourceTree = "<group>"; };
 		4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumVideoInfo.h; sourceTree = "<group>"; };
@@ -234,11 +248,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B17040B1E092594006E3566 /* MediaStreamerFramework.framework in Frameworks */,
+				4B17040D1E092594006E3566 /* MediaPlayerFramework.framework in Frameworks */,
 				4B754FF41E03C7D1005814F8 /* QuartzCore.framework in Frameworks */,
+				4B1704101E092601006E3566 /* PPYLiveKit.framework in Frameworks */,
 				4B754FF21E03C7C9005814F8 /* CoreGraphics.framework in Frameworks */,
-				4B239C721DFAB75800D01B55 /* MediaStreamerFramework.framework in Frameworks */,
-				4B239C701DFAB75800D01B55 /* MediaPlayerFramework.framework in Frameworks */,
-				4B239C6F1DFAAA0500D01B55 /* PPYLiveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,12 +323,22 @@
 			path = Upload;
 			sourceTree = "<group>";
 		};
+		4B1703F31E08D1D2006E3566 /* VideoEdit */ = {
+			isa = PBXGroup;
+			children = (
+				4B1703F41E08D1EC006E3566 /* BZVideoEditViewController.h */,
+				4B1703F51E08D1EC006E3566 /* BZVideoEditViewController.m */,
+				4B1703F61E08D1EC006E3566 /* BZVideoEditViewController.xib */,
+			);
+			path = VideoEdit;
+			sourceTree = "<group>";
+		};
 		4B239C691DFAAA0500D01B55 /* CoreLib */ = {
 			isa = PBXGroup;
 			children = (
-				4B239C6A1DFAAA0500D01B55 /* MediaPlayerFramework.framework */,
-				4B239C6B1DFAAA0500D01B55 /* MediaStreamerFramework.framework */,
-				4B239C6C1DFAAA0500D01B55 /* PPYLiveKit.framework */,
+				4B1704081E092594006E3566 /* MediaStreamerFramework.framework */,
+				4B1704091E092594006E3566 /* PPYLiveKit.framework */,
+				4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */,
 			);
 			path = CoreLib;
 			sourceTree = "<group>";
@@ -324,6 +348,8 @@
 			children = (
 				4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */,
 				4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */,
+				4B1703F01E08C1DF006E3566 /* BZVideoInfo.h */,
+				4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +357,12 @@
 		4B754FF01E03C7C8005814F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B1704061E091FDA006E3566 /* CoreMedia.framework */,
+				4B1704041E091F57006E3566 /* AVFoundation.framework */,
+				4B1704021E091F24006E3566 /* VideoToolbox.framework */,
+				4B1704001E091ED5006E3566 /* OpenGLES.framework */,
+				4B1703FE1E091E94006E3566 /* libz.tbd */,
+				4B1703FC1E091E8D006E3566 /* libc++.tbd */,
 				4B754FF31E03C7D1005814F8 /* QuartzCore.framework */,
 				4B754FF11E03C7C9005814F8 /* CoreGraphics.framework */,
 			);
@@ -482,6 +514,7 @@
 			children = (
 				4B1703D41E07C249006E3566 /* Main */,
 				4B1703D81E07C249006E3566 /* Record */,
+				4B1703F31E08D1D2006E3566 /* VideoEdit */,
 				4B1703DC1E07C249006E3566 /* Upload */,
 				4B7550AB1E03CD39005814F8 /* cells */,
 				4B7550B81E03CD39005814F8 /* Player */,
@@ -633,6 +666,7 @@
 				4B7550631E03CBD5005814F8 /* JGPlayerControlPanel.xib in Resources */,
 				4B1703E51E07C249006E3566 /* UploadController.xib in Resources */,
 				4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */,
+				4B1703F81E08D1EC006E3566 /* BZVideoEditViewController.xib in Resources */,
 				4B7550D41E03CD39005814F8 /* PlayerController.xib in Resources */,
 				4B1703E31E07C249006E3566 /* RecordController.xib in Resources */,
 				4B7550CE1E03CD39005814F8 /* LocalVideoCell.xib in Resources */,
@@ -680,6 +714,7 @@
 				4B7550401E03CBC3005814F8 /* AFNetworkReachabilityManager.m in Sources */,
 				4B754FFE1E03CA29005814F8 /* main.m in Sources */,
 				4B7550DC1E03CD39005814F8 /* LocalVideoAddViewController.m in Sources */,
+				4B1703F71E08D1EC006E3566 /* BZVideoEditViewController.m in Sources */,
 				4B75503F1E03CBC3005814F8 /* AFHTTPSessionManager.m in Sources */,
 				4B7550511E03CBC3005814F8 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4B7550621E03CBD5005814F8 /* JGPlayerControlPanel.m in Sources */,
@@ -690,6 +725,7 @@
 				4B7550481E03CBC3005814F8 /* MASLayoutConstraint.m in Sources */,
 				4B75504C1E03CBC3005814F8 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				4B7550061E03CBAD005814F8 /* WebAPIResponseModels.m in Sources */,
+				4B1703F21E08C1DF006E3566 /* BZVideoInfo.m in Sources */,
 				4B7550651E03CBD5005814F8 /* PPProgressView.m in Sources */,
 				4B7550431E03CBC3005814F8 /* AFURLResponseSerialization.m in Sources */,
 				4B7550601E03CBD5005814F8 /* CaptureView.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  UploadController.m
+//  RecordController.m
 //  PPYShortVideo
 //
 //  Created by admin on 2016/11/7.
@@ -9,13 +9,15 @@
 #import "RecordController.h"
 #import "Masonry.h"
 #import <PPYLiveKit/PPYLiveKit.h>
-#import "UploadController.h"
 #import "PPProgressView.h"
 #import "LocalVideoAddViewController.h"
+#import "BZVideoInfo.h"
+#import "JGCycleProgressView.h"
+#import "BZVideoEditViewController.h"
 
 #define KMAX_RECORD_TIME  1000
 
-@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate>
+@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,SLKMediaMergerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *captureView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBeatify;
@@ -37,6 +39,14 @@
 @property (nonatomic, strong) PPProgressView *progressView;
 @property (assign, nonatomic) PPProgressViewStatus status;
 @property (assign, nonatomic) NSInteger recordIndex;
+@property (nonatomic, strong) NSMutableArray *recordInfoArray;
+
+//合成
+@property (nonatomic, strong) SLKMediaMerger *slkMediaMerger;
+@property (nonatomic, strong) SLKMediaMaterialGroup *slkMediaMaterialGroup;
+@property (nonatomic, strong) SLKMediaProduct* slkMediaProduct;
+@property (nonatomic, assign) NSTimeInterval totalDuration;
+@property (nonatomic, strong) JGCycleProgressView *cycleProgressView;
 
 @end
 
@@ -45,6 +55,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self createRecordFileDir];
+    self.recordInfoArray = [NSMutableArray array];
     [self prepareForRecord];
     self.recordIndex = 0;
 }
@@ -60,12 +72,32 @@
     }
 }
 
+- (NSString *)createRecordFileDir
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *recordDirPath = [documentPath stringByAppendingPathComponent:@"Record"];
+    NSLog(@"recordDirPath = %@",recordDirPath);
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = FALSE;
+    BOOL isDirExist = [fileManager fileExistsAtPath:recordDirPath isDirectory:&isDir];
+    if(!(isDirExist && isDir)){
+           BOOL bCreateDir = [fileManager createDirectoryAtPath:recordDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+            if(!bCreateDir){
+                NSLog(@"创建文件夹失败！");
+            } else {
+                NSLog(@"创建文件夹成功，文件路径%@",recordDirPath);
+            }
+       }
+    
+    return recordDirPath;
+}
+
 -(NSString *)createRecordPath
 {
     //设置录制路径
     self.recordIndex ++;
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [NSString stringWithFormat:@"%@/defalut%zd.mp4",documentPath, self.recordIndex];
+    NSString *path = [NSString stringWithFormat:@"%@/defalut%zd.mp4",[self createRecordFileDir], self.recordIndex];
     
     return path;
 }
@@ -188,7 +220,8 @@
 
 - (IBAction)confirmBtnClicked:(id)sender
 {
-     [self.navigationController pushViewController:[[UploadController alloc]init] animated:YES];
+    [self mergeVideoPrepare];
+    [self startMerge];
 }
 
 #pragma mark --<PPYPushEngineDelegate>
@@ -285,8 +318,9 @@
         self.status = PPProgressViewStatus_wait;
         [self.progressView refreshProgressStatus:self.status];
     } else {
-        NSString *address = [self createRecordPath];
-        [self.pushEngine startWithAddress:address];
+        self.recordPath = [self createRecordPath];
+        [self.pushEngine startWithAddress:self.recordPath];
+        
         self.btnRecord.userInteractionEnabled = NO;
         self.localBtn.hidden = YES;
         self.deleteBtn.hidden = YES;
@@ -309,13 +343,137 @@
 
 -(void)didRecordStoped{
     self.isRecording = NO;
-    
+
     self.status = PPProgressViewStatus_wait;
     [self.progressView refreshProgressStatus:self.status];
+    [self addVideoInfo];
     
     [self.btnRecord setImage:[UIImage imageNamed:@"按住拍摄_未按"] forState:UIControlStateNormal];
     self.deleteBtn.hidden = NO;
     self.confirmBtn.hidden = NO;
 }
+
+- (void)addVideoInfo
+{
+    BZVideoInfo *info = [[BZVideoInfo alloc] init];
+    info.path = self.recordPath;
+    info.startPos = 0;
+    info.endPos = [self.pushEngine syncGetMediaDurationWithInputFile:self.recordPath];
+    
+    [self.recordInfoArray addObject:info];
+}
+
+#pragma mark - merge video
+
+- (void)mergeVideoPrepare
+{
+    if (!self.slkMediaMerger) {
+        self.slkMediaMerger = [[SLKMediaMerger alloc] init];
+    }
+    self.slkMediaMerger.delegate = self;
+    
+    if (!self.slkMediaMaterialGroup) {
+        self.slkMediaMaterialGroup = [[SLKMediaMaterialGroup alloc] init];
+    }
+    
+    if (!self.slkMediaProduct) {
+        self.slkMediaProduct = [[SLKMediaProduct alloc] init];
+    }
+}
+
+- (void)startMerge
+{
+    self.totalDuration = 0;
+    
+    for (int i=0; i<[self.recordInfoArray count]; i++) {
+        BZVideoInfo *info = [self.recordInfoArray objectAtIndex:i];
+        
+        SLKMediaMaterial *slkMediaMaterial = [[SLKMediaMaterial alloc] init];
+        slkMediaMaterial.url = info.path;
+        slkMediaMaterial.slk_media_material_type = SLK_MEDIA_MATERIAL_TYPE_VIDEO_AUDIO;
+        slkMediaMaterial.startPos = info.startPos;
+        slkMediaMaterial.endPos = info.endPos;
+        slkMediaMaterial.weight = 1.0f;
+        self.totalDuration += info.endPos - info.startPos;
+        [self.slkMediaMaterialGroup addMediaMaterial:slkMediaMaterial];
+    }
+   
+    self.slkMediaProduct.url = [[self createRecordFileDir] stringByAppendingString:@"/product.mp4"];
+    self.slkMediaProduct.hasVideo = YES;
+    self.slkMediaProduct.videoSize = CGSizeMake(480,640);
+    self.slkMediaProduct.hasAudio = YES;
+    self.slkMediaProduct.bps = 2000;
+    
+    [self.slkMediaMerger initializeWithInputMaterialGroup:self.slkMediaMaterialGroup WithMergeAlgorithm:SLK_MEDIA_MERGE_ALGORITHM_TIMELINE WithOutputMediaProduct:self.slkMediaProduct];
+    
+    [self.slkMediaMaterialGroup removeAllMediaMaterials];
+    
+    [self.slkMediaMerger start];
+    //[self presentCycleProgressView];
+}
+
+#pragma mark - SLKMediaMergerDelegate
+
+- (void)gotErrorWithErrorType:(int)errorType
+{
+    NSLog(@"gotErrorWithErrorType errorType:%d",errorType);
+}
+
+- (void)gotInfoWithInfoType:(int)infoType InfoValue:(int)infoValue
+{
+    if (infoType == SLK_MEDIA_PROCESSER_INFO_WRITE_TIMESTAMP) {
+        NSLog(@"Write TimeStamp:%d",infoValue);
+        
+//        __weak typeof(self) weakSelf = self;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            // 更UI
+//            weakSelf.cycleProgressView.label.text = [NSString stringWithFormat:@"%zd%%",(int)(infoValue /weakSelf.totalDuration * 100)];
+//            [weakSelf.cycleProgressView drawProgress:infoValue/weakSelf.totalDuration];
+//        });
+    }
+}
+
+- (void)didEnd
+{
+    NSLog(@"didEnd");
+    //[self removeCycleProgressView];
+    [self pushToEditView];
+}
+
+- (void)pushToEditView
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.slkMediaMerger stop];
+        
+        [self.slkMediaMerger terminate];
+        
+        BZVideoEditViewController *editView = [[BZVideoEditViewController alloc] init];
+        editView.mediaProduct = self.slkMediaProduct;
+        [self.navigationController pushViewController:editView animated:YES];
+     });
+}
+
+#pragma mark - JGCycleProgressView
+-(JGCycleProgressView *)cycleProgressView
+{
+    if(_cycleProgressView == nil){
+        _cycleProgressView = [[JGCycleProgressView alloc]init];
+    }
+    return _cycleProgressView;
+}
+
+-(void)presentCycleProgressView
+{
+    [self.view addSubview:self.cycleProgressView];
+    self.cycleProgressView.center = self.view.center;
+}
+
+- (void)removeCycleProgressView
+{
+    if (self.cycleProgressView.superview) {
+        [self.cycleProgressView removeFromSuperview];
+    }
+}
+
 
 @end

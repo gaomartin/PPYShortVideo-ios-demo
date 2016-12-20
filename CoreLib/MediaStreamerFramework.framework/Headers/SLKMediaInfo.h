@@ -24,6 +24,8 @@
 
 @interface SLKMediaInfo : NSObject
 
++ (NSTimeInterval)syncGetMediaDurationWithInputFile:(NSString*)inputMediaFile;
+
 - (instancetype) init;
 
 - (void)initialize;

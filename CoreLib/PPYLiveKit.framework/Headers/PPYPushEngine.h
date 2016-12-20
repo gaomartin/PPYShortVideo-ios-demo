@@ -82,6 +82,8 @@ typedef NS_ENUM(int,PPYPushEngineStreamInfoType){
 - (void)stop;
 - (void)teardown;
 
+- (NSTimeInterval)syncGetMediaDurationWithInputFile:(NSString*)inputMediaFile;
+
 #pragma --Inialize--
 -(instancetype)initWithAudioConfiguration:(PPYAudioConfiguration *)audioConfig
                     andVideoConfiguration:(PPYVideoConfiguration *)videoConfig;

@@ -19,4 +19,12 @@
 
 + (BOOL)getCoverImageFileWithInputFile:(NSString*)inputFile OutputWidth:(int)width OutputHeight:(int)height OutputJPEGFile:(NSString*)outputFile;
 
+//Position : MS
++ (CVPixelBufferRef)getCoverImageWithInputFile:(NSString*)inputFile Position:(NSTimeInterval)position OutputWidth:(int)width OutputHeight:(int)height;
+
++ (BOOL)getCoverImageFileWithInputFile:(NSString*)inputFile Position:(NSTimeInterval)position OutputWidth:(int)width OutputHeight:(int)height OutputPNGFile:(NSString*)outputFile;
+
++ (BOOL)getCoverImageFileWithInputFile:(NSString*)inputFile Position:(NSTimeInterval)position OutputWidth:(int)width OutputHeight:(int)height OutputJPEGFile:(NSString*)outputFile;
+
+
 @end
