@@ -25,11 +25,9 @@ typedef NS_ENUM(NSInteger,PPProgressViewStatus){
 
 @interface PPProgressView : UIView
 
-@property (nonatomic, assign) NSInteger progressNum;
-
 - (void)refreshProgressWithValue:(CGFloat)value;
 - (void)refreshProgressStatus:(PPProgressViewStatus)status;
 - (void)deleteLastProgress;
-
+- (void)clear;
 
 @end

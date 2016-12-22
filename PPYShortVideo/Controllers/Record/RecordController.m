@@ -16,11 +16,12 @@
 #import "BZVideoEditViewController.h"
 
 #ifdef DEBUG
-#define KMAX_RECORD_TIME  1000
+#define KMAX_RECORD_TIME  100
 #else
-#define KMAX_RECORD_TIME  3000
+#define KMAX_RECORD_TIME  300
 #endif
 
+#define KMIN_RECORD_TIME_TO_MERGE 10
 
 @interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,SLKMediaMergerDelegate>
 
@@ -40,12 +41,13 @@
 @property (copy, nonatomic) NSString *recordPath;
 
 @property (assign, nonatomic) BOOL isRecording;
+@property (assign, nonatomic) BOOL isExitWhenRecording;
 
 @property (nonatomic, strong) PPProgressView *progressView;
 @property (assign, nonatomic) PPProgressViewStatus status;
 @property (assign, nonatomic) NSInteger recordIndex;
 @property (nonatomic, strong) NSMutableArray *recordInfoArray;
-
+@property (nonatomic, assign) NSTimeInterval lastDuration;//前面录制的总时间
 //合成
 @property (nonatomic, strong) SLKMediaMerger *slkMediaMerger;
 @property (nonatomic, strong) SLKMediaMaterialGroup *slkMediaMaterialGroup;
@@ -112,6 +114,7 @@
     [self.btnBeatify setImage:[UIImage imageNamed:@"美颜开.png"] forState:UIControlStateNormal];
     [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
     self.lblRecordTime.text = [NSString stringWithFormat:@"0s"];
+    self.confirmBtn.enabled = NO;
     
     self.pushEngine.preview = self.captureView;
     
@@ -163,7 +166,8 @@
     
 }
 
-- (IBAction)doSwitchCamera:(id)sender {
+- (IBAction)doSwitchCamera:(id)sender
+{
     if(self.pushEngine.hasTorch){  // 翻转摄像头之前关闭闪光灯
         self.pushEngine.torch = NO;
         [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
@@ -178,31 +182,35 @@
     }
 }
 
-- (IBAction)doExit:(id)sender {
-    if(self.isRecording){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定要放弃当前录制视频？" preferredStyle:UIAlertControllerStyleAlert];
+- (IBAction)doExit:(id)sender
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定放弃当前录制视频？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        UIAlertAction *OK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (self.isRecording) {
+            self.isExitWhenRecording = YES;
             [self stopRecord];
+        } else {
             [self dismissViewControllerAnimated:YES completion:nil];
-        }];
-
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        }
         
-        [alert addAction:OK];
-        [alert addAction:cancel];
-        
-        [self presentViewController:alert animated:NO completion:nil];
-    }else{
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:OK];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:NO completion:nil];
 }
 
-- (IBAction)doRecord:(id)sender {
-    if(self.isRecording){
-         [self stopRecord];
-    }else{
-         [self startRecord];
+- (IBAction)doRecord:(id)sender
+{
+    if(self.isRecording) {
+        [self stopRecord];
+    } else {
+        [self startRecord];
     }
 }
 
@@ -215,6 +223,15 @@
         [self.progressView deleteLastProgress];
         [self.recordInfoArray removeLastObject];
         self.status = PPProgressViewStatus_wait;
+        
+        if ([self.recordInfoArray count] == 0) {
+            self.localBtn.hidden = NO;
+            self.deleteBtn.hidden = YES;
+        }
+        
+        self.lastDuration = [self getTotalRecordDuration];
+        self.lblRecordTime.text = [NSString stringWithFormat:@"%.fs",self.lastDuration / 1000];
+        [self checkConfirmBtnStatus];
     }
 }
 
@@ -286,16 +303,23 @@
             
             break;
         case PPYPushEngineInfo_PublishTime:
-            self.lblRecordTime.text = [NSString stringWithFormat:@"%.1fs",(float)value / 10];
-           [self.progressView refreshProgressWithValue:((float)value)/KMAX_RECORD_TIME];
-            self.imgDot.hidden = value % 5;
-            if(value >= KMAX_RECORD_TIME){   //步长100ms， 上限5分钟
+        {
+            float total = (float)value + self.lastDuration/100;
+            self.lblRecordTime.text = [NSString stringWithFormat:@"%.1fs",total / 10];
+           [self.progressView refreshProgressWithValue:(float)value/(KMAX_RECORD_TIME * 10)];
+            self.imgDot.hidden = (int)total % 5;
+            if(total >= KMAX_RECORD_TIME * 10){   //步长100ms， 上限5分钟
                 [self stopRecord];
+                self.lblRecordTime.text = [NSString stringWithFormat:@"%.fs",(float)total / 10];
+                [self confirmBtnClicked:nil];
             }
+        }
             break;
     }
     NSLog(@"didStreamInfoThrowOut %d__%d",type,value);
 }
+
+#pragma mark - record
 
 -(void)prepareForRecord{
     //初始化推流引擎
@@ -357,6 +381,12 @@
     [self.btnRecord setImage:[UIImage imageNamed:@"按住拍摄_未按"] forState:UIControlStateNormal];
     self.deleteBtn.hidden = NO;
     self.confirmBtn.hidden = NO;
+    
+    if (self.isExitWhenRecording) {
+        [self exitRecord];
+    }
+    
+    [self checkConfirmBtnStatus];
 }
 
 - (void)addVideoInfo
@@ -367,6 +397,38 @@
     info.endPos = [self.pushEngine syncGetMediaDurationWithInputFile:self.recordPath];
     
     [self.recordInfoArray addObject:info];
+}
+
+- (void)exitRecord
+{
+    self.isExitWhenRecording = NO;
+    self.recordIndex = 0;
+    self.lblRecordTime.text = [NSString stringWithFormat:@"0s"];
+    
+    [self.recordInfoArray removeAllObjects];
+    [self.progressView clear];
+}
+
+- (void)checkConfirmBtnStatus
+{
+    self.lastDuration = [self getTotalRecordDuration];
+    if(self.lastDuration > KMIN_RECORD_TIME_TO_MERGE * 1000) {
+        self.confirmBtn.enabled = YES;
+        [self.confirmBtn setImage:[UIImage imageNamed:@"组-13"] forState:UIControlStateNormal];
+    } else {
+        self.confirmBtn.enabled = NO;
+        [self.confirmBtn setImage:[UIImage imageNamed:@"组-12"] forState:UIControlStateNormal];
+    }
+}
+
+- (NSTimeInterval)getTotalRecordDuration
+{
+    NSTimeInterval totalDuration = 0.f;
+    for (int i=0; i<[self.recordInfoArray count]; i++) {
+        BZVideoInfo *info = [self.recordInfoArray objectAtIndex:i];
+        totalDuration += info.endPos - info.startPos;
+    }
+    return totalDuration;
 }
 
 #pragma mark - merge video
@@ -402,8 +464,10 @@
         slkMediaMaterial.weight = 1.0f;
         self.totalDuration += info.endPos - info.startPos;
         [self.slkMediaMaterialGroup addMediaMaterial:slkMediaMaterial];
+        
+        NSLog(@"record info startPos=%.2f, endPos=%.2f",info.startPos/1000, info.endPos/1000);
     }
-   
+    
     self.slkMediaProduct.url = [[self createRecordFileDir] stringByAppendingString:@"/product.mp4"];
     self.slkMediaProduct.hasVideo = YES;
     self.slkMediaProduct.videoSize = CGSizeMake(480,640);
@@ -449,8 +513,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.slkMediaMerger stop];
         [self.slkMediaMerger terminate];
-        [self  removeCycleProgressView];
+        [self removeCycleProgressView];
         [self.recordInfoArray removeAllObjects];
+        [self checkConfirmBtnStatus];
+        self.lblRecordTime.text = [NSString stringWithFormat:@"0s"];
         
         BZVideoEditViewController *editView = [[BZVideoEditViewController alloc] init];
         editView.mediaProduct = self.slkMediaProduct;

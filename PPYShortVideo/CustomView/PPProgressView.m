@@ -18,7 +18,6 @@
 
 @interface PPProgressView ()
 
-@property (nonatomic, assign) float curValue;
 @property (nonatomic, strong) UIView *pointView;
 @property (nonatomic, strong) NSMutableArray *progressArray;
 
@@ -51,6 +50,7 @@
 }
 
 #pragma mark -
+
 - (void)refreshProgressWithValue:(CGFloat)value
 {
     PPProgressModel *progressModel = (PPProgressModel *)[self.progressArray lastObject];
@@ -106,6 +106,21 @@
     CGRect size = self.pointView.frame;
     size.origin.x -= view.frame.size.width + 2;
     self.pointView.frame = size;
+}
+
+- (void)clear
+{
+    for (PPProgressModel *model in self.progressArray) {
+        UIView *view = model.progressView;
+        [view removeFromSuperview];
+    }
+    
+    [self.progressArray removeAllObjects];
+    
+    if (self.pointView.superview) {
+        [self.pointView removeFromSuperview];
+        self.pointView = nil;
+    }
 }
 
 - (float)allValue

@@ -163,7 +163,7 @@
                                 <action selector="doRecord:" destination="-1" eventType="touchUpInside" id="gAL-nm-SUj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFp-Pa-iHX">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFp-Pa-iHX">
                             <rect key="frame" x="235" y="54" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="BWF-rf-iUd"/>

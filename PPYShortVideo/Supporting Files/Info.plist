@@ -29,6 +29,8 @@
 	<string>亲，打开相机好吗？</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>亲，打开麦克风好吗？</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>亲,   打开相册好吗?</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
