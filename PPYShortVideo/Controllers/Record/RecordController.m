@@ -54,6 +54,7 @@
 @property (nonatomic, strong) SLKMediaProduct* slkMediaProduct;
 @property (nonatomic, assign) NSTimeInterval totalDuration;
 @property (nonatomic, strong) JGCycleProgressView *cycleProgressView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @end
 
@@ -535,7 +536,11 @@
 
 -(void)presentCycleProgressView
 {
-    self.view.userInteractionEnabled = NO;
+    self.backgroundView = [[UIView alloc]initWithFrame:self.view.frame];
+    self.backgroundView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.backgroundView];
+    self.backgroundView.alpha = 0.5;
+    
     [self.view addSubview:self.cycleProgressView];
     [self.cycleProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
@@ -545,12 +550,15 @@
 
 - (void)removeCycleProgressView
 {
-    self.view.userInteractionEnabled = YES;
+    if (self.backgroundView.superview) {
+        [self.backgroundView removeFromSuperview];
+        self.backgroundView = nil;
+    }
+    
     if (self.cycleProgressView.superview) {
         [self.cycleProgressView removeFromSuperview];
         self.cycleProgressView = nil;
     }
 }
-
 
 @end

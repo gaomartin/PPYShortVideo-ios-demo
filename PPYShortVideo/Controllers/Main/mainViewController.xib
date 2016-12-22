@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,8 +21,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="首页背景.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ab8-7h-Uj3"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="首页背景" translatesAutoresizingMaskIntoConstraints="NO" id="Ab8-7h-Uj3">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69i-fd-bCi">
+                    <rect key="frame" x="65.5" y="527" width="244" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="EJa-aC-JtV"/>
                         <constraint firstAttribute="width" constant="244" id="I98-ag-etC"/>
@@ -33,19 +39,22 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EP-X5-pIu">
+                    <rect key="frame" x="65.5" y="478" width="244" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="拍摄短视频"/>
                     <connections>
                         <action selector="onPressedRecord:" destination="-1" eventType="touchUpInside" id="Fvq-n1-L0n"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="标题栏logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zjk-Eb-v66">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="标题栏logo" translatesAutoresizingMaskIntoConstraints="NO" id="Zjk-Eb-v66">
+                    <rect key="frame" x="109" y="47" width="33" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="90n-gB-H5p"/>
                         <constraint firstAttribute="width" constant="33" id="QCb-vU-aHR"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="短视频DEMO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvD-ma-c9e">
+                    <rect key="frame" x="150" y="45" width="119" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <color key="textColor" red="0.44313725490196076" green="0.86274509803921573" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -68,11 +77,12 @@
                 <constraint firstItem="69i-fd-bCi" firstAttribute="top" secondItem="Ab8-7h-Uj3" secondAttribute="bottom" constant="-140" id="ylp-Wu-JaA"/>
                 <constraint firstItem="0EP-X5-pIu" firstAttribute="centerX" secondItem="69i-fd-bCi" secondAttribute="centerX" id="ynY-2Q-ZEe"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <point key="canvasLocation" x="26.5" y="52.5"/>
         </view>
     </objects>
     <resources>
-        <image name="标题栏logo.png" width="24" height="16"/>
-        <image name="首页背景.png" width="375" height="667"/>
+        <image name="标题栏logo" width="24" height="16"/>
+        <image name="首页背景" width="375" height="667"/>
     </resources>
 </document>

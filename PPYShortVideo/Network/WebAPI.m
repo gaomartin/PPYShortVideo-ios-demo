@@ -13,7 +13,6 @@
 #define kURLShortVideo_Download  @"http://115.231.44.26:8081/video/download"
 #define kURLShortVideo_List      @"http://115.231.44.26:8081/video/list"
 
-
 @implementation WebAPI
 
 +(void)fetchShortVideoListSuccess:(void (^) (NSDictionary *))successBlock
@@ -38,13 +37,15 @@
     }];
 }
 
+static NSURLSessionUploadTask *curUploadTask;
+
 +(void)uploadShortVideo:(NSString *)url Progress:(void (^) (NSProgress *))progressBlock
                                         Success:(void (^) (NSDictionary *))successBlock
                                         Failured:(void (^) (NSError *))failuredBlock
 {
-    NSMutableURLRequest *request =[ [NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:kURLShortVideo_Upload]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:kURLShortVideo_Upload]];
     [request setHTTPMethod:@"POST"];
-    NSData *videoData = [NSData dataWithContentsOfFile:url ];
+    NSData *videoData = [NSData dataWithContentsOfFile:url];
     [request setHTTPBody:videoData];
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -63,6 +64,14 @@
           }
     }];
     
+    curUploadTask = uploadTask;
+    NSLog(@"uploadTask=%@", uploadTask);
     [uploadTask resume];
 }
+
++ (void)uploadCancel
+{
+    [curUploadTask cancel];
+}
+
 @end

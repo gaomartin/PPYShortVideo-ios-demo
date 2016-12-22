@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,19 +50,23 @@
                                 <constraint firstAttribute="width" constant="50" id="DkG-rS-tYA"/>
                                 <constraint firstAttribute="height" constant="44" id="vhc-5O-TCZ"/>
                             </constraints>
-                            <state key="normal" image="组-20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="发布"/>
+                            <connections>
+                                <action selector="uploadBtnClicked:" destination="-1" eventType="touchUpInside" id="EfF-ub-aOS"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="jyW-Gb-Ns4" firstAttribute="baseline" secondItem="7XX-UA-T5K" secondAttribute="baseline" id="J2f-Fm-myp"/>
+                        <constraint firstItem="jyW-Gb-Ns4" firstAttribute="bottom" secondItem="7XX-UA-T5K" secondAttribute="bottom" id="J2f-Fm-myp"/>
                         <constraint firstItem="jyW-Gb-Ns4" firstAttribute="top" secondItem="BRh-QJ-FcC" secondAttribute="top" id="MFF-Sr-7Ph"/>
                         <constraint firstItem="BRh-QJ-FcC" firstAttribute="bottom" secondItem="7XX-UA-T5K" secondAttribute="bottom" id="Nbo-UR-dUY"/>
                         <constraint firstItem="jyW-Gb-Ns4" firstAttribute="top" secondItem="PbA-nU-n15" secondAttribute="top" id="Nzn-C9-Xag"/>
                         <constraint firstAttribute="trailing" secondItem="7XX-UA-T5K" secondAttribute="trailing" id="RKC-41-lb4"/>
                         <constraint firstItem="BRh-QJ-FcC" firstAttribute="top" secondItem="7XX-UA-T5K" secondAttribute="top" id="cfE-0q-T8b"/>
                         <constraint firstAttribute="bottom" secondItem="BRh-QJ-FcC" secondAttribute="bottom" id="fmu-XQ-idT"/>
-                        <constraint firstItem="jyW-Gb-Ns4" firstAttribute="firstBaseline" secondItem="7XX-UA-T5K" secondAttribute="firstBaseline" id="iSz-16-mBK"/>
+                        <constraint firstItem="jyW-Gb-Ns4" firstAttribute="top" secondItem="7XX-UA-T5K" secondAttribute="top" id="iSz-16-mBK"/>
                         <constraint firstAttribute="height" constant="44" id="ndQ-yL-CdN"/>
                         <constraint firstItem="BRh-QJ-FcC" firstAttribute="centerX" secondItem="PbA-nU-n15" secondAttribute="centerX" id="vG8-kn-oib"/>
                         <constraint firstItem="jyW-Gb-Ns4" firstAttribute="leading" secondItem="PbA-nU-n15" secondAttribute="leading" id="ztX-t3-H2J"/>
@@ -111,6 +114,5 @@
     </objects>
     <resources>
         <image name="左上角的关闭" width="16" height="17"/>
-        <image name="组-20" width="27" height="17"/>
     </resources>
 </document>

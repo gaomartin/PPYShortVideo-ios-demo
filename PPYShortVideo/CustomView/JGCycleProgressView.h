@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface JGCycleProgressView : UIView
+
 @property (nonatomic, strong) UILabel *label;
+
 - (void)drawProgress:(CGFloat )progress;
+
 @end

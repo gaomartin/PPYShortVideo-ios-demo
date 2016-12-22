@@ -19,4 +19,7 @@
 +(void)uploadShortVideo:(NSString *)url Progress:(void (^) (NSProgress *))progressBlock
                                         Success:(void (^) (NSDictionary *))successBlock
                                         Failured:(void (^) (NSError *))failuredBlock;
+
++ (void)uploadCancel;
+
 @end

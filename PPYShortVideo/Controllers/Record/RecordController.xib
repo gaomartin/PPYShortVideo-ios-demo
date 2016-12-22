@@ -213,6 +213,7 @@
                 <constraint firstItem="SHS-in-NjW" firstAttribute="leading" secondItem="KEj-5Q-59B" secondAttribute="leading" id="p5y-p5-E67"/>
                 <constraint firstItem="KEj-5Q-59B" firstAttribute="top" secondItem="MQd-SD-mup" secondAttribute="bottom" id="yE2-W5-uS8"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <point key="canvasLocation" x="-139" y="16"/>
         </view>
     </objects>
