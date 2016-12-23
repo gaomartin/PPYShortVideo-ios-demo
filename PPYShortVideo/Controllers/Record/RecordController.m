@@ -13,7 +13,7 @@
 #import "LocalVideoAddViewController.h"
 #import "BZVideoInfo.h"
 #import "JGCycleProgressView.h"
-#import "BZVideoEditViewController.h"
+#import "BZChiefEditViewController.h"
 
 #ifdef DEBUG
 #define KMAX_RECORD_TIME  100
@@ -21,7 +21,12 @@
 #define KMAX_RECORD_TIME  300
 #endif
 
-#define KMIN_RECORD_TIME_TO_MERGE 10
+#ifdef DEBUG
+#define KMIN_RECORD_TIME_TO_MERGE  5
+#else
+#define KMIN_RECORD_TIME_TO_MERGE  10
+#endif
+
 
 @interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,SLKMediaMergerDelegate>
 
@@ -194,7 +199,7 @@
                  [self stopRecord];
             } else {//停止录制, 且已经有录制的文件
                 [self exitRecord];
-                [self checkConfirmBtnStatus];
+                [self checkButtonStatus];
             }
         }];
         
@@ -229,14 +234,9 @@
         [self.recordInfoArray removeLastObject];
         self.status = PPProgressViewStatus_wait;
         
-        if ([self.recordInfoArray count] == 0) {
-            self.localBtn.hidden = NO;
-            self.deleteBtn.hidden = YES;
-        }
-        
         self.lastDuration = [self getTotalRecordDuration];
         self.lblRecordTime.text = [NSString stringWithFormat:@"%.fs",self.lastDuration / 1000];
-        [self checkConfirmBtnStatus];
+        [self checkButtonStatus];
     }
 }
 
@@ -390,7 +390,7 @@
         [self exitRecord];
     }
     
-    [self checkConfirmBtnStatus];
+    [self checkButtonStatus];
     
     if (self.lastDuration >= KMAX_RECORD_TIME * 1000) {//录制时间满后, 自动合成跳转
         [self confirmBtnClicked:nil];
@@ -417,7 +417,7 @@
     [self.progressView clear];
 }
 
-- (void)checkConfirmBtnStatus
+- (void)checkButtonStatus
 {
     self.lastDuration = [self getTotalRecordDuration];
     if(self.lastDuration > KMIN_RECORD_TIME_TO_MERGE * 1000) {
@@ -426,6 +426,11 @@
     } else {
         self.confirmBtn.enabled = NO;
         [self.confirmBtn setImage:[UIImage imageNamed:@"组-12"] forState:UIControlStateNormal];
+    }
+    
+    if ([self.recordInfoArray count] == 0) {
+        self.localBtn.hidden = NO;
+        self.deleteBtn.hidden = YES;
     }
 }
 
@@ -521,14 +526,16 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.slkMediaMerger stop];
         [self.slkMediaMerger terminate];
+       
+        BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
+        editView.mediaProduct = self.slkMediaProduct;
+        editView.videoArray = self.recordInfoArray;
+        [self.navigationController pushViewController:editView animated:YES];
+        
         [self removeCycleProgressView];
         [self.recordInfoArray removeAllObjects];
-        [self checkConfirmBtnStatus];
+        [self checkButtonStatus];
         self.lblRecordTime.text = [NSString stringWithFormat:@"0s"];
-        
-        BZVideoEditViewController *editView = [[BZVideoEditViewController alloc] init];
-        editView.mediaProduct = self.slkMediaProduct;
-        [self.navigationController pushViewController:editView animated:YES];
      });
 }
 

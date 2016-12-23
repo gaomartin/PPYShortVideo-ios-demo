@@ -16,6 +16,6 @@
 @property (assign, nonatomic) PPYSourceType sourceType;
 @property (assign, nonatomic) BOOL needPlayWhenAppear;
 
-+(instancetype)playerViewWithURL:(NSString *)url andSourceType:(PPYSourceType)sourceType;
+- (void)stop;
 
 @end

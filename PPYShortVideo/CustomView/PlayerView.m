@@ -25,16 +25,9 @@
 @property (nonatomic, strong) NSTimer *timer;
 @end
 
-#define JPlayControllerLog(format, ...) NSLog((@"PlayerController_"format), ##__VA_ARGS__)
+#define JPlayControllerLog(format, ...) NSLog((@"PlayerView_"format), ##__VA_ARGS__)
 
 @implementation PlayerView
-
-+(instancetype)playerViewWithURL:(NSString *)url andSourceType:(PPYSourceType)sourceType{
-    PlayerView *__instance = [[self alloc]init];
-    __instance.playerURL = url;
-    __instance.sourceType = sourceType;
-    return __instance;
-}
 
 -(void)initialize{
     _displayView = [UIView new];
@@ -53,7 +46,6 @@
     _controlPanel.delegate = self;
     _controlPanel.state = JGPlayerControlState_Init;
     [self addSubview:_controlPanel];
-    
     
     [_displayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
@@ -106,9 +98,23 @@
     NSLog(@"PlayerView delloc!");
 }
 
+- (void)refreshUI
+{
+    [_previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+    }];
+    
+    [self.btnStartOrPause mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+    }];
+    
+    [PPYPlayEngine shareInstance].delegate = self;
+}
 
 #pragma ---Setter,Getter---
--(void)setPlayerURL:(NSString *)playerURL{
+-(void)setPlayerURL:(NSString *)playerURL
+{
+    [self refreshUI];
     _playerURL = playerURL;
     
     [PPYMediaUtils getCoverImageFileWithInputFile:self.playerURL OutputWidth:375 OutputHeight:375 OutputFile:self.cachImagePath];
@@ -132,6 +138,7 @@
 
 -(void)startPlay{
     [[PPYPlayEngine shareInstance] startPlayFromURL:self.playerURL WithType:PPYSourceType_VOD];
+    
     [self.btnStartOrPause mas_updateConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
     }];
@@ -146,6 +153,11 @@
 
 -(void)onPressBtnStartOrPause:(UIButton *)sender{
     [self startPlay];
+}
+
+- (void)stop
+{
+    [[PPYPlayEngine shareInstance] stopPlayerBlackDisplayNeeded:YES];
 }
 
 #pragma mark --<PPYPlayEngineDelegate>

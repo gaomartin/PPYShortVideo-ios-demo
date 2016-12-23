@@ -1,15 +1,15 @@
 //
-//  BZVideoEditViewController.h
+//  BZChiefEditViewController.h
 //  PPYShortVideo
 //
-//  Created by bobzhang on 16/12/23.
+//  Created by bobzhang on 16/12/20.
 //  Copyright © 2016年 PPTV. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-//编辑页面
-@interface BZVideoEditViewController : UIViewController
+//总编辑页面
+@interface BZChiefEditViewController : UIViewController
 
 @property (nonatomic, strong) SLKMediaProduct* mediaProduct;
 @property (nonatomic, strong) NSMutableArray *videoArray;

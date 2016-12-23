@@ -14,6 +14,10 @@
 		4B02DF461E010D8F00DE345F /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B02DF3C1E010D8F00DE345F /* NSDictionary+StringValue.m */; };
 		4B02DF471E010D8F00DE345F /* NSObject+SafeValueWithJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B02DF3E1E010D8F00DE345F /* NSObject+SafeValueWithJSON.m */; };
 		4B02DF481E010D8F00DE345F /* UIColor+BZHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B02DF411E010D8F00DE345F /* UIColor+BZHex.m */; };
+		4B0F442C1E0CC3C100D6B1A2 /* BZVideoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F442A1E0CC3C100D6B1A2 /* BZVideoEditViewController.m */; };
+		4B0F442D1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0F442B1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib */; };
+		4B0F44311E0CC3D100D6B1A2 /* BZVideoCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F442F1E0CC3D100D6B1A2 /* BZVideoCutViewController.m */; };
+		4B0F44321E0CC3D100D6B1A2 /* BZVideoCutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0F44301E0CC3D100D6B1A2 /* BZVideoCutViewController.xib */; };
 		4B1703E01E07C249006E3566 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703D61E07C249006E3566 /* mainViewController.m */; };
 		4B1703E11E07C249006E3566 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703D71E07C249006E3566 /* mainViewController.xib */; };
 		4B1703E21E07C249006E3566 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DA1E07C249006E3566 /* RecordController.m */; };
@@ -23,8 +27,8 @@
 		4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */; };
 		4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */; };
 		4B1703F21E08C1DF006E3566 /* BZVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */; };
-		4B1703F71E08D1EC006E3566 /* BZVideoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F51E08D1EC006E3566 /* BZVideoEditViewController.m */; };
-		4B1703F81E08D1EC006E3566 /* BZVideoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703F61E08D1EC006E3566 /* BZVideoEditViewController.xib */; };
+		4B1703F71E08D1EC006E3566 /* BZChiefEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F51E08D1EC006E3566 /* BZChiefEditViewController.m */; };
+		4B1703F81E08D1EC006E3566 /* BZChiefEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703F61E08D1EC006E3566 /* BZChiefEditViewController.xib */; };
 		4B17040B1E092594006E3566 /* MediaStreamerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704081E092594006E3566 /* MediaStreamerFramework.framework */; };
 		4B17040D1E092594006E3566 /* MediaPlayerFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */; };
 		4B17040F1E092601006E3566 /* MediaStreamerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704081E092594006E3566 /* MediaStreamerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -115,6 +119,12 @@
 		4B02DF3F1E010D8F00DE345F /* PPObjectSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPObjectSafe.h; sourceTree = "<group>"; };
 		4B02DF401E010D8F00DE345F /* UIColor+BZHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BZHex.h"; sourceTree = "<group>"; };
 		4B02DF411E010D8F00DE345F /* UIColor+BZHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BZHex.m"; sourceTree = "<group>"; };
+		4B0F44291E0CC3C100D6B1A2 /* BZVideoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoEditViewController.h; sourceTree = "<group>"; };
+		4B0F442A1E0CC3C100D6B1A2 /* BZVideoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoEditViewController.m; sourceTree = "<group>"; };
+		4B0F442B1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZVideoEditViewController.xib; sourceTree = "<group>"; };
+		4B0F442E1E0CC3D100D6B1A2 /* BZVideoCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoCutViewController.h; sourceTree = "<group>"; };
+		4B0F442F1E0CC3D100D6B1A2 /* BZVideoCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoCutViewController.m; sourceTree = "<group>"; };
+		4B0F44301E0CC3D100D6B1A2 /* BZVideoCutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZVideoCutViewController.xib; sourceTree = "<group>"; };
 		4B1703D51E07C249006E3566 /* mainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
 		4B1703D61E07C249006E3566 /* mainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
 		4B1703D71E07C249006E3566 /* mainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainViewController.xib; sourceTree = "<group>"; };
@@ -130,9 +140,9 @@
 		4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaInfoViewController.m; sourceTree = "<group>"; };
 		4B1703F01E08C1DF006E3566 /* BZVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoInfo.h; sourceTree = "<group>"; };
 		4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoInfo.m; sourceTree = "<group>"; };
-		4B1703F41E08D1EC006E3566 /* BZVideoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoEditViewController.h; sourceTree = "<group>"; };
-		4B1703F51E08D1EC006E3566 /* BZVideoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoEditViewController.m; sourceTree = "<group>"; };
-		4B1703F61E08D1EC006E3566 /* BZVideoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZVideoEditViewController.xib; sourceTree = "<group>"; };
+		4B1703F41E08D1EC006E3566 /* BZChiefEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZChiefEditViewController.h; sourceTree = "<group>"; };
+		4B1703F51E08D1EC006E3566 /* BZChiefEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZChiefEditViewController.m; sourceTree = "<group>"; };
+		4B1703F61E08D1EC006E3566 /* BZChiefEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZChiefEditViewController.xib; sourceTree = "<group>"; };
 		4B1703FC1E091E8D006E3566 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		4B1703FE1E091E94006E3566 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4B1704001E091ED5006E3566 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -326,9 +336,15 @@
 		4B1703F31E08D1D2006E3566 /* VideoEdit */ = {
 			isa = PBXGroup;
 			children = (
-				4B1703F41E08D1EC006E3566 /* BZVideoEditViewController.h */,
-				4B1703F51E08D1EC006E3566 /* BZVideoEditViewController.m */,
-				4B1703F61E08D1EC006E3566 /* BZVideoEditViewController.xib */,
+				4B1703F41E08D1EC006E3566 /* BZChiefEditViewController.h */,
+				4B1703F51E08D1EC006E3566 /* BZChiefEditViewController.m */,
+				4B1703F61E08D1EC006E3566 /* BZChiefEditViewController.xib */,
+				4B0F44291E0CC3C100D6B1A2 /* BZVideoEditViewController.h */,
+				4B0F442A1E0CC3C100D6B1A2 /* BZVideoEditViewController.m */,
+				4B0F442B1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib */,
+				4B0F442E1E0CC3D100D6B1A2 /* BZVideoCutViewController.h */,
+				4B0F442F1E0CC3D100D6B1A2 /* BZVideoCutViewController.m */,
+				4B0F44301E0CC3D100D6B1A2 /* BZVideoCutViewController.xib */,
 			);
 			path = VideoEdit;
 			sourceTree = "<group>";
@@ -664,9 +680,11 @@
 				4B754FFB1E03CA29005814F8 /* Assets.xcassets in Resources */,
 				4B754FFC1E03CA29005814F8 /* LaunchScreen.storyboard in Resources */,
 				4B7550631E03CBD5005814F8 /* JGPlayerControlPanel.xib in Resources */,
+				4B0F442D1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib in Resources */,
+				4B0F44321E0CC3D100D6B1A2 /* BZVideoCutViewController.xib in Resources */,
 				4B1703E51E07C249006E3566 /* UploadController.xib in Resources */,
 				4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */,
-				4B1703F81E08D1EC006E3566 /* BZVideoEditViewController.xib in Resources */,
+				4B1703F81E08D1EC006E3566 /* BZChiefEditViewController.xib in Resources */,
 				4B7550D41E03CD39005814F8 /* PlayerController.xib in Resources */,
 				4B1703E31E07C249006E3566 /* RecordController.xib in Resources */,
 				4B7550CE1E03CD39005814F8 /* LocalVideoCell.xib in Resources */,
@@ -707,14 +725,16 @@
 				4B7550531E03CBC3005814F8 /* YYClassInfo.m in Sources */,
 				4B7550411E03CBC3005814F8 /* AFSecurityPolicy.m in Sources */,
 				4B7550641E03CBD5005814F8 /* PlayerView.m in Sources */,
+				4B0F442C1E0CC3C100D6B1A2 /* BZVideoEditViewController.m in Sources */,
 				4B02DF421E010D8F00DE345F /* NSArray+ObjectAtIndexWithBoundsCheck.m in Sources */,
 				4B7550CF1E03CD39005814F8 /* SelectVideoViewCell.m in Sources */,
 				4B7550CB1E03CD39005814F8 /* FlowCell.m in Sources */,
 				4B7550501E03CBC3005814F8 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				4B7550401E03CBC3005814F8 /* AFNetworkReachabilityManager.m in Sources */,
+				4B0F44311E0CC3D100D6B1A2 /* BZVideoCutViewController.m in Sources */,
 				4B754FFE1E03CA29005814F8 /* main.m in Sources */,
 				4B7550DC1E03CD39005814F8 /* LocalVideoAddViewController.m in Sources */,
-				4B1703F71E08D1EC006E3566 /* BZVideoEditViewController.m in Sources */,
+				4B1703F71E08D1EC006E3566 /* BZChiefEditViewController.m in Sources */,
 				4B75503F1E03CBC3005814F8 /* AFHTTPSessionManager.m in Sources */,
 				4B7550511E03CBC3005814F8 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4B7550621E03CBD5005814F8 /* JGPlayerControlPanel.m in Sources */,
