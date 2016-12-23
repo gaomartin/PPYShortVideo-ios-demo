@@ -80,7 +80,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="aVJ-rA-gy6" secondAttribute="trailing" id="267-aJ-iMy"/>
                         <constraint firstItem="aVJ-rA-gy6" firstAttribute="top" secondItem="Xwk-Nd-2ef" secondAttribute="top" constant="50" id="fTt-Vm-dae"/>

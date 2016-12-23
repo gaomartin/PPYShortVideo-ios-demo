@@ -185,25 +185,29 @@
 
 - (IBAction)doExit:(id)sender
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定放弃当前录制视频？" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    if (self.isRecording || [self.recordInfoArray count]) {//正在录制, 或者已经有录制的文件
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定放弃当前录制视频？" preferredStyle:UIAlertControllerStyleAlert];
         
-        if (self.isRecording) {
+        UIAlertAction *OK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             self.isExitWhenRecording = YES;
-            [self stopRecord];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+            if (self.isRecording) {//正在录制
+                 [self stopRecord];
+            } else {//停止录制, 且已经有录制的文件
+                [self exitRecord];
+                [self checkConfirmBtnStatus];
+            }
+        }];
         
-    }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:OK];
+        [alert addAction:cancel];
+        
+        [self presentViewController:alert animated:NO completion:nil];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    
-    [alert addAction:OK];
-    [alert addAction:cancel];
-    
-    [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (IBAction)doRecord:(id)sender
@@ -312,7 +316,6 @@
             if(total >= KMAX_RECORD_TIME * 10){   //步长100ms， 上限5分钟
                 [self stopRecord];
                 self.lblRecordTime.text = [NSString stringWithFormat:@"%.fs",(float)total / 10];
-                [self confirmBtnClicked:nil];
             }
         }
             break;
@@ -388,6 +391,10 @@
     }
     
     [self checkConfirmBtnStatus];
+    
+    if (self.lastDuration >= KMAX_RECORD_TIME * 1000) {//录制时间满后, 自动合成跳转
+        [self confirmBtnClicked:nil];
+    }
 }
 
 - (void)addVideoInfo

@@ -51,7 +51,6 @@
     __weak typeof(self) weakSelf = self;
     [helper uploadShortVideo:recordFilePath Progress:^(NSProgress *progress) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             weakSelf.progressView.label.text = [NSString stringWithFormat:@"%d%%",(int)(progress.fractionCompleted * 100)];
             [weakSelf.progressView drawProgress:progress.fractionCompleted];
         });
@@ -61,6 +60,22 @@
     } Failured:^(NetworkErrorType type, int errcode, NSString *msg) {
         [weakSelf processMessage:type code:errcode info:msg];
     }];
+}
+
+- (void)cancelUploadBtnClicked
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"确定取消上传视频？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self cancelUpload];
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:OK];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:NO completion:nil];
 }
 
 - (void)cancelUpload
@@ -82,7 +97,8 @@
 
 #pragma mark --Presenter--
 
--(JGCycleProgressView *)progressView{
+-(JGCycleProgressView *)progressView
+{
     if(_progressView == nil){
         _progressView = [[JGCycleProgressView alloc]init];
     }
@@ -99,7 +115,7 @@
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.cancelButton.frame = CGRectMake(0, 20, 50, 44);
     [self.cancelButton setImage:[UIImage imageNamed:@"左上角的关闭"] forState:UIControlStateNormal];
-    [self.cancelButton addTarget: self action:@selector(cancelUpload) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelButton addTarget: self action:@selector(cancelUploadBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_cancelButton];
     
     [self.view addSubview:self.progressView];
