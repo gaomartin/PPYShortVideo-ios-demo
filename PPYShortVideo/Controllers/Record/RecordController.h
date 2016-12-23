@@ -1,5 +1,5 @@
 //
-//  UploadController.h
+//  RecordController.h
 //  PPYShortVideo
 //
 //  Created by admin on 2016/11/7.

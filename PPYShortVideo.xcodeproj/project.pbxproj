@@ -22,8 +22,6 @@
 		4B1703E11E07C249006E3566 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703D71E07C249006E3566 /* mainViewController.xib */; };
 		4B1703E21E07C249006E3566 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DA1E07C249006E3566 /* RecordController.m */; };
 		4B1703E31E07C249006E3566 /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703DB1E07C249006E3566 /* RecordController.xib */; };
-		4B1703E41E07C249006E3566 /* UploadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DE1E07C249006E3566 /* UploadController.m */; };
-		4B1703E51E07C249006E3566 /* UploadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703DF1E07C249006E3566 /* UploadController.xib */; };
 		4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */; };
 		4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */; };
 		4B1703F21E08C1DF006E3566 /* BZVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */; };
@@ -131,9 +129,6 @@
 		4B1703D91E07C249006E3566 /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
 		4B1703DA1E07C249006E3566 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
 		4B1703DB1E07C249006E3566 /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordController.xib; sourceTree = "<group>"; };
-		4B1703DD1E07C249006E3566 /* UploadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadController.h; sourceTree = "<group>"; };
-		4B1703DE1E07C249006E3566 /* UploadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadController.m; sourceTree = "<group>"; };
-		4B1703DF1E07C249006E3566 /* UploadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadController.xib; sourceTree = "<group>"; };
 		4B1703E61E07C2A1006E3566 /* SLKMediaProcesserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaProcesserViewController.h; sourceTree = "<group>"; };
 		4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaProcesserViewController.m; sourceTree = "<group>"; };
 		4B1703E91E07C7A2006E3566 /* SLKMediaInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaInfoViewController.h; sourceTree = "<group>"; };
@@ -321,16 +316,6 @@
 				4B1703DB1E07C249006E3566 /* RecordController.xib */,
 			);
 			path = Record;
-			sourceTree = "<group>";
-		};
-		4B1703DC1E07C249006E3566 /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-				4B1703DD1E07C249006E3566 /* UploadController.h */,
-				4B1703DE1E07C249006E3566 /* UploadController.m */,
-				4B1703DF1E07C249006E3566 /* UploadController.xib */,
-			);
-			path = Upload;
 			sourceTree = "<group>";
 		};
 		4B1703F31E08D1D2006E3566 /* VideoEdit */ = {
@@ -531,7 +516,6 @@
 				4B1703D41E07C249006E3566 /* Main */,
 				4B1703D81E07C249006E3566 /* Record */,
 				4B1703F31E08D1D2006E3566 /* VideoEdit */,
-				4B1703DC1E07C249006E3566 /* Upload */,
 				4B7550AB1E03CD39005814F8 /* cells */,
 				4B7550B81E03CD39005814F8 /* Player */,
 				4B7550C71E03CD39005814F8 /* 镜头添加 */,
@@ -682,7 +666,6 @@
 				4B7550631E03CBD5005814F8 /* JGPlayerControlPanel.xib in Resources */,
 				4B0F442D1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib in Resources */,
 				4B0F44321E0CC3D100D6B1A2 /* BZVideoCutViewController.xib in Resources */,
-				4B1703E51E07C249006E3566 /* UploadController.xib in Resources */,
 				4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */,
 				4B1703F81E08D1EC006E3566 /* BZChiefEditViewController.xib in Resources */,
 				4B7550D41E03CD39005814F8 /* PlayerController.xib in Resources */,
@@ -752,7 +735,6 @@
 				4B7550611E03CBD5005814F8 /* JGCycleProgressView.m in Sources */,
 				4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */,
 				4B7550D31E03CD39005814F8 /* PlayerController.m in Sources */,
-				4B1703E41E07C249006E3566 /* UploadController.m in Sources */,
 				4B1703E01E07C249006E3566 /* mainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

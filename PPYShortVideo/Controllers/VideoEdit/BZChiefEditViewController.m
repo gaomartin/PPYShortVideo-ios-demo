@@ -51,10 +51,13 @@
     BZVideoEditViewController *edit = [[BZVideoEditViewController alloc] init];
     edit.mediaProduct = self.mediaProduct;
     edit.videoArray = self.videoArray;
-    //[self.navigationController pushViewController:edit animated:YES];
-    [self presentViewController:edit animated:YES completion:^{
-        [self.playerView stop];
-    }];
+    [self.navigationController pushViewController:edit animated:YES];
+    [self performSelector:@selector(stopVideo) withObject:self afterDelay:1];
+}
+
+- (void)stopVideo
+{
+    [self.playerView stop];
 }
 
 - (IBAction)uploadBtnClicked:(id)sender

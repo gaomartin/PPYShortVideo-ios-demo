@@ -131,7 +131,7 @@
 -(NSString *)cachImagePath{
     if(_cachImagePath == nil){
         NSString *documentDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        _cachImagePath = [documentDir stringByAppendingPathComponent:@"previewImage"];
+        _cachImagePath = [documentDir stringByAppendingPathComponent:@"Record/previewImage"];
     }
     return _cachImagePath;
 }
