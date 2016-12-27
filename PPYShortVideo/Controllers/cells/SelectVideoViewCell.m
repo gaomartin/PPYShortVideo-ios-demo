@@ -7,6 +7,8 @@
 //
 
 #import "SelectVideoViewCell.h"
+#import "NSString+time.h"
+#import "BZVideoInfo.h"
 
 @implementation SelectVideoViewCell
 
@@ -20,6 +22,26 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(deleteCell:)]) {
         [self.delegate deleteCell:self];
     }
+}
+
+- (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo
+{
+    NSString *preImagePath = [self cachImagePath];
+    [PPYMediaUtils getCoverImageFileWithInputFile:videoInfo.path OutputWidth:75 OutputHeight:75 OutputFile:preImagePath];
+    NSData *imageData = [NSData dataWithContentsOfFile:preImagePath];
+    self.imageView.image = [UIImage imageWithData:imageData];
+    
+    self.timeLabel.text = [NSString timeformatFromSeconds:(videoInfo.endPos - videoInfo.startPos)/1000];
+    
+    self.backgroudImageView.hidden = !videoInfo.isSelected;
+}
+
+-(NSString *)cachImagePath
+{
+    NSString *path = @"";
+    NSString *documentDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    path = [documentDir stringByAppendingPathComponent:@"Record/previewImage"];
+    return path;
 }
 
 @end

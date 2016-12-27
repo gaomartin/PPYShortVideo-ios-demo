@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BZVideoEditViewController">
             <connections>
+                <outlet property="collectionView" destination="42Y-E0-ygA" id="wMg-ek-dXq"/>
                 <outlet property="playerView" destination="nWE-Kw-VRz" id="Sbh-Zn-aR2"/>
                 <outlet property="view" destination="6i7-22-85m" id="gii-xr-5S6"/>
             </connections>
@@ -78,9 +79,24 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oal-eH-5gQ">
                             <rect key="frame" x="0.0" y="300" width="320" height="100"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0a-MB-k4U">
+                                    <rect key="frame" x="33" y="35" width="84" height="33"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="84" id="Id1-ZY-HLY"/>
+                                    </constraints>
+                                    <state key="normal" title="镜头剪切"/>
+                                    <connections>
+                                        <action selector="videoCutBtnClicked:" destination="-1" eventType="touchUpInside" id="ltt-Gs-ViF"/>
+                                    </connections>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="D0a-MB-k4U" secondAttribute="bottom" constant="32" id="I7H-ED-4uc"/>
+                                <constraint firstItem="D0a-MB-k4U" firstAttribute="top" secondItem="oal-eH-5gQ" secondAttribute="top" constant="35" id="KZY-Bi-4GH"/>
                                 <constraint firstAttribute="height" constant="100" id="W0d-GL-rrl"/>
+                                <constraint firstItem="D0a-MB-k4U" firstAttribute="leading" secondItem="oal-eH-5gQ" secondAttribute="leading" constant="33" id="ug0-bJ-Npz"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -97,9 +113,29 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xmr-AV-uRx">
                     <rect key="frame" x="0.0" y="464" width="320" height="108"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="42Y-E0-ygA" customClass="XWDragCellCollectionView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BEF-mZ-Gul">
+                                <size key="itemSize" width="70" height="70"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Xny-gd-f8s"/>
+                                <outlet property="delegate" destination="-1" id="qc0-zf-P37"/>
+                            </connections>
+                        </collectionView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="108" id="8fb-29-NJF"/>
+                        <constraint firstAttribute="trailing" secondItem="42Y-E0-ygA" secondAttribute="trailing" id="Dta-if-JGj"/>
+                        <constraint firstItem="42Y-E0-ygA" firstAttribute="leading" secondItem="Xmr-AV-uRx" secondAttribute="leading" id="NTN-28-M2K"/>
+                        <constraint firstItem="42Y-E0-ygA" firstAttribute="top" secondItem="Xmr-AV-uRx" secondAttribute="top" id="kpQ-Tc-RH6"/>
+                        <constraint firstAttribute="bottom" secondItem="42Y-E0-ygA" secondAttribute="bottom" id="tBc-BK-clP"/>
                     </constraints>
                 </view>
             </subviews>

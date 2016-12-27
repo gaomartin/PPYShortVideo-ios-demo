@@ -8,6 +8,7 @@
 
 #import "LocalVideoCell.h"
 #import "AlbumVideoInfo.h"
+#import "NSString+time.h"
 
 @interface LocalVideoCell ()
 
@@ -46,28 +47,9 @@
         
         imageView.image = info.thumbnail;
         imageView.hidden = NO;
-        label.text = [NSString stringWithFormat:@"%@",[self timeformatFromSeconds:[info.duration integerValue]]];
+        label.text = [NSString timeformatFromSeconds:[info.duration integerValue]];
     }
 }
 
-- (NSString*)timeformatFromSeconds:(NSInteger)seconds
-{
-    //format of hour
-    NSString *str_hour = [NSString stringWithFormat:@"%02zd",seconds/3600];
-    //format of minute
-    NSString *str_minute = [NSString stringWithFormat:@"%02zd",(seconds%3600)/60];
-    //format of second
-    NSString *str_second = [NSString stringWithFormat:@"%02zd",seconds%60];
-    //format of time
-    NSString *format_time = @"00:00";
-    
-    if ([str_hour integerValue] > 0) {
-        format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
-    } else {
-        format_time = [NSString stringWithFormat:@"%@:%@",str_minute,str_second];
-    }
-    
-    return format_time;
-}
 
 @end

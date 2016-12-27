@@ -529,7 +529,7 @@
        
         BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
         editView.mediaProduct = self.slkMediaProduct;
-        editView.videoArray = self.recordInfoArray;
+        editView.videoArray = [NSMutableArray arrayWithArray: self.recordInfoArray];
         [self.navigationController pushViewController:editView animated:YES];
         
         [self removeCycleProgressView];

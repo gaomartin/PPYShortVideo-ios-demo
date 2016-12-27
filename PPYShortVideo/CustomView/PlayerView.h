@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <PPYLiveKit/PPYLiveKit.h>
-
 
 @interface PlayerView : UIView
 

@@ -142,7 +142,9 @@
     SelectVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.delegate = self;
     AlbumVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
-    cell.imageView.image = videoInfo.thumbnail;
+    //TODO: 本地视频与录制视频信息不一致
+    //[cell refreshCellWithInfo:videoInfo];
+
     return cell;
 }
 

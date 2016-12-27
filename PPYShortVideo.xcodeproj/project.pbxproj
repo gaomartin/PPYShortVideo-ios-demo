@@ -18,6 +18,7 @@
 		4B0F442D1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0F442B1E0CC3C100D6B1A2 /* BZVideoEditViewController.xib */; };
 		4B0F44311E0CC3D100D6B1A2 /* BZVideoCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F442F1E0CC3D100D6B1A2 /* BZVideoCutViewController.m */; };
 		4B0F44321E0CC3D100D6B1A2 /* BZVideoCutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0F44301E0CC3D100D6B1A2 /* BZVideoCutViewController.xib */; };
+		4B0F44351E0D227000D6B1A2 /* NSString+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0F44341E0D227000D6B1A2 /* NSString+time.m */; };
 		4B1703E01E07C249006E3566 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703D61E07C249006E3566 /* mainViewController.m */; };
 		4B1703E11E07C249006E3566 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703D71E07C249006E3566 /* mainViewController.xib */; };
 		4B1703E21E07C249006E3566 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DA1E07C249006E3566 /* RecordController.m */; };
@@ -123,6 +124,8 @@
 		4B0F442E1E0CC3D100D6B1A2 /* BZVideoCutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoCutViewController.h; sourceTree = "<group>"; };
 		4B0F442F1E0CC3D100D6B1A2 /* BZVideoCutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoCutViewController.m; sourceTree = "<group>"; };
 		4B0F44301E0CC3D100D6B1A2 /* BZVideoCutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZVideoCutViewController.xib; sourceTree = "<group>"; };
+		4B0F44331E0D227000D6B1A2 /* NSString+time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+time.h"; sourceTree = "<group>"; };
+		4B0F44341E0D227000D6B1A2 /* NSString+time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+time.m"; sourceTree = "<group>"; };
 		4B1703D51E07C249006E3566 /* mainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
 		4B1703D61E07C249006E3566 /* mainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
 		4B1703D71E07C249006E3566 /* mainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainViewController.xib; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 				4B02DF341E010D8F00DE345F /* SafeValue */,
 				4B02DF401E010D8F00DE345F /* UIColor+BZHex.h */,
 				4B02DF411E010D8F00DE345F /* UIColor+BZHex.m */,
+				4B0F44331E0D227000D6B1A2 /* NSString+time.h */,
+				4B0F44341E0D227000D6B1A2 /* NSString+time.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				4B75504C1E03CBC3005814F8 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				4B7550061E03CBAD005814F8 /* WebAPIResponseModels.m in Sources */,
 				4B1703F21E08C1DF006E3566 /* BZVideoInfo.m in Sources */,
+				4B0F44351E0D227000D6B1A2 /* NSString+time.m in Sources */,
 				4B7550651E03CBD5005814F8 /* PPProgressView.m in Sources */,
 				4B7550431E03CBC3005814F8 /* AFURLResponseSerialization.m in Sources */,
 				4B7550601E03CBD5005814F8 /* CaptureView.m in Sources */,

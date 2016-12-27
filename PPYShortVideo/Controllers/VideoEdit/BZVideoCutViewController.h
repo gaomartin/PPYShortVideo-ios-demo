@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 //视频剪切页面
+@class BZVideoInfo;
 @interface BZVideoCutViewController : UIViewController
+
+@property (nonatomic, strong) BZVideoInfo *videoInfo;
 
 @end

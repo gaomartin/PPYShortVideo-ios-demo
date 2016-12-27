@@ -15,10 +15,17 @@
 
 @end
 
+@class BZVideoInfo;
 @interface SelectVideoViewCell : UICollectionViewCell
+
+@property (nonatomic, weak) IBOutlet UIImageView *backgroudImageView;
+
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 
 @property (nonatomic, weak) id <PPCollectionCellDelegate> delegate;
 
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+- (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo;
 
 @end
