@@ -11,19 +11,25 @@
 #import "BZVideoInfo.h"
 #import "NSString+time.h"
 
-#define KMAX_PRE_IMAGEVIEW 7
+#define KMAX_PRE_IMAGEVIEW      7
+#define KMIN_DISTANCE           5
+
 
 @interface BZVideoCutViewController () <SLKMediaInfoDelegate>
 
 @property (nonatomic, strong) SLKMediaInfo *slkMediaInfo;
 
-@property (strong, nonatomic) IBOutlet PlayerView *playerView;
-@property (weak, nonatomic) IBOutlet UIView *preView;
-@property (weak, nonatomic) IBOutlet UILabel *startPosLabel;
-@property (weak, nonatomic) IBOutlet UILabel *endPosLabel;
+@property (nonatomic, weak) IBOutlet PlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UIView *infoView;
+@property (nonatomic, weak) IBOutlet UIView *preView;
+@property (nonatomic, weak) IBOutlet UILabel *startPosLabel;
+@property (nonatomic, weak) IBOutlet UILabel *endPosLabel;
 
-@property (nonatomic,assign) NSInteger thumbnailIndex;
-@property (strong, nonatomic) NSMutableArray *imageViewArray;
+@property (nonatomic, assign) NSInteger thumbnailIndex;
+@property (nonatomic, strong) NSMutableArray *imageViewArray;
+@property (nonatomic, strong) UIView *leftView;
+@property (nonatomic, strong) UIView *rightView;
+@property  CGPoint beginPoint;
 
 @end
 
@@ -41,11 +47,20 @@
     
     [self createPreImageView];
     [self requestPreImage];
+    [self addGesture];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    NSLog(@"BZVideoCutViewController dealloc");
+    [self.slkMediaInfo quit];
+    [self.slkMediaInfo terminate];
+    self.playerView = nil;
 }
 
 - (IBAction)backBtnClicked:(id)sender
@@ -91,10 +106,89 @@
     
     for (int i=0; i<KMAX_PRE_IMAGEVIEW; i++) {
         UIImageView *imageView = [self.imageViewArray objectAtIndex:i];
-        NSString* docPath= [docDir stringByAppendingFormat:@"/ppy_%d.png",i];
+        NSString *docPath= [docDir stringByAppendingFormat:@"/Record/ppy_%d.png",i];
         NSData *imageData = [NSData dataWithContentsOfFile:docPath];
         UIImage *image = [UIImage imageWithData:imageData];
         imageView.image = image;
+    }
+}
+
+#pragma mark - UIEvent
+
+- (void)addGesture
+{
+    UIImageView *left = [[UIImageView alloc] init];
+    left.image = [UIImage imageNamed:@"组-40"];
+    left.frame = CGRectMake(0, 0, 40, 84);
+    [left setContentMode:UIViewContentModeCenter];
+    
+    self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, 40, 84)];
+    [self.leftView addSubview:left];
+    [self.infoView addSubview:self.leftView];
+    
+    UIImageView *right = [[UIImageView alloc] init];
+    right.image = [UIImage imageNamed:@"组-41"];
+    right.frame = CGRectMake(0, 0, 40, 84);
+    [right setContentMode:UIViewContentModeCenter];
+    
+    self.rightView = [[UIView alloc] initWithFrame:CGRectMake(self.infoView.frame.size.width - 40, 50, 40, 84)];
+    [self.rightView addSubview:right];
+    [self.infoView addSubview:self.rightView];
+}
+
+//拖动事件
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = touches.anyObject;
+    if (touch.view != self.leftView && touch.view.superview != self.leftView &&
+        touch.view != self.rightView && touch.view.superview != self.rightView) {
+        return;
+    }
+    
+    if (touch.view == self.leftView) {
+        self.beginPoint = [touch locationInView:self.leftView];
+    } else if (touch.view == self.rightView) {
+        self.beginPoint = [touch locationInView:self.rightView];
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = touches.anyObject;
+    if (touch.view != self.leftView && touch.view != self.rightView) {
+        return;
+    }
+    
+    if (touch.view == self.leftView) {
+        CGPoint nowPoint = [touch locationInView:self.leftView];
+        
+        float offsetX = nowPoint.x - self.beginPoint.x;
+        
+        CGFloat centerX = self.leftView.center.x + offsetX;
+        CGFloat centerY = self.leftView.center.y;
+        
+        if (centerX < self.leftView.frame.size.width / 2) {
+            centerX = self.leftView.frame.size.width / 2;
+        } else if (centerX > self.rightView.center.x - KMIN_DISTANCE){
+            centerX = self.rightView.center.x - KMIN_DISTANCE;
+        }
+        
+        self.leftView.center = CGPointMake(centerX, centerY);
+    } else if (touch.view == self.rightView) {
+        CGPoint nowPoint = [touch locationInView:self.rightView];
+        
+        float offsetX = nowPoint.x - self.beginPoint.x;
+        
+        CGFloat centerX = self.rightView.center.x + offsetX;
+        CGFloat centerY = self.rightView.center.y;
+        
+        if (centerX > self.view.frame.size.width - self.rightView.frame.size.width / 2) {
+            centerX = self.view.frame.size.width - self.rightView.frame.size.width / 2;
+        } else if (centerX < self.leftView.center.x + KMIN_DISTANCE){
+            centerX = self.leftView.center.x + KMIN_DISTANCE;
+        }
+        
+        self.rightView.center = CGPointMake(centerX, centerY);
     }
 }
 
@@ -128,7 +222,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     NSString *docDir = [paths objectAtIndex:0];
     
-    NSString* docPath= [docDir stringByAppendingFormat:@"/ppy_%d.png",self.thumbnailIndex++];
+    NSString* docPath= [docDir stringByAppendingFormat:@"/Record/ppy_%d.png",self.thumbnailIndex++];
     NSLog(@"docPath = %@",docPath);
     [imageData writeToFile:docPath atomically:NO];
     

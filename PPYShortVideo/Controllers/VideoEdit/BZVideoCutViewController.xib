@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BZVideoCutViewController">
             <connections>
                 <outlet property="endPosLabel" destination="Hfb-Kq-jTP" id="cfB-OH-fbl"/>
+                <outlet property="infoView" destination="1sa-3Z-f4y" id="obo-BU-4zh"/>
                 <outlet property="playerView" destination="VlD-vS-aPS" id="5hi-aV-qet"/>
                 <outlet property="preView" destination="Dl0-Oe-RmW" id="25h-CN-bnK"/>
                 <outlet property="startPosLabel" destination="En5-WR-XTB" id="dqD-TG-tq6"/>
