@@ -11,7 +11,4 @@
 //编辑页面
 @interface BZVideoEditViewController : UIViewController
 
-@property (nonatomic, strong) SLKMediaProduct* mediaProduct;
-@property (nonatomic, strong) NSMutableArray *videoArray;
-
 @end

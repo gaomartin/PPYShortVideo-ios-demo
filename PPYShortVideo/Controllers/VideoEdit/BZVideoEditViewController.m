@@ -34,13 +34,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.playerView.playerURL = self.mediaProduct.url;
+    self.playerView.playerURL = [BZEditVideoInfo shareInstance].mediaProduct.url;
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.shakeLevel = 3.0f;
     
     self.infoArray = [NSMutableArray array];
-    [self.infoArray addObject:self.videoArray];
+    [self.infoArray addObject:[BZEditVideoInfo shareInstance].editVideoArry];
     
     [self setSelectVideoWithIndex:0];
     [self.collectionView reloadData];
@@ -76,6 +76,12 @@
     BZVideoCutViewController *cut = [[BZVideoCutViewController alloc] init];
     cut.videoInfo = self.selectInfo;
     [self.navigationController pushViewController:cut animated:YES];
+    [self performSelector:@selector(stopVideo) withObject:self afterDelay:1];
+}
+
+- (void)stopVideo
+{
+    [self.playerView stop];
 }
 
 #pragma mark - <XWDragCellCollectionViewDataSource>

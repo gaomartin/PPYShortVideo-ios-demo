@@ -23,8 +23,6 @@
 		4B1703E11E07C249006E3566 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703D71E07C249006E3566 /* mainViewController.xib */; };
 		4B1703E21E07C249006E3566 /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703DA1E07C249006E3566 /* RecordController.m */; };
 		4B1703E31E07C249006E3566 /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703DB1E07C249006E3566 /* RecordController.xib */; };
-		4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */; };
-		4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */; };
 		4B1703F21E08C1DF006E3566 /* BZVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */; };
 		4B1703F71E08D1EC006E3566 /* BZChiefEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1703F51E08D1EC006E3566 /* BZChiefEditViewController.m */; };
 		4B1703F81E08D1EC006E3566 /* BZChiefEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1703F61E08D1EC006E3566 /* BZChiefEditViewController.xib */; };
@@ -83,6 +81,7 @@
 		4B7550D71E03CD39005814F8 /* PlayListHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C01E03CD39005814F8 /* PlayListHelper.m */; };
 		4B7550DC1E03CD39005814F8 /* LocalVideoAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C91E03CD39005814F8 /* LocalVideoAddViewController.m */; };
 		4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550CA1E03CD39005814F8 /* LocalVideoAddViewController.xib */; };
+		4B7EBC4A1E1270C500E4349F /* BZEditVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7EBC491E1270C500E4349F /* BZEditVideoInfo.m */; };
 		842472EA1DCC7FA0007B4D44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 842472E91DCC7FA0007B4D44 /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -132,10 +131,6 @@
 		4B1703D91E07C249006E3566 /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
 		4B1703DA1E07C249006E3566 /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
 		4B1703DB1E07C249006E3566 /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordController.xib; sourceTree = "<group>"; };
-		4B1703E61E07C2A1006E3566 /* SLKMediaProcesserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaProcesserViewController.h; sourceTree = "<group>"; };
-		4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaProcesserViewController.m; sourceTree = "<group>"; };
-		4B1703E91E07C7A2006E3566 /* SLKMediaInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKMediaInfoViewController.h; sourceTree = "<group>"; };
-		4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKMediaInfoViewController.m; sourceTree = "<group>"; };
 		4B1703F01E08C1DF006E3566 /* BZVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZVideoInfo.h; sourceTree = "<group>"; };
 		4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZVideoInfo.m; sourceTree = "<group>"; };
 		4B1703F41E08D1EC006E3566 /* BZChiefEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZChiefEditViewController.h; sourceTree = "<group>"; };
@@ -246,6 +241,9 @@
 		4B7550C81E03CD39005814F8 /* LocalVideoAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVideoAddViewController.h; sourceTree = "<group>"; };
 		4B7550C91E03CD39005814F8 /* LocalVideoAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalVideoAddViewController.m; sourceTree = "<group>"; };
 		4B7550CA1E03CD39005814F8 /* LocalVideoAddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalVideoAddViewController.xib; sourceTree = "<group>"; };
+		4B7EBC481E1270C500E4349F /* BZEditVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZEditVideoInfo.h; sourceTree = "<group>"; };
+		4B7EBC491E1270C500E4349F /* BZEditVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZEditVideoInfo.m; sourceTree = "<group>"; };
+		4B7EBC4C1E135BD300E4349F /* DefaultDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultDefine.h; sourceTree = "<group>"; };
 		842472E21DCC7FA0007B4D44 /* PPYShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPYShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842472E81DCC7FA0007B4D44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		842472E91DCC7FA0007B4D44 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -312,10 +310,6 @@
 		4B1703D81E07C249006E3566 /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				4B1703E91E07C7A2006E3566 /* SLKMediaInfoViewController.h */,
-				4B1703EA1E07C7A2006E3566 /* SLKMediaInfoViewController.m */,
-				4B1703E61E07C2A1006E3566 /* SLKMediaProcesserViewController.h */,
-				4B1703E71E07C2A1006E3566 /* SLKMediaProcesserViewController.m */,
 				4B1703D91E07C249006E3566 /* RecordController.h */,
 				4B1703DA1E07C249006E3566 /* RecordController.m */,
 				4B1703DB1E07C249006E3566 /* RecordController.xib */,
@@ -356,6 +350,8 @@
 				4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */,
 				4B1703F01E08C1DF006E3566 /* BZVideoInfo.h */,
 				4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */,
+				4B7EBC481E1270C500E4349F /* BZEditVideoInfo.h */,
+				4B7EBC491E1270C500E4349F /* BZEditVideoInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -383,6 +379,7 @@
 				4B754FF91E03CA29005814F8 /* Info.plist */,
 				4B754FFA1E03CA29005814F8 /* main.m */,
 				4B754FFF1E03CA7B005814F8 /* PrefixHeader.pch */,
+				4B7EBC4C1E135BD300E4349F /* DefaultDefine.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -708,10 +705,10 @@
 				4B2F66451E07783D0080B941 /* XWDragCellCollectionView.m in Sources */,
 				4B7550441E03CBC3005814F8 /* AFURLSessionManager.m in Sources */,
 				4B02DF441E010D8F00DE345F /* NSArray+StringValue.m in Sources */,
-				4B1703E81E07C2A1006E3566 /* SLKMediaProcesserViewController.m in Sources */,
 				4B7550461E03CBC3005814F8 /* MASConstraint.m in Sources */,
 				4B7550531E03CBC3005814F8 /* YYClassInfo.m in Sources */,
 				4B7550411E03CBC3005814F8 /* AFSecurityPolicy.m in Sources */,
+				4B7EBC4A1E1270C500E4349F /* BZEditVideoInfo.m in Sources */,
 				4B7550641E03CBD5005814F8 /* PlayerView.m in Sources */,
 				4B0F442C1E0CC3C100D6B1A2 /* BZVideoEditViewController.m in Sources */,
 				4B02DF421E010D8F00DE345F /* NSArray+ObjectAtIndexWithBoundsCheck.m in Sources */,
@@ -739,7 +736,6 @@
 				4B7550431E03CBC3005814F8 /* AFURLResponseSerialization.m in Sources */,
 				4B7550601E03CBD5005814F8 /* CaptureView.m in Sources */,
 				4B7550611E03CBD5005814F8 /* JGCycleProgressView.m in Sources */,
-				4B1703EB1E07C7A2006E3566 /* SLKMediaInfoViewController.m in Sources */,
 				4B7550D31E03CD39005814F8 /* PlayerController.m in Sources */,
 				4B1703E01E07C249006E3566 /* mainViewController.m in Sources */,
 			);

@@ -33,7 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.playerView.playerURL = self.mediaProduct.url;
+    self.playerView.playerURL = [BZEditVideoInfo shareInstance].mediaProduct.url;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,8 +49,6 @@
 - (IBAction)editBtnClicked:(id)sender
 {
     BZVideoEditViewController *edit = [[BZVideoEditViewController alloc] init];
-    edit.mediaProduct = self.mediaProduct;
-    edit.videoArray = self.videoArray;
     [self.navigationController pushViewController:edit animated:YES];
     [self performSelector:@selector(stopVideo) withObject:self afterDelay:1];
 }
@@ -64,7 +62,7 @@
 {
     PlayListHelper *helper = [[PlayListHelper alloc]init];
     
-    NSString *recordFilePath = self.mediaProduct.url;
+    NSString *recordFilePath = [BZEditVideoInfo shareInstance].mediaProduct.url;
     NSLog(@"product recordFilePath=%@",recordFilePath);
     [self presentProgressView];
     

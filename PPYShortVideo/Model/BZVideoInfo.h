@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *path;
 @property (nonatomic) NSTimeInterval startPos;
 @property (nonatomic) NSTimeInterval endPos;
+@property (nonatomic) NSTimeInterval total;
 @property (nonatomic) NSTimeInterval weight; //0.0 - 1.0
 @property (nonatomic) BOOL isSelected;
 

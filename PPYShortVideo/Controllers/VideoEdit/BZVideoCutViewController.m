@@ -14,7 +14,6 @@
 #define KMAX_PRE_IMAGEVIEW      7
 #define KMIN_DISTANCE           5
 
-
 @interface BZVideoCutViewController () <SLKMediaInfoDelegate>
 
 @property (nonatomic, strong) SLKMediaInfo *slkMediaInfo;
@@ -27,6 +26,7 @@
 
 @property (nonatomic, assign) NSInteger thumbnailIndex;
 @property (nonatomic, strong) NSMutableArray *imageViewArray;
+@property (nonatomic, strong) NSMutableArray *imageDataArray;
 @property (nonatomic, strong) UIView *leftView;
 @property (nonatomic, strong) UIView *rightView;
 @property  CGPoint beginPoint;
@@ -44,10 +44,11 @@
     self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
     
     self.imageViewArray = [NSMutableArray array];
+    self.imageDataArray = [NSMutableArray array];
     
     [self createPreImageView];
     [self requestPreImage];
-    [self addGesture];
+    [self addCutEffectView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +62,8 @@
     [self.slkMediaInfo quit];
     [self.slkMediaInfo terminate];
     self.playerView = nil;
+    
+    [self.infoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 - (IBAction)backBtnClicked:(id)sender
@@ -78,7 +81,7 @@
     for (int i=0; i<KMAX_PRE_IMAGEVIEW; i++) {
         UIImageView *imageview = [[UIImageView alloc] init];
         imageview.backgroundColor = [UIColor clearColor];
-        imageview.frame = CGRectMake(self.preView.frame.size.width/KMAX_PRE_IMAGEVIEW *i, 0, self.preView.frame.size.width/KMAX_PRE_IMAGEVIEW, self.preView.frame.size.height);
+        imageview.frame = CGRectMake((KMainScreenWidth - 40)/KMAX_PRE_IMAGEVIEW *i, 0, (KMainScreenWidth - 40)/KMAX_PRE_IMAGEVIEW, self.preView.frame.size.height);
         imageview.tag = i;
         [self.preView addSubview:imageview];
         [self.imageViewArray addObject:imageview];
@@ -93,7 +96,7 @@
     }
     self.slkMediaInfo.delegate = self;
     [self.slkMediaInfo initialize];
-    [self.slkMediaInfo setThumbnailsOptionWithWidth:self.preView.frame.size.width/KMAX_PRE_IMAGEVIEW
+    [self.slkMediaInfo setThumbnailsOptionWithWidth:(KMainScreenWidth - 40)/KMAX_PRE_IMAGEVIEW
                                          WithHeight:self.preView.frame.size.height
                                  WithThumbnailCount:KMAX_PRE_IMAGEVIEW];
     [self.slkMediaInfo loadAsync:self.videoInfo.path];
@@ -101,28 +104,26 @@
 
 - (void)showPreImage
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-    NSString *docDir = [paths objectAtIndex:0];
-    
     for (int i=0; i<KMAX_PRE_IMAGEVIEW; i++) {
         UIImageView *imageView = [self.imageViewArray objectAtIndex:i];
-        NSString *docPath= [docDir stringByAppendingFormat:@"/Record/ppy_%d.png",i];
-        NSData *imageData = [NSData dataWithContentsOfFile:docPath];
-        UIImage *image = [UIImage imageWithData:imageData];
-        imageView.image = image;
+        NSData *imageData = [self.imageDataArray objectAtIndex:i];
+        imageView.image = [UIImage imageWithData:imageData];
     }
 }
 
-#pragma mark - UIEvent
-
-- (void)addGesture
+- (void)addCutEffectView
 {
+    //两边各空20, 中间的width-40作为总长度的进度标准
+    CGFloat length = KMainScreenWidth - 40;
+    CGFloat xOriginLeft = self.videoInfo.startPos / self.videoInfo.total * length;
+    CGFloat xOriginRight = self.videoInfo.endPos / self.videoInfo.total * length;
+    
     UIImageView *left = [[UIImageView alloc] init];
     left.image = [UIImage imageNamed:@"组-40"];
     left.frame = CGRectMake(0, 0, 40, 84);
     [left setContentMode:UIViewContentModeCenter];
     
-    self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, 40, 84)];
+    self.leftView = [[UIView alloc] initWithFrame:CGRectMake(xOriginLeft, 45, 40, 84)];
     [self.leftView addSubview:left];
     [self.infoView addSubview:self.leftView];
     
@@ -131,11 +132,12 @@
     right.frame = CGRectMake(0, 0, 40, 84);
     [right setContentMode:UIViewContentModeCenter];
     
-    self.rightView = [[UIView alloc] initWithFrame:CGRectMake(self.infoView.frame.size.width - 40, 50, 40, 84)];
+    self.rightView = [[UIView alloc] initWithFrame:CGRectMake(xOriginRight, 45, 40, 84)];
     [self.rightView addSubview:right];
     [self.infoView addSubview:self.rightView];
 }
 
+#pragma mark - UIEvent
 //拖动事件
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -159,6 +161,9 @@
         return;
     }
     
+    //两边各空20, 中间的width-40作为总长度的进度标准
+    CGFloat length = KMainScreenWidth - 40;
+    
     if (touch.view == self.leftView) {
         CGPoint nowPoint = [touch locationInView:self.leftView];
         
@@ -174,6 +179,8 @@
         }
         
         self.leftView.center = CGPointMake(centerX, centerY);
+        
+        self.videoInfo.startPos = (centerX - self.leftView.frame.size.width / 2) * self.videoInfo.total / length ;
     } else if (touch.view == self.rightView) {
         CGPoint nowPoint = [touch locationInView:self.rightView];
         
@@ -189,7 +196,11 @@
         }
         
         self.rightView.center = CGPointMake(centerX, centerY);
+        self.videoInfo.endPos = (centerX - self.rightView.frame.size.width / 2) * self.videoInfo.total / length ;
     }
+    
+    self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
+    self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
 }
 
 #pragma mark - SLKMediaInfoDelegate
@@ -217,15 +228,9 @@
     UIImage *uiImage = [UIImage imageWithCGImage:videoImage];
     CGImageRelease(videoImage);
     
-    NSData* imageData = UIImageJPEGRepresentation(uiImage,1.0f);
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
-    NSString *docDir = [paths objectAtIndex:0];
-    
-    NSString* docPath= [docDir stringByAppendingFormat:@"/Record/ppy_%d.png",self.thumbnailIndex++];
-    NSLog(@"docPath = %@",docPath);
-    [imageData writeToFile:docPath atomically:NO];
-    
+    NSData* imageData = UIImageJPEGRepresentation(uiImage,0.5f);
+    [self.imageDataArray addObject:imageData];
+   
     CVPixelBufferRelease(outputThumbnailData);
 }
 

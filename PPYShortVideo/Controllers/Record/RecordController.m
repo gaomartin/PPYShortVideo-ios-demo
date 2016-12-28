@@ -320,7 +320,7 @@
         }
             break;
     }
-    NSLog(@"didStreamInfoThrowOut %d__%d",type,value);
+    //NSLog(@"didStreamInfoThrowOut %d__%d",type,value);
 }
 
 #pragma mark - record
@@ -403,6 +403,7 @@
     info.path = self.recordPath;
     info.startPos = 0;
     info.endPos = [self.pushEngine syncGetMediaDurationWithInputFile:self.recordPath];
+    info.total = [self.pushEngine syncGetMediaDurationWithInputFile:self.recordPath];
     
     [self.recordInfoArray addObject:info];
 }
@@ -528,8 +529,8 @@
         [self.slkMediaMerger terminate];
        
         BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
-        editView.mediaProduct = self.slkMediaProduct;
-        editView.videoArray = [NSMutableArray arrayWithArray: self.recordInfoArray];
+        [BZEditVideoInfo shareInstance].mediaProduct = self.slkMediaProduct;
+        [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
         [self.navigationController pushViewController:editView animated:YES];
         
         [self removeCycleProgressView];
