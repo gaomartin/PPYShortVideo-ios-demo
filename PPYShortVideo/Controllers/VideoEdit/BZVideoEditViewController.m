@@ -34,8 +34,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.playerView.playerURL = [BZEditVideoInfo shareInstance].mediaProduct.url;
-    
     [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.shakeLevel = 3.0f;
     
@@ -44,6 +42,12 @@
     
     [self setSelectVideoWithIndex:0];
     [self.collectionView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.playerView.playerURL = [BZEditVideoInfo shareInstance].mediaProduct.url;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,19 +72,23 @@
 
 - (IBAction)backBtnClicked:(id)sender
 {
+    self.playerView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)videoCutBtnClicked:(id)sender
 {
     BZVideoCutViewController *cut = [[BZVideoCutViewController alloc] init];
-    cut.videoInfo = self.selectInfo;
+    
+    //这里不能直接对象赋值, 不然cut页面取消修改, 也会保存修改的值.
+    BZVideoInfo *info = [[BZVideoInfo alloc] init];
+    info.path = self.selectInfo.path;
+    info.startPos = self.selectInfo.startPos;
+    info.endPos = self.selectInfo.endPos;
+    info.total = self.selectInfo.total;
+    cut.videoInfo = info;
+    
     [self.navigationController pushViewController:cut animated:YES];
-    [self performSelector:@selector(stopVideo) withObject:self afterDelay:1];
-}
-
-- (void)stopVideo
-{
     [self.playerView stop];
 }
 

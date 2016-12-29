@@ -30,6 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -43,6 +44,7 @@
 
 - (IBAction)backBtnClicked:(id)sender
 {
+    self.playerView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -50,11 +52,6 @@
 {
     BZVideoEditViewController *edit = [[BZVideoEditViewController alloc] init];
     [self.navigationController pushViewController:edit animated:YES];
-    [self performSelector:@selector(stopVideo) withObject:self afterDelay:1];
-}
-
-- (void)stopVideo
-{
     [self.playerView stop];
 }
 

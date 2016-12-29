@@ -26,9 +26,10 @@
 
 @property (nonatomic, assign) NSInteger thumbnailIndex;
 @property (nonatomic, strong) NSMutableArray *imageViewArray;
-@property (nonatomic, strong) NSMutableArray *imageDataArray;
 @property (nonatomic, strong) UIView *leftView;
 @property (nonatomic, strong) UIView *rightView;
+@property (nonatomic, strong) UIView *leftBackgroudView;
+@property (nonatomic, strong) UIView *rightBackgroudView;
 @property  CGPoint beginPoint;
 
 @end
@@ -40,11 +41,12 @@
     // Do any additional setup after loading the view from its nib.
     
     self.playerView.playerURL = self.videoInfo.path;
+    self.playerView.needPlayWhenAppear = YES;
+    self.playerView.needPrepareToPlay = YES;
     self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
     self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
     
     self.imageViewArray = [NSMutableArray array];
-    self.imageDataArray = [NSMutableArray array];
     
     [self createPreImageView];
     [self requestPreImage];
@@ -61,8 +63,8 @@
     NSLog(@"BZVideoCutViewController dealloc");
     [self.slkMediaInfo quit];
     [self.slkMediaInfo terminate];
-    self.playerView = nil;
     
+    self.playerView = nil;
     [self.infoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
@@ -73,6 +75,13 @@
 
 - (IBAction)confirmBtnClicked:(id)sender
 {
+    for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].editVideoArry) {
+        if ([info.path isEqualToString:self.videoInfo.path]) {
+            info.startPos = self.videoInfo.startPos;
+            info.endPos = self.videoInfo.endPos;
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -86,6 +95,12 @@
         [self.preView addSubview:imageview];
         [self.imageViewArray addObject:imageview];
     }
+}
+
+- (void)showPreImageWithData:(NSData *)imageData
+{
+    UIImageView *imageView = [self.imageViewArray objectAtIndex:self.thumbnailIndex++];
+    imageView.image = [UIImage imageWithData:imageData];
 }
 
 - (void)requestPreImage
@@ -102,21 +117,24 @@
     [self.slkMediaInfo loadAsync:self.videoInfo.path];
 }
 
-- (void)showPreImage
-{
-    for (int i=0; i<KMAX_PRE_IMAGEVIEW; i++) {
-        UIImageView *imageView = [self.imageViewArray objectAtIndex:i];
-        NSData *imageData = [self.imageDataArray objectAtIndex:i];
-        imageView.image = [UIImage imageWithData:imageData];
-    }
-}
-
 - (void)addCutEffectView
 {
     //两边各空20, 中间的width-40作为总长度的进度标准
     CGFloat length = KMainScreenWidth - 40;
     CGFloat xOriginLeft = self.videoInfo.startPos / self.videoInfo.total * length;
     CGFloat xOriginRight = self.videoInfo.endPos / self.videoInfo.total * length;
+    
+    self.leftBackgroudView = [[UIView alloc] init];
+    self.leftBackgroudView.backgroundColor = [UIColor blackColor];
+    self.leftBackgroudView.alpha = 0.5;
+    self.leftBackgroudView.frame = CGRectMake(0, 0, xOriginLeft, self.preView.frame.size.height);
+    [self.preView addSubview:self.leftBackgroudView];
+    
+    self.rightBackgroudView = [[UIView alloc] init];
+    self.rightBackgroudView.backgroundColor = [UIColor blackColor];
+    self.rightBackgroudView.alpha = 0.5;
+    self.rightBackgroudView.frame = CGRectMake(xOriginRight, 0, length - xOriginRight, self.preView.frame.size.height);
+    [self.preView addSubview:self.rightBackgroudView];
     
     UIImageView *left = [[UIImageView alloc] init];
     left.image = [UIImage imageNamed:@"组-40"];
@@ -177,10 +195,17 @@
         } else if (centerX > self.rightView.center.x - KMIN_DISTANCE){
             centerX = self.rightView.center.x - KMIN_DISTANCE;
         }
-        
+        //滑块
         self.leftView.center = CGPointMake(centerX, centerY);
-        
+        //时间
         self.videoInfo.startPos = (centerX - self.leftView.frame.size.width / 2) * self.videoInfo.total / length ;
+        self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
+        //阴影
+        CGRect frame = self.leftBackgroudView.frame;
+        frame.size.width = centerX - 20;
+        self.leftBackgroudView.frame = frame;
+        
+        [self.playerView seekToPostion:self.videoInfo.startPos];
     } else if (touch.view == self.rightView) {
         CGPoint nowPoint = [touch locationInView:self.rightView];
         
@@ -194,13 +219,20 @@
         } else if (centerX < self.leftView.center.x + KMIN_DISTANCE){
             centerX = self.leftView.center.x + KMIN_DISTANCE;
         }
-        
+        //滑块
         self.rightView.center = CGPointMake(centerX, centerY);
+        //时间
         self.videoInfo.endPos = (centerX - self.rightView.frame.size.width / 2) * self.videoInfo.total / length ;
+        self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
+        //阴影
+        CGRect frame = self.rightBackgroudView.frame;
+        frame.origin.x = centerX - 20;
+        frame.size.width = KMainScreenWidth - centerX - 20;
+        self.rightBackgroudView.frame = frame;
+        
+        //TODO:右边滑块拖动不改变视频进度条
+        //[self.playerView seekToPostion:self.videoInfo.endPos];
     }
-    
-    self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
-    self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
 }
 
 #pragma mark - SLKMediaInfoDelegate
@@ -224,14 +256,16 @@
                              fromRect:CGRectMake(0, 0,
                                                  CVPixelBufferGetWidth(outputThumbnailData),
                                                  CVPixelBufferGetHeight(outputThumbnailData))];
-    
+    CVPixelBufferRelease(outputThumbnailData);
     UIImage *uiImage = [UIImage imageWithCGImage:videoImage];
     CGImageRelease(videoImage);
     
     NSData* imageData = UIImageJPEGRepresentation(uiImage,0.5f);
-    [self.imageDataArray addObject:imageData];
-   
-    CVPixelBufferRelease(outputThumbnailData);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIImageView *imageView = [self.imageViewArray objectAtIndex:self.thumbnailIndex++];
+        imageView.image = [UIImage imageWithData:imageData];
+    });
 }
 
 - (void)gotErrorWithErrorType:(int)errorType
@@ -247,7 +281,10 @@
 - (void)didEnd
 {
     NSLog(@"didEnd");
-    [self showPreImage];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+    });
 }
 
 

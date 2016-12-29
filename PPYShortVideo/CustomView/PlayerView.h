@@ -13,7 +13,11 @@
 @property (copy, nonatomic) NSString *playerURL;
 @property (assign, nonatomic) PPYSourceType sourceType;
 @property (assign, nonatomic) BOOL needPlayWhenAppear;
+@property (assign, nonatomic) BOOL needPrepareToPlay;
 
+- (void)seekToPostion:(NSTimeInterval)position;
+- (void)resume;
+- (void)pause;
 - (void)stop;
 
 @end

@@ -10,6 +10,7 @@
 
 @interface NSString (time)
 
+//毫秒转换为时间, 如05:30
 + (NSString*)timeformatFromSeconds:(NSInteger)seconds;
 
 

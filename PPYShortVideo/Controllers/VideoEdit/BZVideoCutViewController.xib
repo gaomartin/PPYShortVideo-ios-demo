@@ -98,7 +98,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="Dl0-Oe-RmW" secondAttribute="bottom" constant="42" id="6rf-8y-S6C"/>
                                 <constraint firstItem="Hfb-Kq-jTP" firstAttribute="trailing" secondItem="Dl0-Oe-RmW" secondAttribute="trailing" id="C49-s8-U1l"/>
