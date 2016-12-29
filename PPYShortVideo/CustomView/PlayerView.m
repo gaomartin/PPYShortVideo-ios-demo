@@ -117,7 +117,7 @@
     [self refreshUI];
     _playerURL = playerURL;
     
-    [PPYMediaUtils getCoverImageFileWithInputFile:self.playerURL OutputWidth:375 OutputHeight:375 OutputFile:self.cachImagePath];
+    [PPYThumbnailInfo getCoverImageFileWithInputFile:self.playerURL OutputWidth:375 OutputHeight:375 OutputFile:self.cachImagePath];
     NSData *imageData = [NSData dataWithContentsOfFile:self.cachImagePath];
     self.previewImage.image = [UIImage imageWithData:imageData];
 
@@ -244,6 +244,7 @@
             [[PPYPlayEngine shareInstance] presentPreviewOnView:_displayView];
             
             if (self.needPrepareToPlay) {//剪切页面, 准备播放状态, 为了可以拖动进度条来刷新预览图
+                [self seekToPostion:self.defaultSeekTime];
                 [[PPYPlayEngine shareInstance] pause];
                 self.needPrepareToPlay = NO;
                 

@@ -9,6 +9,7 @@
 #ifndef PPYLiveKit_h
 #define PPYLiveKit_h
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for PPYLiveKit.
 FOUNDATION_EXPORT double PPYLiveKitVersionNumber;
@@ -23,7 +24,8 @@ FOUNDATION_EXPORT const unsigned char PPYLiveKitVersionString[];
 #import <PPYLiveKit/PPYPlayEngine.h>
 #import <PPYLiveKit/PPYVideoConfiguration.h>
 #import <PPYLiveKit/PPYAudioConfiguration.h>
-#import <PPYLiveKit/PPYMediaUtils.h>
+#import <PPYLiveKit/PPYMediaMerger.h>
+#import <PPYLiveKit/PPYThumbnailInfo.h>
 
 #endif /* PPYLiveKit_h */
 

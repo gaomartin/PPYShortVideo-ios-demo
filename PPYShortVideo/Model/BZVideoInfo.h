@@ -11,10 +11,10 @@
 @interface BZVideoInfo : NSObject
 
 @property (nonatomic, strong) NSString *path;
-@property (nonatomic) NSTimeInterval startPos;
-@property (nonatomic) NSTimeInterval endPos;
-@property (nonatomic) NSTimeInterval total;
-@property (nonatomic) NSTimeInterval weight; //0.0 - 1.0
-@property (nonatomic) BOOL isSelected;
+@property (nonatomic, assign) NSTimeInterval startPos;
+@property (nonatomic, assign) NSTimeInterval endPos;
+@property (nonatomic, assign) NSTimeInterval total;
+@property (nonatomic, assign) NSTimeInterval weight; //0.0 - 1.0
+@property (nonatomic, assign) BOOL isSelected;
 
 @end

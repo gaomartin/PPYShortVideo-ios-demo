@@ -27,7 +27,7 @@
 - (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo
 {
     NSString *preImagePath = [self cachImagePath];
-    [PPYMediaUtils getCoverImageFileWithInputFile:videoInfo.path OutputWidth:75 OutputHeight:75 OutputFile:preImagePath];
+    [PPYThumbnailInfo getCoverImageFileWithInputFile:videoInfo.path OutputWidth:75 OutputHeight:75 OutputFile:preImagePath];
     NSData *imageData = [NSData dataWithContentsOfFile:preImagePath];
     self.imageView.image = [UIImage imageWithData:imageData];
     

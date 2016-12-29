@@ -14,9 +14,9 @@
 #define KMAX_PRE_IMAGEVIEW      7
 #define KMIN_DISTANCE           5
 
-@interface BZVideoCutViewController () <SLKMediaInfoDelegate>
+@interface BZVideoCutViewController () <PPYThumbnailInfoDelegate>
 
-@property (nonatomic, strong) SLKMediaInfo *slkMediaInfo;
+@property (nonatomic, strong) PPYThumbnailInfo *thumbnailInfo;
 
 @property (nonatomic, weak) IBOutlet PlayerView *playerView;
 @property (nonatomic, weak) IBOutlet UIView *infoView;
@@ -43,6 +43,8 @@
     self.playerView.playerURL = self.videoInfo.path;
     self.playerView.needPlayWhenAppear = YES;
     self.playerView.needPrepareToPlay = YES;
+    self.playerView.defaultSeekTime = self.videoInfo.startPos;
+    
     self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
     self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
     
@@ -61,8 +63,8 @@
 - (void)dealloc
 {
     NSLog(@"BZVideoCutViewController dealloc");
-    [self.slkMediaInfo quit];
-    [self.slkMediaInfo terminate];
+    [self.thumbnailInfo quit];
+    [self.thumbnailInfo terminate];
     
     self.playerView = nil;
     [self.infoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -106,15 +108,14 @@
 - (void)requestPreImage
 {
     self.thumbnailIndex = 0;
-    if (!self.slkMediaInfo) {
-        self.slkMediaInfo = [[SLKMediaInfo alloc] init];
+    if (!self.thumbnailInfo) {
+        self.thumbnailInfo = [[PPYThumbnailInfo alloc] init];
     }
-    self.slkMediaInfo.delegate = self;
-    [self.slkMediaInfo initialize];
-    [self.slkMediaInfo setThumbnailsOptionWithWidth:(KMainScreenWidth - 40)/KMAX_PRE_IMAGEVIEW
+    self.thumbnailInfo.delegate = self;
+    [self.thumbnailInfo setThumbnailsOptionWithWidth:(KMainScreenWidth - 40)/KMAX_PRE_IMAGEVIEW
                                          WithHeight:self.preView.frame.size.height
                                  WithThumbnailCount:KMAX_PRE_IMAGEVIEW];
-    [self.slkMediaInfo loadAsync:self.videoInfo.path];
+    [self.thumbnailInfo loadAsync:self.videoInfo.path];
 }
 
 - (void)addCutEffectView
@@ -242,26 +243,8 @@
     NSLog(@"gotMediaDetailInfoWithDuration Duration:%lld Width:%d Height:%d",duration, width, height);
 }
 
-- (void)gotThumbnailWithCVPixelBuffer:(CVPixelBufferRef)outputThumbnailData
+- (void)gotThumbnailWithImageData:(NSData *)imageData
 {
-    NSLog(@"gotThumbnailWithCVPixelBuffer");
-    
-    if (outputThumbnailData==nil) return ;
-    
-    CIImage *ciImage = [CIImage imageWithCVPixelBuffer:outputThumbnailData];
-    
-    CIContext *temporaryContext = [CIContext contextWithOptions:nil];
-    CGImageRef videoImage = [temporaryContext
-                             createCGImage:ciImage
-                             fromRect:CGRectMake(0, 0,
-                                                 CVPixelBufferGetWidth(outputThumbnailData),
-                                                 CVPixelBufferGetHeight(outputThumbnailData))];
-    CVPixelBufferRelease(outputThumbnailData);
-    UIImage *uiImage = [UIImage imageWithCGImage:videoImage];
-    CGImageRelease(videoImage);
-    
-    NSData* imageData = UIImageJPEGRepresentation(uiImage,0.5f);
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         UIImageView *imageView = [self.imageViewArray objectAtIndex:self.thumbnailIndex++];
         imageView.image = [UIImage imageWithData:imageData];

@@ -76,6 +76,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)confirmBtnClicked:(id)sender
+{
+    self.playerView = nil;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)videoCutBtnClicked:(id)sender
 {
     BZVideoCutViewController *cut = [[BZVideoCutViewController alloc] init];

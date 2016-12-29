@@ -28,7 +28,7 @@
 #endif
 
 
-@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,SLKMediaMergerDelegate>
+@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,PPYMediaMergerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *captureView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBeatify;
@@ -54,9 +54,7 @@
 @property (nonatomic, strong) NSMutableArray *recordInfoArray;
 @property (nonatomic, assign) NSTimeInterval lastDuration;//前面录制的总时间
 //合成
-@property (nonatomic, strong) SLKMediaMerger *slkMediaMerger;
-@property (nonatomic, strong) SLKMediaMaterialGroup *slkMediaMaterialGroup;
-@property (nonatomic, strong) SLKMediaProduct* slkMediaProduct;
+@property (nonatomic, strong) PPYMediaMerger *mediaMerger;
 @property (nonatomic, assign) NSTimeInterval totalDuration;
 @property (nonatomic, strong) JGCycleProgressView *cycleProgressView;
 @property (nonatomic, strong) UIView *backgroundView;
@@ -248,7 +246,6 @@
 
 - (IBAction)confirmBtnClicked:(id)sender
 {
-    [self mergeVideoPrepare];
     [self startMerge];
 }
 
@@ -447,56 +444,33 @@
 
 #pragma mark - merge video
 
-- (void)mergeVideoPrepare
-{
-    if (!self.slkMediaMerger) {
-        self.slkMediaMerger = [[SLKMediaMerger alloc] init];
-    }
-    self.slkMediaMerger.delegate = self;
-    
-    if (!self.slkMediaMaterialGroup) {
-        self.slkMediaMaterialGroup = [[SLKMediaMaterialGroup alloc] init];
-    }
-    
-    if (!self.slkMediaProduct) {
-        self.slkMediaProduct = [[SLKMediaProduct alloc] init];
-    }
-}
-
 - (void)startMerge
 {
+    NSString *product = [[self createRecordFileDir] stringByAppendingString:@"/product.mp4"];
+    self.mediaMerger = [[PPYMediaMerger alloc] initWithProductPath:product andVideoSize:CGSizeMake(480,640)];
+    self.mediaMerger.delegate = self;
+    
     self.totalDuration = 0;
     
     for (int i=0; i<[self.recordInfoArray count]; i++) {
         BZVideoInfo *info = [self.recordInfoArray objectAtIndex:i];
         
-        SLKMediaMaterial *slkMediaMaterial = [[SLKMediaMaterial alloc] init];
-        slkMediaMaterial.url = info.path;
-        slkMediaMaterial.slk_media_material_type = SLK_MEDIA_MATERIAL_TYPE_VIDEO_AUDIO;
-        slkMediaMaterial.startPos = info.startPos;
-        slkMediaMaterial.endPos = info.endPos;
-        slkMediaMaterial.weight = 1.0f;
+        PPYMediaInfo *mediaInfo = [[PPYMediaInfo alloc] init];
+        mediaInfo.mediaPath = info.path;
+        mediaInfo.startPos = info.startPos;
+        mediaInfo.endPos = info.endPos;
+
         self.totalDuration += info.endPos - info.startPos;
-        [self.slkMediaMaterialGroup addMediaMaterial:slkMediaMaterial];
+        [self.mediaMerger addMediaMaterial:mediaInfo];
         
         NSLog(@"record info startPos=%.2f, endPos=%.2f",info.startPos/1000, info.endPos/1000);
     }
     
-    self.slkMediaProduct.url = [[self createRecordFileDir] stringByAppendingString:@"/product.mp4"];
-    self.slkMediaProduct.hasVideo = YES;
-    self.slkMediaProduct.videoSize = CGSizeMake(480,640);
-    self.slkMediaProduct.hasAudio = YES;
-    self.slkMediaProduct.bps = 2000;
-    
-    [self.slkMediaMerger initializeWithInputMaterialGroup:self.slkMediaMaterialGroup WithMergeAlgorithm:SLK_MEDIA_MERGE_ALGORITHM_TIMELINE WithOutputMediaProduct:self.slkMediaProduct];
-    
-    [self.slkMediaMaterialGroup removeAllMediaMaterials];
-    
-    [self.slkMediaMerger start];
+    [self.mediaMerger start];
     [self presentCycleProgressView];
 }
 
-#pragma mark - SLKMediaMergerDelegate
+#pragma mark - PPYMediaMergerDelegate
 
 - (void)gotErrorWithErrorType:(int)errorType
 {
@@ -505,7 +479,7 @@
 
 - (void)gotInfoWithInfoType:(int)infoType InfoValue:(int)infoValue
 {
-    if (infoType == SLK_MEDIA_PROCESSER_INFO_WRITE_TIMESTAMP) {
+    if (infoType == PPY_MEDIA_PROCESSER_INFO_WRITE_TIMESTAMP) {
         NSLog(@"Write TimeStamp:%d",infoValue);
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -525,11 +499,9 @@
 - (void)pushToEditView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.slkMediaMerger stop];
-        [self.slkMediaMerger terminate];
-       
+
         BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
-        [BZEditVideoInfo shareInstance].mediaProduct = self.slkMediaProduct;
+        [BZEditVideoInfo shareInstance].mediaProduct = self.mediaMerger.mediaProduct;
         [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
         [self.navigationController pushViewController:editView animated:YES];
         

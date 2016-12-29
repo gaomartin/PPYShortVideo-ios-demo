@@ -57,6 +57,21 @@
 
 - (IBAction)uploadBtnClicked:(id)sender
 {
+    BOOL isNeedMerge = NO;
+    
+    for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].editVideoArry) {
+        if (info.startPos > 0 || info.endPos < info.total) {
+            isNeedMerge = YES;
+        }
+    }
+    
+    if (isNeedMerge) {
+        
+    }
+}
+
+- (void)uploadVideo
+{
     PlayListHelper *helper = [[PlayListHelper alloc]init];
     
     NSString *recordFilePath = [BZEditVideoInfo shareInstance].mediaProduct.url;

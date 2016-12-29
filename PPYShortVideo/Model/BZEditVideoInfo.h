@@ -11,7 +11,7 @@
 @interface BZEditVideoInfo : NSObject
 
 @property (nonatomic, strong) NSMutableArray *editVideoArry;
-@property (nonatomic, strong) SLKMediaProduct* mediaProduct;
+@property (nonatomic, strong) PPYMediaProduct* mediaProduct;
 
 + (instancetype)shareInstance;
 
