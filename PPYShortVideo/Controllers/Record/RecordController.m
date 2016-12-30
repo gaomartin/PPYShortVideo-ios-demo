@@ -529,6 +529,7 @@
     self.backgroundView.alpha = 0.5;
     
     [self.view addSubview:self.cycleProgressView];
+    self.cycleProgressView.detailLabel.text = @"视频处理中...";
     [self.cycleProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.size.mas_equalTo(CGSizeMake(100, 100));

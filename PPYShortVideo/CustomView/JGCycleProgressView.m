@@ -31,10 +31,23 @@
     self.label.layer.borderWidth = kBorderWidth;
     self.label.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
+    self.detailLabel = [[UILabel alloc] init];
+    self.detailLabel.backgroundColor = [UIColor clearColor];
+    self.detailLabel.textColor = [UIColor whiteColor];
+    self.detailLabel.textAlignment = NSTextAlignmentCenter;
+    
     [self addSubview:self.label];
+    [self addSubview:self.detailLabel];
+    
     [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(kRadius * 2, kRadius * 2));
+    }];
+    
+    [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kRadius * 4, kRadius * 2));
+        make.centerX.mas_equalTo(self.bounds.origin.x);
+        make.bottom.equalTo(self.mas_bottom).with.offset(30);
     }];
     self.label.text = @"0%";
 }

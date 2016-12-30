@@ -51,6 +51,7 @@ static NSString * reuseIdentifier = @"flowcell";
 -(void)notifyMessageOnUI:(NSString *)message{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.mode = MBProgressHUDModeText;
+    hud.userInteractionEnabled = NO;
     hud.label.text = message;
     hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
     [hud hideAnimated:YES afterDelay:3.f];

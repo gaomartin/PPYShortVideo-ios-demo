@@ -14,12 +14,16 @@
 #import "WebAPI.h"
 #import "BZVideoEditViewController.h"
 
-@interface BZChiefEditViewController ()
+@interface BZChiefEditViewController ()<PPYMediaMergerDelegate>
 
 @property (strong, nonatomic) IBOutlet PlayerView *playerView;
 @property (strong, nonatomic) JGCycleProgressView *progressView;
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIButton *cancelButton;
+
+@property (nonatomic, strong) PPYMediaMerger *mediaMerger;
+@property (nonatomic, assign) NSTimeInterval totalDuration;
+@property (nonatomic, assign) BOOL isNeedMerge;
 
 @end
 
@@ -57,16 +61,29 @@
 
 - (IBAction)uploadBtnClicked:(id)sender
 {
-    BOOL isNeedMerge = NO;
+    self.totalDuration = 0;
+    self.isNeedMerge = NO;
     
     for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].editVideoArry) {
         if (info.startPos > 0 || info.endPos < info.total) {
-            isNeedMerge = YES;
+            self.isNeedMerge = YES;
         }
+        
+        self.totalDuration += info.endPos - info.startPos;
     }
     
-    if (isNeedMerge) {
-        
+    if (self.totalDuration > 5 * 60 * 1000) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"当前最多传 5min 的视频" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    [self presentProgressView];
+    
+    if (self.isNeedMerge) {
+        [self startMerge];
+    } else {
+        [self uploadVideo];
     }
 }
 
@@ -76,7 +93,6 @@
     
     NSString *recordFilePath = [BZEditVideoInfo shareInstance].mediaProduct.url;
     NSLog(@"product recordFilePath=%@",recordFilePath);
-    [self presentProgressView];
     
     __weak typeof(self) weakSelf = self;
     [helper uploadShortVideo:recordFilePath Progress:^(NSProgress *progress) {
@@ -110,6 +126,12 @@
 
 - (void)cancelUpload
 {
+    [self removeProgressView];
+    [WebAPI uploadCancel];
+}
+
+- (void)removeProgressView
+{
     if (self.backgroundView.superview) {
         [self.backgroundView removeFromSuperview];
         self.backgroundView = nil;
@@ -122,7 +144,64 @@
         [self.progressView removeFromSuperview];
         self.progressView = nil;
     }
-    [WebAPI uploadCancel];
+}
+
+#pragma mark - merge video
+
+- (void)startMerge
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *recordDirPath = [documentPath stringByAppendingPathComponent:@"Record"];
+    
+    NSString *product = [recordDirPath stringByAppendingString:@"/product.mp4"];
+    self.mediaMerger = [[PPYMediaMerger alloc] initWithProductPath:product andVideoSize:CGSizeMake(480,640)];
+    self.mediaMerger.delegate = self;
+    
+    for (int i=0; i<[[BZEditVideoInfo shareInstance].editVideoArry count]; i++) {
+        BZVideoInfo *info = [[BZEditVideoInfo shareInstance].editVideoArry objectAtIndex:i];
+        
+        PPYMediaInfo *mediaInfo = [[PPYMediaInfo alloc] init];
+        mediaInfo.mediaPath = info.path;
+        mediaInfo.startPos = info.startPos;
+        mediaInfo.endPos = info.endPos;
+        
+        [self.mediaMerger addMediaMaterial:mediaInfo];
+        
+        NSLog(@"record info startPos=%.2f, endPos=%.2f",info.startPos/1000, info.endPos/1000);
+    }
+    
+    [self.mediaMerger start];
+}
+
+#pragma mark - PPYMediaMergerDelegate
+
+- (void)gotErrorWithErrorType:(int)errorType
+{
+    NSLog(@"gotErrorWithErrorType errorType:%d",errorType);
+}
+
+- (void)gotInfoWithInfoType:(int)infoType InfoValue:(int)infoValue
+{
+    if (infoType == PPY_MEDIA_PROCESSER_INFO_WRITE_TIMESTAMP) {
+        NSLog(@"Write TimeStamp:%d",infoValue);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 更UI
+            self.progressView.label.text = [NSString stringWithFormat:@"%zd%%",(int)(infoValue /self.totalDuration * 100 * 1000)];
+            [self.progressView drawProgress:infoValue/self.totalDuration * 1000];
+        });
+    }
+}
+
+- (void)didEnd
+{
+    NSLog(@"didEnd");
+    self.isNeedMerge = NO;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self removeProgressView];
+        [self presentProgressView];
+        [self uploadVideo];
+    });
 }
 
 #pragma mark --Presenter--
@@ -142,11 +221,17 @@
     [self.view addSubview:self.backgroundView];
     self.backgroundView.alpha = 0.5;
     
-    self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.cancelButton.frame = CGRectMake(0, 20, 50, 44);
-    [self.cancelButton setImage:[UIImage imageNamed:@"左上角的关闭"] forState:UIControlStateNormal];
-    [self.cancelButton addTarget: self action:@selector(cancelUploadBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_cancelButton];
+    if (!self.isNeedMerge) {//merge的时候, 不创建cancel按钮
+        self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.cancelButton.frame = CGRectMake(0, 20, 50, 44);
+        [self.cancelButton setImage:[UIImage imageNamed:@"左上角的关闭"] forState:UIControlStateNormal];
+        [self.cancelButton addTarget: self action:@selector(cancelUploadBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_cancelButton];
+        
+        self.progressView.detailLabel.text = @"正在发布";
+    } else {
+        self.progressView.detailLabel.text = @"视频处理中...";
+    }
     
     [self.view addSubview:self.progressView];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
