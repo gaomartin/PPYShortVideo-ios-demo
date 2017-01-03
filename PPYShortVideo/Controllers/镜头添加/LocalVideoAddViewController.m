@@ -16,8 +16,9 @@
 
 @interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,XWDragCellCollectionViewDataSource, XWDragCellCollectionViewDelegate, PPCollectionCellDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIView *bottomView;
+
+@property (nonatomic, weak) IBOutlet UICollectionView *localCollectionView;
 @property (nonatomic, weak) IBOutlet XWDragCellCollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray *localVideoArray;
@@ -31,14 +32,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _localVideoArray = [NSMutableArray array];
-    _selectVideoArray = [NSMutableArray array];
+    self.localVideoArray = [NSMutableArray array];
+    self.selectVideoArray = [NSMutableArray array];
     [self loadLocalVideo];
     
+    [self.localCollectionView registerNib:[UINib nibWithNibName:@"LocalVideoCell" bundle:nil] forCellWithReuseIdentifier:@"LocalCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.shakeLevel = 3.0f;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -47,6 +48,7 @@
 
 - (void)loadLocalVideo
 {
+    NSMutableArray *array = [NSMutableArray array];
     ALAssetsLibrary *library1 = [[ALAssetsLibrary alloc] init];
     [library1 enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if (group) {
@@ -62,20 +64,24 @@
                     
                     info.endPos = [duration doubleValue] * 1000;
                     info.total = [duration doubleValue] * 1000;
-                    [_localVideoArray addObject:info];
+                    [array addObject:info];
                 }
             }];
         } else {
             //没有更多的group时，即可认为已经加载完成。
-            NSLog(@"after load, the total alumvideo count is %zd",_localVideoArray.count);
+            NSLog(@"after load, the total alumvideo count is %zd",array.count);
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [_selectVideoArray addObject:_localVideoArray];//test
-//                [self.collectionView reloadData];
+                
+                [self.localVideoArray addObject:array];
+                [self.localCollectionView reloadData];
+                
+                [self.selectVideoArray addObject:array];//test
+                [self.collectionView reloadData];
             });
         }
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"loadLocalVideo Failed.");
+        NSLog(@"load LocalVideo Failed.");
     }];
 }
 
@@ -90,86 +96,78 @@
     
 }
 
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-     return [self.localVideoArray count] / kItemCountInVideoListCell + ([self.localVideoArray count] % kItemCountInVideoListCell ? 1 : 0);
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"LocalVideoCellIdentifier";
-    LocalVideoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"LocalVideoCell" owner:nil options:nil] objectAtIndex:0];
-        cell.backgroundColor = [UIColor clearColor];
-    }
-    
-    NSInteger leftCount = [self.localVideoArray count] - indexPath.row * kItemCountInVideoListCell;
-    NSRange range = NSMakeRange(indexPath.row * kItemCountInVideoListCell, ((leftCount > kItemCountInVideoListCell) || (leftCount < 0)) ? kItemCountInVideoListCell : leftCount);
-    NSArray *temp = [self.localVideoArray subarrayWithRange:range];
-    [cell refreshCellWithSourceList:temp];
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80;
-}
-
 #pragma mark - <XWDragCellCollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.selectVideoArray.count;
+    if (collectionView == self.localCollectionView) {
+        return [self.localVideoArray count];
+    } else {
+        return [self.selectVideoArray count];
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSArray *sec = _selectVideoArray[section];
-    return sec.count;
+    NSInteger count = 0;
+    if (collectionView == self.localCollectionView) {
+        NSArray *sec = self.localVideoArray[section];
+        count = sec.count;
+    } else {
+        NSArray *sec = self.selectVideoArray[section];
+        count = sec.count;
+    }
+    
+    return count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SelectVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.delegate = self;
-    BZVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
-    [cell refreshCellWithInfo:videoInfo];
-
-    return cell;
+    if (collectionView == self.localCollectionView) {
+        LocalVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocalCell" forIndexPath:indexPath];
+        BZVideoInfo *videoInfo = self.localVideoArray[indexPath.section][indexPath.item];
+        [cell refreshCellWithInfo:videoInfo];
+        
+        return cell;
+    } else {
+        SelectVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+        cell.delegate = self;
+        BZVideoInfo *videoInfo = self.selectVideoArray[indexPath.section][indexPath.item];
+        [cell refreshCellWithInfo:videoInfo];
+        
+        return cell;
+    }
 }
 
 - (NSArray *)dataSourceArrayOfCollectionView:(XWDragCellCollectionView *)collectionView
 {
-    return _selectVideoArray;
+    return self.selectVideoArray;
 }
 
 #pragma mark - <XWDragCellCollectionViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    BZVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
-    NSLog(@"点击了%@",videoInfo.path);
+    if (collectionView == self.localCollectionView) {
+        BZVideoInfo *videoInfo = self.localVideoArray[indexPath.section][indexPath.item];
+        NSLog(@"local点击了%f",videoInfo.total);
+    } else {
+        BZVideoInfo *videoInfo = self.selectVideoArray[indexPath.section][indexPath.item];
+        NSLog(@"点击了%f",videoInfo.total);
+    }
 }
 
 - (void)dragCellCollectionView:(XWDragCellCollectionView *)collectionView newDataArrayAfterMove:(NSArray *)newDataArray
 {
-    _selectVideoArray = [NSMutableArray arrayWithArray:newDataArray];
+    self.selectVideoArray = [NSMutableArray arrayWithArray:newDataArray];
 }
 
 #pragma mark - PPCollectionCellDelegate
 - (void)deleteCell:(SelectVideoViewCell *)cell
 {
-    for (BZVideoInfo *videoInfo in _selectVideoArray[0]) {
+    for (BZVideoInfo *videoInfo in self.selectVideoArray[0]) {
         if ([cell.fileIdentifier isEqualToString: videoInfo.path]) {
-            [_selectVideoArray[0] removeObject:videoInfo];
+            [self.selectVideoArray[0] removeObject:videoInfo];
             [self.collectionView reloadData];
             return;
         }

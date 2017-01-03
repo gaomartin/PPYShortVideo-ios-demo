@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="bottomView" destination="Fzk-zf-ekm" id="1FW-L0-4cL"/>
                 <outlet property="collectionView" destination="J63-vj-xGf" id="vHy-Qu-zqX"/>
-                <outlet property="tableView" destination="fZC-j7-90e" id="bBS-QT-7X0"/>
+                <outlet property="localCollectionView" destination="cs3-SY-u6n" id="ge1-JC-wEf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -65,14 +65,20 @@
                         <constraint firstAttribute="trailing" secondItem="9gT-38-FZP" secondAttribute="trailing" id="wPv-cb-XBy"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fZC-j7-90e">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cs3-SY-u6n">
                     <rect key="frame" x="0.0" y="64" width="320" height="300"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="p8a-Gp-QvE">
+                        <size key="itemSize" width="70" height="70"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                    </collectionViewFlowLayout>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="Li7-zS-IjO"/>
-                        <outlet property="delegate" destination="-1" id="dRY-1y-P6O"/>
+                        <outlet property="dataSource" destination="-1" id="0HC-1j-Joo"/>
+                        <outlet property="delegate" destination="-1" id="QqL-EV-f4H"/>
                     </connections>
-                </tableView>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fzk-zf-ekm">
                     <rect key="frame" x="0.0" y="364" width="320" height="208"/>
                     <subviews>
@@ -103,16 +109,16 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Fzk-zf-ekm" firstAttribute="top" secondItem="fZC-j7-90e" secondAttribute="bottom" id="3V8-dV-JgS"/>
+                <constraint firstItem="cs3-SY-u6n" firstAttribute="leading" secondItem="4Uk-ho-rug" secondAttribute="leading" id="2TG-ay-M3H"/>
                 <constraint firstItem="4Uk-ho-rug" firstAttribute="leading" secondItem="Fzk-zf-ekm" secondAttribute="leading" id="5bP-3L-k9N"/>
-                <constraint firstItem="4Uk-ho-rug" firstAttribute="leading" secondItem="fZC-j7-90e" secondAttribute="leading" id="9Qx-wG-iLN"/>
                 <constraint firstItem="4Uk-ho-rug" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="HDn-5U-Vh4"/>
+                <constraint firstItem="Fzk-zf-ekm" firstAttribute="top" secondItem="cs3-SY-u6n" secondAttribute="bottom" id="UJ7-Op-PvZ"/>
+                <constraint firstItem="cs3-SY-u6n" firstAttribute="trailing" secondItem="4Uk-ho-rug" secondAttribute="trailing" id="W3m-Wu-a2K"/>
                 <constraint firstAttribute="trailing" secondItem="4Uk-ho-rug" secondAttribute="trailing" id="ZFf-Ji-U2H"/>
                 <constraint firstAttribute="bottom" secondItem="Fzk-zf-ekm" secondAttribute="bottom" constant="-4" id="cay-9C-c48"/>
                 <constraint firstItem="4Uk-ho-rug" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h8V-cH-a0N"/>
                 <constraint firstItem="4Uk-ho-rug" firstAttribute="trailing" secondItem="Fzk-zf-ekm" secondAttribute="trailing" id="sZj-4h-3cz"/>
-                <constraint firstItem="fZC-j7-90e" firstAttribute="top" secondItem="4Uk-ho-rug" secondAttribute="bottom" id="uYe-tE-Ze1"/>
-                <constraint firstItem="4Uk-ho-rug" firstAttribute="trailing" secondItem="fZC-j7-90e" secondAttribute="trailing" id="xYj-Oh-pqY"/>
+                <constraint firstItem="cs3-SY-u6n" firstAttribute="top" secondItem="4Uk-ho-rug" secondAttribute="bottom" id="tUL-Gx-qBW"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <point key="canvasLocation" x="-191" y="52"/>

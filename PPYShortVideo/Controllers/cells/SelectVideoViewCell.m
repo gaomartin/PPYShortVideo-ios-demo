@@ -10,6 +10,16 @@
 #import "NSString+time.h"
 #import "BZVideoInfo.h"
 
+@interface SelectVideoViewCell ()
+
+@property (nonatomic, weak) IBOutlet UIImageView *backgroudImageView;
+
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+
+@end
+
 @implementation SelectVideoViewCell
 
 - (void)awakeFromNib {

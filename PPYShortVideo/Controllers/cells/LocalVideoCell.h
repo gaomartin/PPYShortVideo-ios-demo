@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LocalVideoCell : UITableViewCell
+@interface LocalVideoCell : UICollectionViewCell
 
-- (void)refreshCellWithSourceList:(NSArray *)list;
+- (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo;
 
 @end

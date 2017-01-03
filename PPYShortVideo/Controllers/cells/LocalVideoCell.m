@@ -12,8 +12,9 @@
 
 @interface LocalVideoCell ()
 
-@property (nonatomic, strong) IBOutletCollection(UIImageView) NSArray *imageViewArray;
-@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *labelArray;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -24,31 +25,12 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
-}
-
-- (void)refreshCellWithSourceList:(NSArray *)list
+- (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo
 {
-    for (UIImageView *imageView in self.imageViewArray) {
-        imageView.hidden = YES;
-    }
-    
-    for (UILabel *label in self.labelArray) {
-        label.text = @"";
-    }
-    
-    for (int i = 0; i < 4 && i < [list count]; i++) {
-        UIImageView *imageView = [self.imageViewArray objectAtIndex:i];
-        UILabel *label = [self.labelArray objectAtIndex:i];
-        BZVideoInfo *info = [list objectAtIndex:i];
-        
-        imageView.image = info.thumbnail;
-        imageView.hidden = NO;
-        label.text = [NSString timeformatFromSeconds:(NSInteger)(info.total/1000)];
-    }
+    self.imageView.image = videoInfo.thumbnail;
+    self.timeLabel.text = [NSString timeformatFromSeconds:(NSInteger)(videoInfo.total/1000)];
 }
+
 
 @end
