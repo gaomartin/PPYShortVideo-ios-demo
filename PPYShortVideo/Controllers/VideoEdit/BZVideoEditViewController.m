@@ -15,7 +15,7 @@
 #import "SelectVideoViewCell.h"
 #import "XWDragCellCollectionView.h"
 #import "BZVideoCutViewController.h"
-
+#import "RecordController.h"
 @interface BZVideoEditViewController ()<PPCollectionCellDelegate>
 
 @property (strong, nonatomic) IBOutlet PlayerView *playerView;
@@ -143,8 +143,57 @@
 #pragma mark - PPCollectionCellDelegate
 - (void)deleteCell:(SelectVideoViewCell *)cell
 {
-  
+    for (BZVideoInfo *videoInfo in self.infoArray[0]) {
+        if ([cell.fileIdentifier isEqualToString: videoInfo.path]) {
+            [self.infoArray[0] removeObject:videoInfo];
+            [self refreshCollectionView];
+            return;
+        }
+    }
+}
+
+- (void)refreshCollectionView
+{
+    NSArray *videoArray = self.infoArray[0];
+    
+    if ([videoArray count] == 0) {
+        [self allVideoHasDelete];
+        return;
+    }
+    
+    BOOL isHaveSelectVideo = NO;
+    
+    for (BZVideoInfo *videoInfo in self.infoArray[0]) {
+        if (videoInfo.isSelected) {
+            isHaveSelectVideo = YES;
+        }
+    }
+    
+    if (!isHaveSelectVideo) {
+        BZVideoInfo *videoInfo = videoArray[0];
+        videoInfo.isSelected = YES;
+        self.selectInfo = videoInfo;
+    }
+    
+    [self.collectionView reloadData];
 }
 
 
+- (void)allVideoHasDelete
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"你已删除所有镜头, 是否重新开始录制？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"重新录制" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popToRootViewControllerAnimated:YES];//录制页面
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"放弃" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];//返回首页
+    }];
+    
+    [alert addAction:OK];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:NO completion:nil];
+}
 @end

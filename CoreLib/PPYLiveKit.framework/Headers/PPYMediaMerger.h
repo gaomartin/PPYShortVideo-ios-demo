@@ -48,7 +48,7 @@ enum ppy_media_processer_info_type {
 
 -(instancetype)initWithProductPath:(NSString *)path  andVideoSize:(CGSize)videoSize;
 
-//一段视频添加一次
+//每段视频都要调用一次
 - (void)addMediaMaterial:(PPYMediaInfo*)mediaMaterial;
 
 - (void)start;

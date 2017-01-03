@@ -33,7 +33,6 @@
 		4B1704111E092601006E3566 /* PPYLiveKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1704091E092594006E3566 /* PPYLiveKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B1704131E092601006E3566 /* MediaPlayerFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4B2F66451E07783D0080B941 /* XWDragCellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */; };
-		4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */; };
 		4B754FF21E03C7C9005814F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B754FF11E03C7C9005814F8 /* CoreGraphics.framework */; };
 		4B754FF41E03C7D1005814F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B754FF31E03C7D1005814F8 /* QuartzCore.framework */; };
 		4B754FFB1E03CA29005814F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B754FF61E03CA29005814F8 /* Assets.xcassets */; };
@@ -147,8 +146,6 @@
 		4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayerFramework.framework; sourceTree = "<group>"; };
 		4B2F66431E07783D0080B941 /* XWDragCellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWDragCellCollectionView.h; sourceTree = "<group>"; };
 		4B2F66441E07783D0080B941 /* XWDragCellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWDragCellCollectionView.m; sourceTree = "<group>"; };
-		4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumVideoInfo.h; sourceTree = "<group>"; };
-		4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumVideoInfo.m; sourceTree = "<group>"; };
 		4B754FF11E03C7C9005814F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4B754FF31E03C7D1005814F8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4B754FF61E03CA29005814F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -346,8 +343,6 @@
 		4B754FC31E026A10005814F8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4B754FC41E026A42005814F8 /* AlbumVideoInfo.h */,
-				4B754FC51E026A42005814F8 /* AlbumVideoInfo.m */,
 				4B1703F01E08C1DF006E3566 /* BZVideoInfo.h */,
 				4B1703F11E08C1DF006E3566 /* BZVideoInfo.m */,
 				4B7EBC481E1270C500E4349F /* BZEditVideoInfo.h */,
@@ -724,7 +719,6 @@
 				4B7550511E03CBC3005814F8 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				4B7550621E03CBD5005814F8 /* JGPlayerControlPanel.m in Sources */,
 				4B7550D71E03CD39005814F8 /* PlayListHelper.m in Sources */,
-				4B754FC61E026A42005814F8 /* AlbumVideoInfo.m in Sources */,
 				4B7550D51E03CD39005814F8 /* PlayListController.m in Sources */,
 				4B7550051E03CBAD005814F8 /* WebAPI.m in Sources */,
 				4B7550481E03CBC3005814F8 /* MASLayoutConstraint.m in Sources */,

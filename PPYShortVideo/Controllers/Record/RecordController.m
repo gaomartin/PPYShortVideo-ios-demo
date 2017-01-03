@@ -505,6 +505,7 @@
         [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
         [self.navigationController pushViewController:editView animated:YES];
         
+        self.mediaMerger = nil;
         [self removeCycleProgressView];
         [self.recordInfoArray removeAllObjects];
         [self checkButtonStatus];

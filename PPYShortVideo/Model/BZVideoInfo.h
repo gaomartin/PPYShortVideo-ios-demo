@@ -17,4 +17,6 @@
 @property (nonatomic, assign) NSTimeInterval weight; //0.0 - 1.0
 @property (nonatomic, assign) BOOL isSelected;
 
+@property (nonatomic, strong) UIImage *thumbnail; //本地视频
+
 @end

@@ -26,6 +26,8 @@
 
 @property (nonatomic, weak) id <PPCollectionCellDelegate> delegate;
 
+@property (nonatomic, strong) NSString *fileIdentifier;
+
 - (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo;
 
 @end

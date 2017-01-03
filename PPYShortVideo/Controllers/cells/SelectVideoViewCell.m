@@ -26,16 +26,23 @@
 
 - (void)refreshCellWithInfo:(BZVideoInfo *)videoInfo
 {
-    NSString *preImagePath = [self cachImagePath];
-    [PPYThumbnailInfo getCoverImageFileWithInputFile:videoInfo.path OutputWidth:75 OutputHeight:75 OutputFile:preImagePath];
-    NSData *imageData = [NSData dataWithContentsOfFile:preImagePath];
-    self.imageView.image = [UIImage imageWithData:imageData];
+    self.fileIdentifier = videoInfo.path;
+    
+    if (videoInfo.thumbnail) {//本地视频
+        self.imageView.image = videoInfo.thumbnail;
+    } else {
+        NSString *preImagePath = [self cachImagePath];
+        [PPYThumbnailInfo getCoverImageFileWithInputFile:videoInfo.path OutputWidth:75 OutputHeight:75 OutputFile:preImagePath];
+        NSData *imageData = [NSData dataWithContentsOfFile:preImagePath];
+        self.imageView.image = [UIImage imageWithData:imageData];
+    }
     
     self.timeLabel.text = [NSString timeformatFromSeconds:(videoInfo.endPos - videoInfo.startPos)/1000];
     
     self.backgroudImageView.hidden = !videoInfo.isSelected;
 }
 
+//只针对录制视频
 -(NSString *)cachImagePath
 {
     NSString *path = @"";

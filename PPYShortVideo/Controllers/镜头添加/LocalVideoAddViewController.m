@@ -8,7 +8,6 @@
 
 #import "LocalVideoAddViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "AlbumVideoInfo.h"
 #import "LocalVideoCell.h"
 #import "SelectVideoViewCell.h"
 #import "XWDragCellCollectionView.h"
@@ -21,7 +20,7 @@
 @property (nonatomic, weak) IBOutlet UIView *bottomView;
 @property (nonatomic, weak) IBOutlet XWDragCellCollectionView *collectionView;
 
-@property (nonatomic, strong) NSMutableArray *albumVideoInfos;
+@property (nonatomic, strong) NSMutableArray *localVideoArray;
 @property (nonatomic, strong) NSMutableArray *selectVideoArray;
 
 @end
@@ -32,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _albumVideoInfos = [NSMutableArray array];
+    _localVideoArray = [NSMutableArray array];
     _selectVideoArray = [NSMutableArray array];
     [self loadLocalVideo];
     
@@ -55,28 +54,28 @@
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 
                 if (result) {
-                    AlbumVideoInfo *videoInfo = [[AlbumVideoInfo alloc] init];
-                    videoInfo.thumbnail = [UIImage imageWithCGImage:result.thumbnail];
-                    //                    videoInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
-                    videoInfo.videoURL = result.defaultRepresentation.url;
-                    videoInfo.duration = [result valueForProperty:ALAssetPropertyDuration];
-                    videoInfo.name = [result valueForProperty:ALAssetPropertyDate];
-                    videoInfo.size = result.defaultRepresentation.size; //Bytes
-                    videoInfo.format = [result.defaultRepresentation.filename pathExtension];
-                    [_albumVideoInfos addObject:videoInfo];
+                    BZVideoInfo *info = [[BZVideoInfo alloc] init];
+                    info.thumbnail = [UIImage imageWithCGImage:result.thumbnail];
+                    info.path = [NSString stringWithFormat:@"%@", result.defaultRepresentation.url];;
+                    info.startPos = 0;
+                    NSNumber *duration = [result valueForProperty:ALAssetPropertyDuration];
+                    
+                    info.endPos = [duration doubleValue] * 1000;
+                    info.total = [duration doubleValue] * 1000;
+                    [_localVideoArray addObject:info];
                 }
             }];
         } else {
             //没有更多的group时，即可认为已经加载完成。
-            NSLog(@"after load, the total alumvideo count is %zd",_albumVideoInfos.count);
+            NSLog(@"after load, the total alumvideo count is %zd",_localVideoArray.count);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [_selectVideoArray addObject:_albumVideoInfos];//test
-                [self.collectionView reloadData];
+//                [_selectVideoArray addObject:_localVideoArray];//test
+//                [self.collectionView reloadData];
             });
         }
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"Failed.");
+        NSLog(@"loadLocalVideo Failed.");
     }];
 }
 
@@ -94,7 +93,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-     return [self.albumVideoInfos count] / kItemCountInVideoListCell + ([self.albumVideoInfos count] % kItemCountInVideoListCell ? 1 : 0);
+     return [self.localVideoArray count] / kItemCountInVideoListCell + ([self.localVideoArray count] % kItemCountInVideoListCell ? 1 : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,9 +105,9 @@
         cell.backgroundColor = [UIColor clearColor];
     }
     
-    NSInteger leftCount = [self.albumVideoInfos count] - indexPath.row * kItemCountInVideoListCell;
+    NSInteger leftCount = [self.localVideoArray count] - indexPath.row * kItemCountInVideoListCell;
     NSRange range = NSMakeRange(indexPath.row * kItemCountInVideoListCell, ((leftCount > kItemCountInVideoListCell) || (leftCount < 0)) ? kItemCountInVideoListCell : leftCount);
-    NSArray *temp = [self.albumVideoInfos subarrayWithRange:range];
+    NSArray *temp = [self.localVideoArray subarrayWithRange:range];
     [cell refreshCellWithSourceList:temp];
     
     return cell;
@@ -141,9 +140,8 @@
 {
     SelectVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.delegate = self;
-    AlbumVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
-    //TODO: 本地视频与录制视频信息不一致
-    //[cell refreshCellWithInfo:videoInfo];
+    BZVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
+    [cell refreshCellWithInfo:videoInfo];
 
     return cell;
 }
@@ -157,8 +155,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AlbumVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
-    NSLog(@"点击了%@",videoInfo.name);
+    BZVideoInfo *videoInfo = _selectVideoArray[indexPath.section][indexPath.item];
+    NSLog(@"点击了%@",videoInfo.path);
 }
 
 - (void)dragCellCollectionView:(XWDragCellCollectionView *)collectionView newDataArrayAfterMove:(NSArray *)newDataArray
@@ -169,8 +167,8 @@
 #pragma mark - PPCollectionCellDelegate
 - (void)deleteCell:(SelectVideoViewCell *)cell
 {
-    for (AlbumVideoInfo *videoInfo in _selectVideoArray[0]) {
-        if (cell.imageView.image == videoInfo.thumbnail) {
+    for (BZVideoInfo *videoInfo in _selectVideoArray[0]) {
+        if ([cell.fileIdentifier isEqualToString: videoInfo.path]) {
             [_selectVideoArray[0] removeObject:videoInfo];
             [self.collectionView reloadData];
             return;

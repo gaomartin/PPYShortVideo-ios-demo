@@ -7,8 +7,8 @@
 //
 
 #import "LocalVideoCell.h"
-#import "AlbumVideoInfo.h"
 #import "NSString+time.h"
+#import "BZVideoInfo.h"
 
 @interface LocalVideoCell ()
 
@@ -43,13 +43,12 @@
     for (int i = 0; i < 4 && i < [list count]; i++) {
         UIImageView *imageView = [self.imageViewArray objectAtIndex:i];
         UILabel *label = [self.labelArray objectAtIndex:i];
-        AlbumVideoInfo *info = [list objectAtIndex:i];
+        BZVideoInfo *info = [list objectAtIndex:i];
         
         imageView.image = info.thumbnail;
         imageView.hidden = NO;
-        label.text = [NSString timeformatFromSeconds:[info.duration integerValue]];
+        label.text = [NSString timeformatFromSeconds:(NSInteger)(info.total/1000)];
     }
 }
-
 
 @end
