@@ -59,7 +59,6 @@
         if (group) {
             [group setAssetsFilter:[ALAssetsFilter allVideos]];
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                
                 if (result) {
                     BZVideoInfo *info = [[BZVideoInfo alloc] init];
                     //videoInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
@@ -70,6 +69,10 @@
                     
                     info.endPos = [duration doubleValue] * 1000;
                     info.total = [duration doubleValue] * 1000;
+                    
+                    NSString *uti = [result.defaultRepresentation UTI];
+                    NSURL *URL = [[result valueForProperty:ALAssetPropertyURLs] valueForKey:uti];
+                    NSLog(@"URL=%@",URL);
                     [array addObject:info];
                 }
             }];
@@ -86,6 +89,9 @@
         
     } failureBlock:^(NSError *error) {
         NSLog(@"load LocalVideo Failed.");
+        NSString *message = @"请在\"设置-隐私-照片\"选项中，允许app访问你的相册";
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法访问" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
     }];
 }
 

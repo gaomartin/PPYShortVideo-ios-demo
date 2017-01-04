@@ -16,7 +16,7 @@
 
 @interface BZChiefEditViewController ()<PPYMediaMergerDelegate>
 
-@property (strong, nonatomic) IBOutlet PlayerView *playerView;
+@property (strong, nonatomic) IBOutlet LocalPlayerView *localPlayerView;
 @property (strong, nonatomic) JGCycleProgressView *progressView;
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIButton *cancelButton;
@@ -33,12 +33,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [BZEditVideoInfo shareInstance].editVideoType = BZEditVideoType_FromRecordView;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.playerView.playerURL = [BZEditVideoInfo shareInstance].mediaProduct.url;
+    
+    NSMutableArray *pathArray = [NSMutableArray array];
+    for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].editVideoArry) {
+        [pathArray addObject:info.path];
+    }
+    self.localPlayerView.filePaths = pathArray;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +48,8 @@
 
 - (IBAction)backBtnClicked:(id)sender
 {
-    self.playerView = nil;
+    [self.localPlayerView clearCache];
+    self.localPlayerView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -56,7 +57,7 @@
 {
     BZVideoEditViewController *edit = [[BZVideoEditViewController alloc] init];
     [self.navigationController pushViewController:edit animated:YES];
-    [self.playerView stop];
+    [self.localPlayerView pause];
 }
 
 - (IBAction)uploadBtnClicked:(id)sender
@@ -235,7 +236,7 @@
     
     [self.view addSubview:self.progressView];
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.playerView);
+        make.center.equalTo(self.localPlayerView);
         make.size.mas_equalTo(CGSizeMake(100, 100));
     }];
 }

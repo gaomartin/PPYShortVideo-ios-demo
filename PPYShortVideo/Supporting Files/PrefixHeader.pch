@@ -14,9 +14,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+
 #import <PPYLiveKit/PPYLiveKit.h>
+#import <PPYPreviewPlayer/PPYPreviewPlayer.h>
+
 #import "BZEditVideoInfo.h"
 #import "DefaultDefine.h"
 #import "BZVideoInfo.h"
+#import "AppDelegate.h"
+#import "LocalPlayerView.h"
 
 #endif /* PrefixHeader_pch */

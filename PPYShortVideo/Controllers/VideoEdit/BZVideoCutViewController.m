@@ -7,7 +7,6 @@
 //
 
 #import "BZVideoCutViewController.h"
-#import "PlayerView.h"
 #import "BZVideoInfo.h"
 #import "NSString+time.h"
 
@@ -18,7 +17,7 @@
 
 @property (nonatomic, strong) PPYThumbnailInfo *thumbnailInfo;
 
-@property (nonatomic, weak) IBOutlet PlayerView *playerView;
+@property (nonatomic, weak) IBOutlet LocalPlayerView *localPlayerView;
 @property (nonatomic, weak) IBOutlet UIView *infoView;
 @property (nonatomic, weak) IBOutlet UIView *preView;
 @property (nonatomic, weak) IBOutlet UILabel *startPosLabel;
@@ -40,10 +39,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.playerView.playerURL = self.videoInfo.path;
-    self.playerView.needPlayWhenAppear = YES;
-    self.playerView.needPrepareToPlay = YES;
-    self.playerView.defaultSeekTime = self.videoInfo.startPos;
+    NSMutableArray *pathArray = [NSMutableArray array];
+    [pathArray addObject:self.videoInfo.path];
+    self.localPlayerView.filePaths = pathArray;
     
     self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
     self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
@@ -66,7 +64,7 @@
     [self.thumbnailInfo quit];
     [self.thumbnailInfo terminate];
     
-    self.playerView = nil;
+    self.localPlayerView = nil;
     [self.infoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
@@ -222,7 +220,7 @@
         frame.size.width = centerX - 20;
         self.leftBackgroudView.frame = frame;
         
-        [self.playerView seekToPostion:self.videoInfo.startPos];
+        //[self.playerView seekToPostion:self.videoInfo.startPos];
     } else if (touch.view == self.rightView) {
         CGPoint nowPoint = [touch locationInView:self.rightView];
         

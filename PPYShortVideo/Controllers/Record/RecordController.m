@@ -53,11 +53,6 @@
 @property (assign, nonatomic) NSInteger recordIndex;
 @property (nonatomic, strong) NSMutableArray *recordInfoArray;
 @property (nonatomic, assign) NSTimeInterval lastDuration;//前面录制的总时间
-//合成
-@property (nonatomic, strong) PPYMediaMerger *mediaMerger;
-@property (nonatomic, assign) NSTimeInterval totalDuration;
-@property (nonatomic, strong) JGCycleProgressView *cycleProgressView;
-@property (nonatomic, strong) UIView *backgroundView;
 
 @end
 
@@ -66,7 +61,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self createRecordFileDir];
     self.recordInfoArray = [NSMutableArray array];
     [self prepareForRecord];
     self.recordIndex = 0;
@@ -83,32 +77,12 @@
     }
 }
 
-- (NSString *)createRecordFileDir
-{
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *recordDirPath = [documentPath stringByAppendingPathComponent:@"Record"];
-    NSLog(@"recordDirPath = %@",recordDirPath);
-
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL isDir = FALSE;
-    BOOL isDirExist = [fileManager fileExistsAtPath:recordDirPath isDirectory:&isDir];
-    if(!(isDirExist && isDir)){
-           BOOL bCreateDir = [fileManager createDirectoryAtPath:recordDirPath withIntermediateDirectories:YES attributes:nil error:nil];
-            if(!bCreateDir){
-                NSLog(@"创建文件夹失败！");
-            } else {
-                NSLog(@"创建文件夹成功，文件路径%@",recordDirPath);
-            }
-       }
-    
-    return recordDirPath;
-}
-
 -(NSString *)createRecordPath
 {
     //设置录制路径
     self.recordIndex ++;
-    NSString *path = [NSString stringWithFormat:@"%@/defalut%zd.mp4",[self createRecordFileDir], self.recordIndex];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSString *path = [NSString stringWithFormat:@"%@/defalut%zd.mp4",[appDelegate getRecordFileDir], self.recordIndex];
     
     return path;
 }
@@ -246,7 +220,15 @@
 
 - (IBAction)confirmBtnClicked:(id)sender
 {
-    [self startMerge];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
+        [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
+        [self.navigationController pushViewController:editView animated:YES];
+        
+        [self.recordInfoArray removeAllObjects];
+        [self checkButtonStatus];
+        self.lblRecordTime.text = [NSString stringWithFormat:@"0s"];
+    });
 }
 
 #pragma mark --<PPYPushEngineDelegate>
@@ -440,114 +422,6 @@
         totalDuration += info.endPos - info.startPos;
     }
     return totalDuration;
-}
-
-#pragma mark - merge video
-
-- (void)startMerge
-{
-    NSString *product = [[self createRecordFileDir] stringByAppendingString:@"/product.mp4"];
-    self.mediaMerger = [[PPYMediaMerger alloc] initWithProductPath:product andVideoSize:CGSizeMake(480,640)];
-    self.mediaMerger.delegate = self;
-    
-    self.totalDuration = 0;
-    
-    for (int i=0; i<[self.recordInfoArray count]; i++) {
-        BZVideoInfo *info = [self.recordInfoArray objectAtIndex:i];
-        
-        PPYMediaInfo *mediaInfo = [[PPYMediaInfo alloc] init];
-        mediaInfo.mediaPath = info.path;
-        mediaInfo.startPos = info.startPos;
-        mediaInfo.endPos = info.endPos;
-
-        self.totalDuration += info.endPos - info.startPos;
-        [self.mediaMerger addMediaMaterial:mediaInfo];
-        
-        NSLog(@"record info startPos=%.2f, endPos=%.2f",info.startPos/1000, info.endPos/1000);
-    }
-    
-    [self.mediaMerger start];
-    [self presentCycleProgressView];
-}
-
-#pragma mark - PPYMediaMergerDelegate
-
-- (void)gotErrorWithErrorType:(int)errorType
-{
-    NSLog(@"gotErrorWithErrorType errorType:%d",errorType);
-}
-
-- (void)gotInfoWithInfoType:(int)infoType InfoValue:(int)infoValue
-{
-    if (infoType == PPY_MEDIA_PROCESSER_INFO_WRITE_TIMESTAMP) {
-        NSLog(@"Write TimeStamp:%d",infoValue);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // 更UI
-            self.cycleProgressView.label.text = [NSString stringWithFormat:@"%zd%%",(int)(infoValue /self.totalDuration * 100 * 1000)];
-            [self.cycleProgressView drawProgress:infoValue/self.totalDuration * 1000];
-        });
-    }
-}
-
-- (void)didEnd
-{
-    NSLog(@"didEnd");
-    [self pushToEditView];
-}
-
-- (void)pushToEditView
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
-        [BZEditVideoInfo shareInstance].mediaProduct = self.mediaMerger.mediaProduct;
-        [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
-        [self.navigationController pushViewController:editView animated:YES];
-        
-        self.mediaMerger = nil;
-        [self removeCycleProgressView];
-        [self.recordInfoArray removeAllObjects];
-        [self checkButtonStatus];
-        self.lblRecordTime.text = [NSString stringWithFormat:@"0s"];
-     });
-}
-
-#pragma mark - JGCycleProgressView
-
--(JGCycleProgressView *)cycleProgressView
-{
-    if(_cycleProgressView == nil){
-        _cycleProgressView = [[JGCycleProgressView alloc]init];
-    }
-    return _cycleProgressView;
-}
-
--(void)presentCycleProgressView
-{
-    self.backgroundView = [[UIView alloc]initWithFrame:self.view.frame];
-    self.backgroundView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:self.backgroundView];
-    self.backgroundView.alpha = 0.5;
-    
-    [self.view addSubview:self.cycleProgressView];
-    self.cycleProgressView.detailLabel.text = @"视频处理中...";
-    [self.cycleProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
-    }];
-}
-
-- (void)removeCycleProgressView
-{
-    if (self.backgroundView.superview) {
-        [self.backgroundView removeFromSuperview];
-        self.backgroundView = nil;
-    }
-    
-    if (self.cycleProgressView.superview) {
-        [self.cycleProgressView removeFromSuperview];
-        self.cycleProgressView = nil;
-    }
 }
 
 @end

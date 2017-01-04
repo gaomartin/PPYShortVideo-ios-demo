@@ -81,6 +81,9 @@
 		4B7550DC1E03CD39005814F8 /* LocalVideoAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7550C91E03CD39005814F8 /* LocalVideoAddViewController.m */; };
 		4B7550DD1E03CD39005814F8 /* LocalVideoAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7550CA1E03CD39005814F8 /* LocalVideoAddViewController.xib */; };
 		4B7EBC4A1E1270C500E4349F /* BZEditVideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7EBC491E1270C500E4349F /* BZEditVideoInfo.m */; };
+		4BC72EA91E1C9D9D003AD9CA /* PPYPreviewPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */; };
+		4BC72EAC1E1C9DEA003AD9CA /* LocalPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC72EAB1E1C9DEA003AD9CA /* LocalPlayerView.m */; };
+		4BC72EAE1E1CA519003AD9CA /* PPYPreviewPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		842472EA1DCC7FA0007B4D44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 842472E91DCC7FA0007B4D44 /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +96,7 @@
 			files = (
 				4B17040F1E092601006E3566 /* MediaStreamerFramework.framework in Embed Frameworks */,
 				4B1704131E092601006E3566 /* MediaPlayerFramework.framework in Embed Frameworks */,
+				4BC72EAE1E1CA519003AD9CA /* PPYPreviewPlayer.framework in Embed Frameworks */,
 				4B1704111E092601006E3566 /* PPYLiveKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -241,6 +245,9 @@
 		4B7EBC481E1270C500E4349F /* BZEditVideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZEditVideoInfo.h; sourceTree = "<group>"; };
 		4B7EBC491E1270C500E4349F /* BZEditVideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZEditVideoInfo.m; sourceTree = "<group>"; };
 		4B7EBC4C1E135BD300E4349F /* DefaultDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultDefine.h; sourceTree = "<group>"; };
+		4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYPreviewPlayer.framework; sourceTree = "<group>"; };
+		4BC72EAA1E1C9DEA003AD9CA /* LocalPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPlayerView.h; sourceTree = "<group>"; };
+		4BC72EAB1E1C9DEA003AD9CA /* LocalPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPlayerView.m; sourceTree = "<group>"; };
 		842472E21DCC7FA0007B4D44 /* PPYShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPYShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842472E81DCC7FA0007B4D44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		842472E91DCC7FA0007B4D44 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -251,6 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC72EA91E1C9D9D003AD9CA /* PPYPreviewPlayer.framework in Frameworks */,
 				4B17040B1E092594006E3566 /* MediaStreamerFramework.framework in Frameworks */,
 				4B17040D1E092594006E3566 /* MediaPlayerFramework.framework in Frameworks */,
 				4B754FF41E03C7D1005814F8 /* QuartzCore.framework in Frameworks */,
@@ -333,6 +341,7 @@
 		4B239C691DFAAA0500D01B55 /* CoreLib */ = {
 			isa = PBXGroup;
 			children = (
+				4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */,
 				4B1704081E092594006E3566 /* MediaStreamerFramework.framework */,
 				4B1704091E092594006E3566 /* PPYLiveKit.framework */,
 				4B17040A1E092594006E3566 /* MediaPlayerFramework.framework */,
@@ -499,6 +508,8 @@
 				4B75505B1E03CBD5005814F8 /* JGPlayerControlPanel.xib */,
 				4B75505C1E03CBD5005814F8 /* PlayerView.h */,
 				4B75505D1E03CBD5005814F8 /* PlayerView.m */,
+				4BC72EAA1E1C9DEA003AD9CA /* LocalPlayerView.h */,
+				4BC72EAB1E1C9DEA003AD9CA /* LocalPlayerView.m */,
 				4B75505E1E03CBD5005814F8 /* PPProgressView.h */,
 				4B75505F1E03CBD5005814F8 /* PPProgressView.m */,
 				4B2F66431E07783D0080B941 /* XWDragCellCollectionView.h */,
@@ -686,6 +697,7 @@
 				4B7550421E03CBC3005814F8 /* AFURLRequestSerialization.m in Sources */,
 				4B02DF461E010D8F00DE345F /* NSDictionary+StringValue.m in Sources */,
 				4B02DF481E010D8F00DE345F /* UIColor+BZHex.m in Sources */,
+				4BC72EAC1E1C9DEA003AD9CA /* LocalPlayerView.m in Sources */,
 				842472EA1DCC7FA0007B4D44 /* AppDelegate.m in Sources */,
 				4B7550471E03CBC3005814F8 /* MASConstraintMaker.m in Sources */,
 				4B7550521E03CBC3005814F8 /* NSObject+YYModel.m in Sources */,

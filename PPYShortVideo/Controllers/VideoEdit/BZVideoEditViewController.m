@@ -8,7 +8,7 @@
 
 #import "BZVideoEditViewController.h"
 #import "JGCycleProgressView.h"
-#import "PlayerView.h"
+#import "localPlayerView.h"
 #import "Masonry.h"
 
 #import "BZVideoInfo.h"
@@ -18,7 +18,7 @@
 #import "RecordController.h"
 @interface BZVideoEditViewController ()<PPCollectionCellDelegate>
 
-@property (strong, nonatomic) IBOutlet PlayerView *playerView;
+@property (strong, nonatomic) IBOutlet LocalPlayerView *localPlayerView;
 @property (strong, nonatomic) JGCycleProgressView *progressView;
 @property (nonatomic, strong) UIView *backgroundView;
 
@@ -42,12 +42,13 @@
     
     [self setSelectVideoWithIndex:0];
     [self.collectionView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.playerView.playerURL = [BZEditVideoInfo shareInstance].mediaProduct.url;
+    
+    
+    NSMutableArray *pathArray = [NSMutableArray array];
+    for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].editVideoArry) {
+        [pathArray addObject:info.path];
+    }
+    self.localPlayerView.filePaths = pathArray;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,13 +73,14 @@
 
 - (IBAction)backBtnClicked:(id)sender
 {
-    self.playerView = nil;
+    self.localPlayerView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)confirmBtnClicked:(id)sender
 {
-    self.playerView = nil;
+    [self.localPlayerView clearCache];
+    self.localPlayerView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -95,7 +97,7 @@
     cut.videoInfo = info;
     
     [self.navigationController pushViewController:cut animated:YES];
-    [self.playerView stop];
+    [self.localPlayerView pause];
 }
 
 #pragma mark - <XWDragCellCollectionViewDataSource>

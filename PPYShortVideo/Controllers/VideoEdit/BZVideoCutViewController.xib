@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="endPosLabel" destination="Hfb-Kq-jTP" id="cfB-OH-fbl"/>
                 <outlet property="infoView" destination="1sa-3Z-f4y" id="obo-BU-4zh"/>
-                <outlet property="playerView" destination="VlD-vS-aPS" id="5hi-aV-qet"/>
+                <outlet property="localPlayerView" destination="VlD-vS-aPS" id="dL4-Tb-hbF"/>
                 <outlet property="preView" destination="Dl0-Oe-RmW" id="25h-CN-bnK"/>
                 <outlet property="startPosLabel" destination="En5-WR-XTB" id="dqD-TG-tq6"/>
                 <outlet property="view" destination="9o9-Mj-gzz" id="SHK-Bn-NNB"/>
@@ -49,7 +49,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="By2-Cd-Aa8">
                     <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VlD-vS-aPS" customClass="PlayerView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VlD-vS-aPS" customClass="LocalPlayerView">
                             <rect key="frame" x="0.0" y="20" width="320" height="300"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>

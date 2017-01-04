@@ -1,0 +1,6 @@
+framework module PPYPreviewPlayer {
+  umbrella header "PPYPreviewPlayer.h"
+
+  export *
+  module * { export * }
+}

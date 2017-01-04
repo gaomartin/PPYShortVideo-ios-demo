@@ -29,4 +29,5 @@ typedef NS_ENUM(int,JGPlayerControlState){
 @property (assign, nonatomic) NSTimeInterval duration;  //s
 
 +(instancetype)playerControlPanel;
+
 @end

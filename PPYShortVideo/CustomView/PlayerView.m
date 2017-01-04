@@ -14,15 +14,17 @@
 #define kOffScreenNumber 1000
 
 @interface PlayerView ()<PPYPlayEngineDelegate,JGPlayControlPanelDelegate>
+
 @property (strong, nonatomic) UIView *displayView;
 @property (strong, nonatomic) UIButton *btnStartOrPause;
 @property (strong, nonatomic) UIImageView *previewImage;
 
-@property (nonatomic,assign) BOOL isPrepared;
+@property (nonatomic,assign) BOOL isPlaying;
 @property (nonatomic,copy)   NSString *cachImagePath;
 
 @property (nonatomic, strong) JGPlayerControlPanel *controlPanel;
 @property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 #define JPlayControllerLog(format, ...) NSLog((@"PlayerView_"format), ##__VA_ARGS__)
@@ -112,8 +114,7 @@
 }
 
 #pragma ---Setter,Getter---
--(void)setPlayerURL:(NSString *)playerURL
-{
+-(void)setPlayerURL:(NSString *)playerURL{
     [self refreshUI];
     _playerURL = playerURL;
     
@@ -121,8 +122,11 @@
     NSData *imageData = [NSData dataWithContentsOfFile:self.cachImagePath];
     self.previewImage.image = [UIImage imageWithData:imageData];
 
-    self.isPrepared = NO;
-    [self startPlay];
+    if(self.needPlayWhenAppear){
+        if(!self.isPlaying){
+            [self startPlay];
+        }
+    }
 }
 
 -(NSString *)cachImagePath{
@@ -135,31 +139,6 @@
 
 -(void)startPlay{
     [[PPYPlayEngine shareInstance] startPlayFromURL:self.playerURL WithType:PPYSourceType_VOD];
-}
-
--(void)onPressBtnStartOrPause:(UIButton *)sender{
-    
-    if (self.isPrepared) {
-        [self resume];
-    } else {
-        [self startPlay];
-        self.needPlayWhenAppear = YES;
-    }
-}
-
-- (void)stop
-{
-    [[PPYPlayEngine shareInstance] stopPlayerBlackDisplayNeeded:YES];
-}
-
-- (void)resume
-{
-    [[PPYPlayEngine shareInstance] resume];
-    
-    [self.previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
-    }];
-    
     [self.btnStartOrPause mas_updateConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
     }];
@@ -168,18 +147,17 @@
     [self.controlPanel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(0);
     }];
-    
+
     [self layoutIfNeeded];
 }
 
-- (void)pause
-{
-    [[PPYPlayEngine shareInstance] pause];
+-(void)onPressBtnStartOrPause:(UIButton *)sender{
+    [self startPlay];
 }
 
-- (void)seekToPostion:(NSTimeInterval)position
+- (void)stop
 {
-    [[PPYPlayEngine shareInstance] seekToPosition:position];
+    [[PPYPlayEngine shareInstance] stopPlayerBlackDisplayNeeded:YES];
 }
 
 #pragma mark --<PPYPlayEngineDelegate>
@@ -213,18 +191,12 @@
             break;
         case PPYPlayEngineInfo_Duration:
             self.controlPanel.duration = value;
-            
-            if (self.needPlayWhenAppear) {
-                [self resume];
-                self.needPlayWhenAppear = NO;
-            }
-            
             break;
         case PPYPlayEngineInfo_CurrentPlayBackTime:
             self.controlPanel.progress = value;
             break;
     }
-    //JPlayControllerLog(@"type = %d,value = %d",type,value);
+    JPlayControllerLog(@"type = %d,value = %d",type,value);
 }
 
 -(void)didPPYPlayEngineStateChanged:(PPYPlayEngineStatus)state{
@@ -237,33 +209,15 @@
           
             break;
         case PPYPlayEngineStatus_FisrtKeyFrameComing:
-           //加载成功而已
-            self.isPrepared = YES;
+            [[PPYPlayEngine shareInstance] resume];
+            [[PPYPlayEngine shareInstance] presentPreviewOnView:_displayView];
+            [self.previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
+            }];
+            [self layoutIfNeeded];
+            self.isPlaying = YES;
             break;
         case PPYPlayEngineStatus_RenderingStart:
-            [[PPYPlayEngine shareInstance] presentPreviewOnView:_displayView];
-            
-            if (self.needPrepareToPlay) {//剪切页面, 准备播放状态, 为了可以拖动进度条来刷新预览图
-                [self seekToPostion:self.defaultSeekTime];
-                [[PPYPlayEngine shareInstance] pause];
-                self.needPrepareToPlay = NO;
-                
-                [self.previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
-                }];
-                
-                [_btnStartOrPause mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.center.equalTo(self);
-                    make.size.equalTo(self);
-                }];
-                
-                self.controlPanel.state = JGPlayerControlState_Pause;
-                [self.controlPanel mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.bottom.equalTo(self).offset(kOffScreenNumber);
-                }];
-                
-                [self layoutIfNeeded];
-            }
             break;
         case PPYPlayEngineStatus_ReceiveEOF:
         {
@@ -274,19 +228,18 @@
                 make.bottom.equalTo(self).offset(kOffScreenNumber);
             }];
             [self layoutIfNeeded];
-            self.isPrepared = NO;
+            self.isPlaying = NO;
         }
             break;
         case PPYPlayEngineStatus_SeekComplete:
             break;
     }
-    //JPlayControllerLog(@"state = %lu",(unsigned long)state);
+    JPlayControllerLog(@"state = %lu",(unsigned long)state);
 }
 
 -(void)didPPYPlayEngineVideoResolutionCaptured:(int)width VideoHeight:(int)height{
     JPlayControllerLog(@"width = %d,height = %d",width,height);
 }
-
 -(void)playControlPanelDidClickStartOrPauseButton:(JGPlayerControlPanel *)control{
     switch (control.state) {
         case JGPlayerControlState_Init:
@@ -300,7 +253,6 @@
             break;
     }
 }
-
 -(void)playControlPanel:(JGPlayerControlPanel *)controlPanel didSliderValueChanged:(float)newValue{
     [[PPYPlayEngine shareInstance] seekToPosition:newValue * [PPYPlayEngine shareInstance].duration];
 }
@@ -312,4 +264,5 @@
     hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
     [hud hideAnimated:YES afterDelay:3.f];
 }
+
 @end

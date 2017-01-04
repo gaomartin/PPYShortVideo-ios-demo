@@ -21,18 +21,20 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self setAPPWindow];
     [self setAppRootViewController];
+    [self getRecordFileDir];
     
     return YES;
 }
 
-
--(void)setAPPWindow{
+- (void)setAPPWindow
+{
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
 }
--(void)setAppRootViewController{
-    
+
+- (void)setAppRootViewController
+{
     mainViewController *rootViewController = [[mainViewController alloc]init];
     [rootViewController.view setFrame:[UIScreen mainScreen].bounds];
     
@@ -40,4 +42,26 @@
     nv.navigationBarHidden = YES;
     self.window.rootViewController = nv;
 }
+
+- (NSString *)getRecordFileDir
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *recordDirPath = [documentPath stringByAppendingPathComponent:@"Record"];
+    NSLog(@"recordDirPath = %@",recordDirPath);
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = FALSE;
+    BOOL isDirExist = [fileManager fileExistsAtPath:recordDirPath isDirectory:&isDir];
+    if(!(isDirExist && isDir)){
+        BOOL bCreateDir = [fileManager createDirectoryAtPath:recordDirPath withIntermediateDirectories:YES attributes:nil error:nil];
+        if(!bCreateDir){
+            NSLog(@"创建文件夹失败！");
+        } else {
+            NSLog(@"创建文件夹成功，文件路径%@",recordDirPath);
+        }
+    }
+    
+    return recordDirPath;
+}
+
 @end
