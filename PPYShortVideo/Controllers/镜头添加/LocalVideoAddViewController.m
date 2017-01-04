@@ -19,6 +19,8 @@
 
 @property (nonatomic, weak) IBOutlet UICollectionView *localCollectionView;
 @property (nonatomic, weak) IBOutlet XWDragCellCollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet UILabel *videoNumLabel;
+@property (nonatomic, strong) UILabel *messageLabel;
 
 @property (nonatomic, strong) NSMutableArray *localVideoArray;
 @property (nonatomic, strong) NSMutableArray *selectVideoArray;
@@ -86,13 +88,38 @@
         NSLog(@"load LocalVideo Failed.");
     }];
 }
+
 - (void)refreshVideoCollectionView
 {
+    NSInteger videoNum = [[BZEditVideoInfo shareInstance].editVideoArry count];
+    self.videoNumLabel.text = [NSString stringWithFormat:@"%zd", videoNum];
     [self.localCollectionView reloadData];
     
     [self.selectVideoArray removeAllObjects];
     [self.selectVideoArray addObject:[BZEditVideoInfo shareInstance].editVideoArry];
     [self.collectionView reloadData];
+}
+
+- (void)presentMessageView
+{
+    if (!self.messageLabel) {
+        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, KMainScreenWidth, 25)];
+        self.messageLabel.backgroundColor = [UIColor orangeColor];
+        self.messageLabel.text = @"  至少选择一段视频";
+        self.messageLabel.textColor = [UIColor whiteColor];
+        self.messageLabel.font = [UIFont systemFontOfSize:12.f];
+        [self.view addSubview:self.messageLabel];
+        
+        [self performSelector:@selector(removeMessageView) withObject:nil afterDelay:3.0f];
+    }
+}
+
+- (void)removeMessageView
+{
+    if (self.messageLabel) {
+        [self.messageLabel removeFromSuperview];
+        self.messageLabel = nil;
+    }
 }
 
 #pragma mark - button actions
@@ -104,6 +131,14 @@
 - (IBAction)cameraBtnClicked:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)finishBtnClicked:(id)sender
+{
+    NSInteger videoNum = [[BZEditVideoInfo shareInstance].editVideoArry count];
+    if (videoNum == 0) {
+        [self presentMessageView];
+    }
 }
 
 #pragma mark - <XWDragCellCollectionViewDataSource>
