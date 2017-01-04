@@ -21,12 +21,23 @@
 }
 
 
--(instancetype)init
+- (instancetype)init
 {
     if(self = [super init]){
-        
+        self.editVideoArry = [NSMutableArray array];
+        self.localEditVideoArry = [NSMutableArray array];
+        self.editVideoType = BZEditVideoType_None;
     }
+    
     return self;
+}
+
+- (void)clearCache
+{
+    self.editVideoType = BZEditVideoType_None;
+    self.editVideoArry = nil;
+    self.localEditVideoArry = nil;
+    self.mediaProduct = nil;
 }
 
 @end

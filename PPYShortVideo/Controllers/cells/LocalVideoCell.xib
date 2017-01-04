@@ -29,13 +29,21 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="组-14" translatesAutoresizingMaskIntoConstraints="NO" id="E8b-RA-rnQ">
+                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </view>
             <connections>
+                <outlet property="coverImageView" destination="E8b-RA-rnQ" id="hIc-iy-zBW"/>
                 <outlet property="imageView" destination="rbj-ma-3BD" id="NDS-IU-6Io"/>
                 <outlet property="timeLabel" destination="FxW-GC-1VT" id="jNH-6I-pdN"/>
             </connections>
             <point key="canvasLocation" x="-392" y="-255"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="组-14" width="85" height="85"/>
+    </resources>
 </document>

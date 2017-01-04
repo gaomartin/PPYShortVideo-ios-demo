@@ -16,6 +16,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 
+@property (nonatomic, weak) IBOutlet UIImageView *coverImageView;
+
 @end
 
 @implementation LocalVideoCell
@@ -30,6 +32,7 @@
 {
     self.imageView.image = videoInfo.thumbnail;
     self.timeLabel.text = [NSString timeformatFromSeconds:(NSInteger)(videoInfo.total/1000)];
+    self.coverImageView.hidden = !videoInfo.isAddVideo;
 }
 
 

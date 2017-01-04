@@ -11,8 +11,7 @@
 #import "LocalVideoCell.h"
 #import "SelectVideoViewCell.h"
 #import "XWDragCellCollectionView.h"
-
-#define kItemCountInVideoListCell 4
+#import "BZVideoCutViewController.h"
 
 @interface LocalVideoAddViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,XWDragCellCollectionViewDataSource, XWDragCellCollectionViewDelegate, PPCollectionCellDelegate>
 
@@ -23,6 +22,7 @@
 
 @property (nonatomic, strong) NSMutableArray *localVideoArray;
 @property (nonatomic, strong) NSMutableArray *selectVideoArray;
+@property (nonatomic, strong) BZVideoInfo *deleteVideoInfo;
 
 @end
 
@@ -39,6 +39,9 @@
     [self.localCollectionView registerNib:[UINib nibWithNibName:@"LocalVideoCell" bundle:nil] forCellWithReuseIdentifier:@"LocalCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"SelectVideoViewCell" bundle:nil] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.shakeLevel = 3.0f;
+    
+    [BZEditVideoInfo shareInstance].editVideoType = BZEditVideoType_FromAddLocal;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshVideoCollectionView) name:kAddVideoSuccessNotificatin object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,14 +52,15 @@
 - (void)loadLocalVideo
 {
     NSMutableArray *array = [NSMutableArray array];
-    ALAssetsLibrary *library1 = [[ALAssetsLibrary alloc] init];
-    [library1 enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if (group) {
             [group setAssetsFilter:[ALAssetsFilter allVideos]];
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                 
                 if (result) {
                     BZVideoInfo *info = [[BZVideoInfo alloc] init];
+                    //videoInfo.videoURL = [result valueForProperty:ALAssetPropertyAssetURL];
                     info.thumbnail = [UIImage imageWithCGImage:result.thumbnail];
                     info.path = [NSString stringWithFormat:@"%@", result.defaultRepresentation.url];;
                     info.startPos = 0;
@@ -73,10 +77,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self.localVideoArray addObject:array];
+                [BZEditVideoInfo shareInstance].localEditVideoArry = [NSMutableArray arrayWithArray:array];
                 [self.localCollectionView reloadData];
-                
-                [self.selectVideoArray addObject:array];//test
-                [self.collectionView reloadData];
             });
         }
         
@@ -84,16 +86,24 @@
         NSLog(@"load LocalVideo Failed.");
     }];
 }
+- (void)refreshVideoCollectionView
+{
+    [self.localCollectionView reloadData];
+    
+    [self.selectVideoArray removeAllObjects];
+    [self.selectVideoArray addObject:[BZEditVideoInfo shareInstance].editVideoArry];
+    [self.collectionView reloadData];
+}
 
 #pragma mark - button actions
 - (IBAction)cancelBtnClicked:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)cameraBtnClicked:(id)sender
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - <XWDragCellCollectionViewDataSource>
@@ -151,6 +161,17 @@
     if (collectionView == self.localCollectionView) {
         BZVideoInfo *videoInfo = self.localVideoArray[indexPath.section][indexPath.item];
         NSLog(@"local点击了%f",videoInfo.total);
+        BZVideoCutViewController *cut = [[BZVideoCutViewController alloc] init];
+        
+        //这里不能直接对象赋值, 不然cut页面取消修改, 也会保存修改的值.
+        BZVideoInfo *info = [[BZVideoInfo alloc] init];
+        info.path = videoInfo.path;
+        info.startPos = videoInfo.startPos;
+        info.endPos = videoInfo.endPos;
+        info.total = videoInfo.total;
+        
+        cut.videoInfo = info;
+        [self.navigationController pushViewController:cut animated:YES];
     } else {
         BZVideoInfo *videoInfo = self.selectVideoArray[indexPath.section][indexPath.item];
         NSLog(@"点击了%f",videoInfo.total);
@@ -167,8 +188,15 @@
 {
     for (BZVideoInfo *videoInfo in self.selectVideoArray[0]) {
         if ([cell.fileIdentifier isEqualToString: videoInfo.path]) {
+            
+            for (BZVideoInfo *info in self.localVideoArray[0]) {
+                if ([info.path isEqualToString:videoInfo.path]) {
+                    info.isAddVideo = NO;
+                }
+            }
+            
             [self.selectVideoArray[0] removeObject:videoInfo];
-            [self.collectionView reloadData];
+            [self refreshVideoCollectionView];
             return;
         }
     }

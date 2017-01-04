@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [BZEditVideoInfo shareInstance].editVideoType = BZEditVideoType_FromRecordView;
 }
 
 - (void)viewWillAppear:(BOOL)animated

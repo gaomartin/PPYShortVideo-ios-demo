@@ -84,6 +84,22 @@
         }
     }
     
+    if ([BZEditVideoInfo shareInstance].editVideoType == BZEditVideoType_FromAddLocal) {
+        [[BZEditVideoInfo shareInstance].editVideoArry addObject:self.videoInfo];
+        
+        for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].editVideoArry) {
+            if ([info.path isEqualToString:self.videoInfo.path]) {
+                info.isAddVideo = YES;
+            }
+        }
+        for (BZVideoInfo *info in [BZEditVideoInfo shareInstance].localEditVideoArry) {
+            if ([info.path isEqualToString:self.videoInfo.path]) {
+                info.isAddVideo = YES;
+            }
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAddVideoSuccessNotificatin object:nil];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

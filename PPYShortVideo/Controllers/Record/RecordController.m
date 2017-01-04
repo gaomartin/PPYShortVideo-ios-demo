@@ -241,7 +241,7 @@
 - (IBAction)localBtnClicked:(id)sender
 {
     LocalVideoAddViewController *localView = [[LocalVideoAddViewController alloc] init];
-    [self presentViewController:localView animated:YES completion:nil];
+    [self.navigationController pushViewController:localView animated:YES];
 }
 
 - (IBAction)confirmBtnClicked:(id)sender
@@ -499,7 +499,6 @@
 - (void)pushToEditView
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-
         BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
         [BZEditVideoInfo shareInstance].mediaProduct = self.mediaMerger.mediaProduct;
         [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
@@ -514,6 +513,7 @@
 }
 
 #pragma mark - JGCycleProgressView
+
 -(JGCycleProgressView *)cycleProgressView
 {
     if(_cycleProgressView == nil){

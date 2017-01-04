@@ -13,4 +13,7 @@
 #define KMainScreenWidth    ([UIScreen mainScreen].bounds.size.width)
 #define KMainScreenHeight   ([UIScreen mainScreen].bounds.size.height)
 
+//视频添加
+#define kAddVideoSuccessNotificatin @"AddVideoSuccessNotificatin"
+
 #endif /* DefaultDefine_h */

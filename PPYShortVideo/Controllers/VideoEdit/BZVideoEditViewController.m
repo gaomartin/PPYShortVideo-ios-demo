@@ -178,7 +178,6 @@
     [self.collectionView reloadData];
 }
 
-
 - (void)allVideoHasDelete
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"你已删除所有镜头, 是否重新开始录制？" preferredStyle:UIAlertControllerStyleAlert];
@@ -196,4 +195,6 @@
     
     [self presentViewController:alert animated:NO completion:nil];
 }
+
+
 @end
