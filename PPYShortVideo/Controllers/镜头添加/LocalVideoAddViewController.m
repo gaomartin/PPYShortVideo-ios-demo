@@ -208,7 +208,6 @@
         info.total = videoInfo.total;
         
         cut.videoInfo = info;
-        [self saveVideoWithUrl:[NSURL URLWithString:videoInfo.path] withFileName:@"localVideo.mp4"];
         [self.navigationController pushViewController:cut animated:YES];
     } else {
         BZVideoInfo *videoInfo = self.selectVideoArray[indexPath.section][indexPath.item];
@@ -226,58 +225,16 @@
 {
     for (BZVideoInfo *videoInfo in self.selectVideoArray[0]) {
         if ([cell.fileIdentifier isEqualToString: videoInfo.path]) {
-            
             for (BZVideoInfo *info in self.localVideoArray[0]) {
                 if ([info.path isEqualToString:videoInfo.path]) {
                     info.isAddVideo = NO;
                 }
             }
-            
             [self.selectVideoArray[0] removeObject:videoInfo];
             [self refreshVideoCollectionView];
             return;
         }
     }
-}
-
-- (void)saveVideoWithUrl:(NSURL *)url withFileName:(NSString *)fileName
-{
-    // 解析一下,为什么视频不像图片一样一次性开辟本身大小的内存写入?
-    // 想想,如果1个视频有1G多,难道直接开辟1G多的空间大小来写?
-    
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (url) {
-            [assetLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
-                ALAssetRepresentation *rep = [asset defaultRepresentation];
-                NSString * videoPath = [[appDelegate getRecordFileDir] stringByAppendingPathComponent:fileName];
-                char const *cvideoPath = [videoPath UTF8String];
-                FILE *file = fopen(cvideoPath, "a+");
-                if (file) {
-                    const int bufferSize = 1024 * 1024;
-                    // 初始化一个1M的buffer
-                    Byte *buffer = (Byte*)malloc(bufferSize);
-                    NSUInteger read = 0, offset = 0, written = 0;
-                    NSError* err = nil;
-                    NSLog(@"rep.size=%lld",rep.size);
-                    if (rep.size != 0)
-                    {
-                        do {
-                            read = [rep getBytes:buffer fromOffset:offset length:bufferSize error:&err];
-                            written = fwrite(buffer, sizeof(char), read, file);
-                            offset += read;
-                        } while (read != 0 && !err);//没到结尾，没出错，ok继续
-                    }
-                    // 释放缓冲区，关闭文件
-                    free(buffer);
-                    buffer = NULL;
-                    fclose(file);
-                    file = NULL;
-                }
-            } failureBlock:nil];
-        }
-    //});
 }
 
 @end

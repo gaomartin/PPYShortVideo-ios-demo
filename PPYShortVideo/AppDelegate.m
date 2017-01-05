@@ -21,7 +21,7 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self setAPPWindow];
     [self setAppRootViewController];
-    [self getRecordFileDir];
+    [self removeFile];
     
     return YES;
 }
@@ -63,5 +63,20 @@
     
     return recordDirPath;
 }
+
+//删除record文件件下的文件
+- (void)removeFile
+{
+    NSString *dirPath = [self getRecordFileDir];
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dirPath error:nil];
+    NSLog(@"fileList count=%zd", [fileList count]);
+    for(int i=0;i<[fileList count]; i++){
+        NSString *filePath = [dirPath stringByAppendingPathComponent:[fileList objectAtIndex:i]];
+        NSLog(@"filePath=%@",filePath);
+        NSURL *filepaht1=[NSURL fileURLWithPath:filePath];
+        
+        [[NSFileManager defaultManager] removeItemAtURL:filepaht1 error:nil];}
+}
+
 
 @end

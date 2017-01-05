@@ -218,7 +218,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         BZChiefEditViewController *editView = [[BZChiefEditViewController alloc] init];
-        [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray: self.recordInfoArray];
+        [BZEditVideoInfo shareInstance].editVideoArry = [NSMutableArray arrayWithArray:self.recordInfoArray];
         [self.navigationController pushViewController:editView animated:YES];
         
         [self.recordInfoArray removeAllObjects];

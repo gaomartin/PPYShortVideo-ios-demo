@@ -103,6 +103,13 @@
     }
 }
 
+- (void)removePreImage
+{
+    [self.previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
+    }];
+}
+
 - (void)refreshUI
 {
     [_previewImage mas_updateConstraints:^(MASConstraintMaker *make) {

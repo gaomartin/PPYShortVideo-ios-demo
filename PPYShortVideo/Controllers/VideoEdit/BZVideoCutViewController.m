@@ -9,6 +9,7 @@
 #import "BZVideoCutViewController.h"
 #import "BZVideoInfo.h"
 #import "NSString+time.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 #define KMAX_PRE_IMAGEVIEW      7
 #define KMIN_DISTANCE           5
@@ -40,19 +41,16 @@
     // Do any additional setup after loading the view from its nib.
     
     NSMutableArray *pathArray = [NSMutableArray array];
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSString * videoPath = [[appDelegate getRecordFileDir] stringByAppendingPathComponent:@"localVideo.mp4"];
-    [pathArray addObject:videoPath];
-    self.localPlayerView.filePaths = pathArray;
-    NSLog(@"pathArray=%@",pathArray);
-    self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
-    self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
     
-    self.imageViewArray = [NSMutableArray array];
-    
-    [self createPreImageView];
-    [self requestPreImage];
-    [self addCutEffectView];
+    if ([BZEditVideoInfo shareInstance].editVideoType == BZEditVideoType_FromRecordView) {
+        [pathArray addObject:self.videoInfo.path];
+        self.localPlayerView.filePaths = pathArray;
+        NSLog(@"record pathArray=%@",pathArray);
+        
+        [self initUI];
+    } else if ([BZEditVideoInfo shareInstance].editVideoType == BZEditVideoType_FromAddLocal) {
+        [self saveVideoWithUrl:[NSURL URLWithString:self.videoInfo.path] withFileName:@"localVideo.mp4"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +67,68 @@
     [self.localPlayerView clearCache];
     self.localPlayerView = nil;
     [self.infoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+}
+
+- (void)initUI
+{
+    self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
+    self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
+    
+    self.imageViewArray = [NSMutableArray array];
+    
+    [self createPreImageView];
+    [self requestPreImage];
+    [self addCutEffectView];
+}
+
+- (void)saveVideoWithUrl:(NSURL *)url withFileName:(NSString *)fileName
+{
+    // 解析一下,为什么视频不像图片一样一次性开辟本身大小的内存写入?
+    // 想想,如果1个视频有1G多,难道直接开辟1G多的空间大小来写?
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (url) {
+            [assetLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
+                ALAssetRepresentation *rep = [asset defaultRepresentation];
+                NSString * videoPath = [[appDelegate getRecordFileDir] stringByAppendingPathComponent:fileName];
+                char const *cvideoPath = [videoPath UTF8String];
+                FILE *file = fopen(cvideoPath, "w+");
+                if (file) {
+                    const int bufferSize = 1024 * 1024;
+                    // 初始化一个1M的buffer
+                    Byte *buffer = (Byte*)malloc(bufferSize);
+                    NSUInteger read = 0, offset = 0, written = 0;
+                    NSError* err = nil;
+                    NSLog(@"rep.size=%lld",rep.size);
+                    if (rep.size != 0)
+                    {
+                        do {
+                            read = [rep getBytes:buffer fromOffset:offset length:bufferSize error:&err];
+                            written = fwrite(buffer, sizeof(char), read, file);
+                            offset += read;
+                        } while (read != 0 && !err);//没到结尾，没出错，ok继续
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.videoInfo.path = videoPath;
+                        [self initUI];
+                        
+                        NSMutableArray *pathArray = [NSMutableArray array];
+                        [pathArray addObject:videoPath];
+                        self.localPlayerView.filePaths = pathArray;
+                    });
+                    
+                    // 释放缓冲区，关闭文件
+                    free(buffer);
+                    buffer = NULL;
+                    fclose(file);
+                    file = NULL;
+                }
+            } failureBlock:nil];
+        }
+    });
 }
 
 - (IBAction)backBtnClicked:(id)sender
@@ -182,6 +242,8 @@
         touch.view != self.rightView && touch.view.superview != self.rightView) {
         return;
     }
+    
+    [self.localPlayerView removePreImage];
     
     if (touch.view == self.leftView) {
         self.beginPoint = [touch locationInView:self.leftView];
