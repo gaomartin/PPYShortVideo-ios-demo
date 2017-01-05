@@ -12,8 +12,6 @@
 #import "MBProgressHUD.h"
 #import "LocalPlayerLayerView.h"
 
-#define kLocalOffScreenNumber 1000
-
 @interface LocalPlayerView ()<JGPlayControlPanelDelegate>
 
 @property (nonatomic, strong) PPYSeamlessPlayer *seamlessPlayer;
@@ -70,7 +68,7 @@
     [_controlPanel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self);
         make.trailing.equalTo(self);
-        make.bottom.equalTo(self).offset(kLocalOffScreenNumber);
+        make.bottom.equalTo(self).offset(kOffScreenNumber);
         make.height.mas_equalTo(40);
     }];
 }
@@ -97,8 +95,7 @@
 - (void)clearCache
 {
     //TODO: 播放完成后, 退出会crash
-    self.layerView = nil;
-    //self.seamlessPlayer = nil;
+    self.seamlessPlayer = nil;
     
     if (self.timer) {
         [self.timer invalidate];
@@ -151,6 +148,10 @@
     
     self.layerView.player = self.seamlessPlayer.player;
     
+    [PPYThumbnailInfo getCoverImageFileWithInputFile:[_filePaths objectAtIndex:0] OutputWidth:375 OutputHeight:375 OutputFile:self.cachImagePath];
+    NSData *imageData = [NSData dataWithContentsOfFile:self.cachImagePath];
+    self.previewImage.image = [UIImage imageWithData:imageData];
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doMonitor) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     [self.timer fire];
@@ -161,7 +162,11 @@
     [self.seamlessPlayer play];
     
     [self.btnStartOrPause mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(CGPointMake(kLocalOffScreenNumber, kLocalOffScreenNumber));
+        make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
+    }];
+    
+    [self.previewImage mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(CGPointMake(kOffScreenNumber, kOffScreenNumber));
     }];
     
     self.controlPanel.state = JGPlayerControlState_Start;

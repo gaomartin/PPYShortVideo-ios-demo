@@ -11,8 +11,6 @@
 #import "JGPlayerControlPanel.h"
 #import "MBProgressHUD.h"
 
-#define kOffScreenNumber 1000
-
 @interface PlayerView ()<PPYPlayEngineDelegate,JGPlayControlPanelDelegate>
 
 @property (strong, nonatomic) UIView *displayView;

@@ -16,4 +16,9 @@
 //视频添加
 #define kAddVideoSuccessNotificatin @"AddVideoSuccessNotificatin"
 
+// caches路径
+#define KCachesPath  [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+
+#define kOffScreenNumber 1000
+
 #endif /* DefaultDefine_h */

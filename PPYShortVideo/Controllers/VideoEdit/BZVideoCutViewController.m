@@ -40,9 +40,11 @@
     // Do any additional setup after loading the view from its nib.
     
     NSMutableArray *pathArray = [NSMutableArray array];
-    [pathArray addObject:self.videoInfo.path];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSString * videoPath = [[appDelegate getRecordFileDir] stringByAppendingPathComponent:@"localVideo.mp4"];
+    [pathArray addObject:videoPath];
     self.localPlayerView.filePaths = pathArray;
-    
+    NSLog(@"pathArray=%@",pathArray);
     self.startPosLabel.text = [NSString timeformatFromSeconds: (NSInteger)self.videoInfo.startPos/1000];
     self.endPosLabel.text = [NSString timeformatFromSeconds: (NSInteger) self.videoInfo.endPos/1000];
     

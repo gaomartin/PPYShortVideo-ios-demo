@@ -15,6 +15,7 @@
 }
 
 - (void)setPlayer:(AVPlayer *)player {
+    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//铺满
     self.playerLayer.player = player;
 }
 
