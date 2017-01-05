@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSArray *filePaths;
 
+- (void)seekToPostion:(NSTimeInterval)position;
 - (void)clearCache;
 - (void)pause;
 

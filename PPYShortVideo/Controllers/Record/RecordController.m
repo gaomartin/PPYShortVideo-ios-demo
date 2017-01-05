@@ -28,7 +28,7 @@
 #endif
 
 
-@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate,PPYMediaMergerDelegate>
+@interface RecordController () <PPYPushEngineDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *captureView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBeatify;
@@ -138,10 +138,6 @@
             [self.btnTorch setImage:[UIImage imageNamed:@"闪光灯.png"] forState:UIControlStateNormal];
         }
     }
-}
-
--(void)controlTorch{
-    
 }
 
 - (IBAction)doSwitchCamera:(id)sender

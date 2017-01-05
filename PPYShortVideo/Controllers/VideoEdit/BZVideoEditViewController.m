@@ -73,6 +73,7 @@
 
 - (IBAction)backBtnClicked:(id)sender
 {
+    [self.localPlayerView clearCache];
     self.localPlayerView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }

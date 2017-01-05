@@ -64,6 +64,7 @@
     [self.thumbnailInfo quit];
     [self.thumbnailInfo terminate];
     
+    [self.localPlayerView clearCache];
     self.localPlayerView = nil;
     [self.infoView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
@@ -221,6 +222,7 @@
         self.leftBackgroudView.frame = frame;
         
         //[self.playerView seekToPostion:self.videoInfo.startPos];
+        [self.localPlayerView seekToPostion:self.videoInfo.startPos];
     } else if (touch.view == self.rightView) {
         CGPoint nowPoint = [touch locationInView:self.rightView];
         
@@ -278,10 +280,6 @@
 - (void)didEnd
 {
     NSLog(@"didEnd");
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-    });
 }
 
 

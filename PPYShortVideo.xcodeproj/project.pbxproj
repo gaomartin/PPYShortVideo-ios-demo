@@ -84,6 +84,7 @@
 		4BC72EA91E1C9D9D003AD9CA /* PPYPreviewPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */; };
 		4BC72EAC1E1C9DEA003AD9CA /* LocalPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC72EAB1E1C9DEA003AD9CA /* LocalPlayerView.m */; };
 		4BC72EAE1E1CA519003AD9CA /* PPYPreviewPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4BC72EB91E1DEEE1003AD9CA /* LocalPlayerLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC72EB81E1DEEE1003AD9CA /* LocalPlayerLayerView.m */; };
 		842472EA1DCC7FA0007B4D44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 842472E91DCC7FA0007B4D44 /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -248,6 +249,8 @@
 		4BC72EA81E1C9D9D003AD9CA /* PPYPreviewPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PPYPreviewPlayer.framework; sourceTree = "<group>"; };
 		4BC72EAA1E1C9DEA003AD9CA /* LocalPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPlayerView.h; sourceTree = "<group>"; };
 		4BC72EAB1E1C9DEA003AD9CA /* LocalPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPlayerView.m; sourceTree = "<group>"; };
+		4BC72EB71E1DEEE1003AD9CA /* LocalPlayerLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPlayerLayerView.h; sourceTree = "<group>"; };
+		4BC72EB81E1DEEE1003AD9CA /* LocalPlayerLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPlayerLayerView.m; sourceTree = "<group>"; };
 		842472E21DCC7FA0007B4D44 /* PPYShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPYShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842472E81DCC7FA0007B4D44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		842472E91DCC7FA0007B4D44 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -510,6 +513,8 @@
 				4B75505D1E03CBD5005814F8 /* PlayerView.m */,
 				4BC72EAA1E1C9DEA003AD9CA /* LocalPlayerView.h */,
 				4BC72EAB1E1C9DEA003AD9CA /* LocalPlayerView.m */,
+				4BC72EB71E1DEEE1003AD9CA /* LocalPlayerLayerView.h */,
+				4BC72EB81E1DEEE1003AD9CA /* LocalPlayerLayerView.m */,
 				4B75505E1E03CBD5005814F8 /* PPProgressView.h */,
 				4B75505F1E03CBD5005814F8 /* PPProgressView.m */,
 				4B2F66431E07783D0080B941 /* XWDragCellCollectionView.h */,
@@ -705,6 +710,7 @@
 				4B7550491E03CBC3005814F8 /* MASViewAttribute.m in Sources */,
 				4B02DF451E010D8F00DE345F /* NSDictionary+SafeValue.m in Sources */,
 				4B75504B1E03CBC3005814F8 /* NSArray+MASAdditions.m in Sources */,
+				4BC72EB91E1DEEE1003AD9CA /* LocalPlayerLayerView.m in Sources */,
 				4B75504F1E03CBC3005814F8 /* MBProgressHUD.m in Sources */,
 				4B7550451E03CBC3005814F8 /* MASCompositeConstraint.m in Sources */,
 				4B02DF471E010D8F00DE345F /* NSObject+SafeValueWithJSON.m in Sources */,

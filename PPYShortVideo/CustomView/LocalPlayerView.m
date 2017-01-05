@@ -10,16 +10,15 @@
 #import "Masonry.h"
 #import "JGPlayerControlPanel.h"
 #import "MBProgressHUD.h"
+#import "LocalPlayerLayerView.h"
 
 #define kLocalOffScreenNumber 1000
 
 @interface LocalPlayerView ()<JGPlayControlPanelDelegate>
 
-@property AVPlayer *player;
-@property (readonly) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) PPYSeamlessPlayer *seamlessPlayer;
+@property (nonatomic, strong) LocalPlayerLayerView *layerView;
 
-@property (nonatomic, strong) UIView *displayView;
 @property (nonatomic, strong) UIButton *btnStartOrPause;
 @property (nonatomic, strong) UIImageView *previewImage;
 
@@ -33,26 +32,11 @@
 
 @implementation LocalPlayerView
 
-- (AVPlayer *)player {
-    return self.playerLayer.player;
-}
-
-- (void)setPlayer:(AVPlayer *)player {
-    self.playerLayer.player = player;
-}
-
-// override UIView
-+ (Class)layerClass {
-    return [AVPlayerLayer class];
-}
-
-- (AVPlayerLayer *)playerLayer {
-    return (AVPlayerLayer *)self.layer;
-}
 
 -(void)initialize{
-    _displayView = [UIView new];
-    [self addSubview:_displayView];
+    
+    self.layerView = [[LocalPlayerLayerView alloc]init];
+    [self addSubview:_layerView];
     
     _previewImage = [[UIImageView alloc]init];
     [self addSubview:_previewImage];
@@ -68,7 +52,7 @@
     _controlPanel.state = JGPlayerControlState_Init;
     [self addSubview:_controlPanel];
     
-    [_displayView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_layerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
         make.size.equalTo(self);
     }];
@@ -113,6 +97,7 @@
 - (void)clearCache
 {
     //TODO: 播放完成后, 退出会crash
+    self.layerView = nil;
     //self.seamlessPlayer = nil;
     
     if (self.timer) {
@@ -163,7 +148,8 @@
 -(void)startPlay{
 
     self.seamlessPlayer = [[PPYSeamlessPlayer alloc]initWithSourcePaths:self.filePaths];
-    self.player = self.seamlessPlayer.player;
+    
+    self.layerView.player = self.seamlessPlayer.player;
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doMonitor) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
@@ -189,6 +175,14 @@
 - (void)pause
 {
    [self.seamlessPlayer pause];
+}
+
+- (void)seekToPostion:(NSTimeInterval)position
+{
+    CMTime seekTime = CMTimeMakeWithSeconds(position/1000, 1000);
+    NSLog(@"seekTime = %f",CMTimeGetSeconds(seekTime));
+    
+    [self.seamlessPlayer seekToTime:seekTime];
 }
 
 -(void)onPressBtnStartOrPause:(UIButton *)sender{
